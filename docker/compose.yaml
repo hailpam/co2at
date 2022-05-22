@@ -1,0 +1,9 @@
+version: "3.9"
+services:
+  influxdb:
+    image: "influxdb" 
+  arangodb:
+    image: "arangodb"
+    environment:
+      - ARANGO_NO_AUTH=false
+      - ARANGO_ROOT_PASSWORD=ROOT
