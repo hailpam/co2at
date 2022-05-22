@@ -1,0 +1,9 @@
+[http]
+  enabled = true
+  bind-address = ":8086"
+  auth-enabled = false # Set to true
+  log-enabled = true
+  write-tracing = false
+  pprof-enabled = true
+  pprof-auth-enabled = true
+  debug-pprof-enabled = false

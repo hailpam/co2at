@@ -1,9 +1,16 @@
 version: "3.9"
 services:
   influxdb:
-    image: "influxdb" 
+    image: "influxdb:1.8"
+    environment:
+      - INFLUXDB_HTTP_AUTH_ENABLED=false
+
+    ports:
+      - "127.0.0.1:8086:8086"
   arangodb:
     image: "arangodb"
     environment:
       - ARANGO_NO_AUTH=false
       - ARANGO_ROOT_PASSWORD=ROOT
+    ports:
+      - "127.0.0.1:8529:8529"
