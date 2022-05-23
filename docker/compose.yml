@@ -35,7 +35,7 @@ services:
       - DOCKER_DB_INFLUX_PORT=8086
       - DOCKER_DB_ARANGO_PORT=8529
 
-networks:
-  default:
-    external:
-      name: co2at-external
+# networks:
+#   default:
+#     external:
+#       name: co2at-external
