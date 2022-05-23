@@ -1,1 +1,2 @@
 curl -G 'http://localhost:8086/query?pretty=true' --data-urlencode "db=co2at" --data-urlencode "q=SELECT * FROM \"scope\""
+curl -G "http://127.0.0.1:5000/api/v1/user" -H "Authorization: Basic amRvZTpKRE9F"

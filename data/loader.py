@@ -39,12 +39,11 @@ def generate_scope_datapoints(address, port):
         address = '127.0.0.1'
     if not port:
         port = 8086
-    datapoint = 'scope,company=Acme,region=us-west scope1=%f,scope2=%f,scope3=%f %d'
-    timestamp = int(time() * 1000)
+    datapoint = 'scope,company=Acme,region=us-west scope1=%f,scope2=%f,scope3=%f'
     scope1 = random.random()
     scope2 = random.random()
     scope3 = random.random()
-    res = requests.post('http://%s:%s/write?db=co2at' % (address, port), datapoint % (scope1, scope2, scope3, timestamp))
+    res = requests.post('http://%s:%s/write?db=co2at' % (address, port), datapoint % (scope1, scope2, scope3))
     if res.status_code != 204:
         print('unable to push a datapoint: %s' % res.text)
 

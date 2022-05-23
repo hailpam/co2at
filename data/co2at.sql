@@ -21,7 +21,8 @@ CREATE TABLE companies (
 
 CREATE TABLE products (
     name text PRIMARY KEY,
-    type text NOT NULL
+    type text NOT NULL,
+    producer text NOT NULL
 );
 
 -- Adding 2 users for the Acme, Inc. company
@@ -39,7 +40,7 @@ INSERT INTO users (
     'John',
     'Doe',
     'Supply Chain Manager',
-    'Acme, Inc.'
+    'Acme'
 );
 
 INSERT INTO users (
@@ -55,51 +56,59 @@ INSERT INTO users (
     'Adam',
     'Smith',
     'Chief Operating Officer',
-    'Acme, Inc.'
+    'Acme'
 );
 
--- Adding 1 company: Acme, Inc.
+-- Adding 1 company: Acme
 
 INSERT INTO companies (
     name,
     address,
     country
 ) VALUES (
-    'Acme, Inc.',
+    'Acme',
     '1 Acme Road, San Francisco, CA 94104',
     'USA'
 );
 
--- Adding 3 products for Acme, Inc.
+-- Adding 3 products for Acme
 
 INSERT INTO products (
     name,
-    type
+    type,
+    producer
 ) VALUES (
     'Goodone',
-    'Cheese'
+    'Cheese',
+    'Acme'
 );
 
 INSERT INTO products (
     name,
-    type
+    type,
+    producer
 ) VALUES (
     'Greatone',
-    'Cheese'
+    'Cheese',
+    'Acme'
 );
 
 INSERT INTO products (
     name,
-    type
+    type,
+    producer
 ) VALUES (
     'Badone',
-    'Cheese'
+    'Cheese',
+    'Acme'
 );
 
 INSERT INTO products (
     name,
-    type
+    type,
+    producer
 ) VALUES (
     'Decentone',
-    'Cheese'
+    'Cheese',
+    'Acme'
 );

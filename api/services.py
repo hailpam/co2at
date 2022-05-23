@@ -1,0 +1,66 @@
+import sqlite3
+import os
+import requests
+
+db_path = os.environ['CO2AT_DB_PATH']
+
+def retrieve_data(metric='scope', company='Acme', product=None, period=1):
+    params = {
+        'q': 'SELECT * FROM "%s" WHERE company=\'%s\' AND time > now() - %dd' % (metric, company, period),
+        'db': 'co2at',
+        'pretty': True
+    }
+    return requests.get('http://127.0.0.1:8086/query?pretty=true', params=params).json()
+
+def retrieve_user(username, password):
+    user = {}
+    try:
+        conn = sqlite3.connect(db_path)
+        cursor = conn.execute('SELECT * FROM users WHERE username = "%s" AND password = "%s"' % (username, password))
+        for row in cursor:
+            user['username'] = row[0]
+            user['password'] = row[1]
+            user['name'] = row[2]
+            user['surname'] = row[3]
+            user['role'] = row[4]
+            user['company'] = row[5]
+    except Exception as e:
+        print('error: %s' % e)
+    finally:
+        if conn:
+            conn.close()
+    return user
+
+def retrieve_company(name):
+    company = {}
+    try:
+        conn = sqlite3.connect(db_path)
+        cursor = conn.execute('SELECT * FROM companies WHERE name = "%s"' % (name))
+        for row in cursor:
+            company['name'] = row[0]
+            company['address'] = row[1]
+            company['country'] = row[2]
+    except Exception as e:
+        print('error: %s' % e)
+    finally:
+        if conn:
+            conn.close()
+    return company
+
+def retrieve_product(company):
+    products = []
+    try:
+        conn = sqlite3.connect(db_path)
+        cursor = conn.execute('SELECT * FROM products WHERE producer = "%s"' % (company))
+        for row in cursor:
+            product = {}
+            product['name'] = row[0]
+            product['type'] = row[1]
+            product['producer'] = row[2]
+            products.append(product)
+    except Exception as e:
+        print('error: %s' % e)
+    finally:
+        if conn:
+            conn.close()
+    return products
