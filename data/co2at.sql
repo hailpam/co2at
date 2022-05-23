@@ -71,7 +71,7 @@ INSERT INTO companies (
     'USA'
 );
 
--- Adding 3 products for Acme
+-- Adding 4 products for Acme
 
 INSERT INTO products (
     name,
