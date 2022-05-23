@@ -5,31 +5,50 @@ import requests
 import random
 import os
 import json
+import socket
+
+
+def wait_for(address, port):
+    while True:
+        try:
+            conn = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            conn.connect((address, int(port)))
+            print('info: connected to [%s:%s]' % (address, port))
+            break
+        except Exception as e:
+            print('info: waiting to get connected to [%s:%s]: %s' % (address, port, e))
+            sleep(5)
+        finally:
+            if conn:
+                conn.close()
 
 def fetch_env_variables():
-    address, influx_port, arango_port = None, None, None
+    influx_address, arango_address, influx_port, arango_port = None, None, None, None
     try:
-        address = os.environ['DOCKER_DB_ADDRESS']
+        influx_address = os.environ['DOCKER_DB_INFLUX_ADDRESS']
     except:
-        print('warning: unable to fetch the DB address')
-    
+        print('warning: unable to fetch InfluxDB address')
+    try:
+        arango_address = os.environ['DOCKER_DB_ARANGO_ADDRESS']
+    except:
+        print('warning: unable to fetch ArangoDB address')
     try:
         influx_port = os.environ['DOCKER_DB_INFLUX_PORT']
     except:
         print('warning: unable to fetch the InfluxDB port')
-    
     try:
         arango_port = os.environ['DOCKER_DB_ARANGO_PORT']
     except:
         print('warning: unable to fetch the ArangoDB port')
     
-    return address, influx_port, arango_port
+    return influx_address, arango_address, influx_port, arango_port
 
 def create_influx_database(address, port):
     if not address:
         address = '127.0.0.1'
     if not port:
         port = 8086
+    wait_for(address, port)
     res = requests.post('http://%s:%s/query?q=CREATE DATABASE co2at' % (address, port))
     if res.status_code != 200:
         raise ConnectionError('unable to create InfluxDB database: %s' % res.text)
@@ -40,6 +59,7 @@ def create_arango_database(address, port):
         address = '127.0.0.1'
     if not port:
         port = 8529
+    wait_for(address, port)
     data = { 
         "name" : "co2at", 
         "edgeDefinitions" : [ 
@@ -330,14 +350,13 @@ def generate_scope_datapoints(address, port):
         print('unable to push a datapoint: %s' % res.text)
 
 def main():
-    address, influx_port, arango_port = fetch_env_variables()
-    print(address, influx_port, arango_port)
-    # create_influx_database(address, influx_port)
-    create_arango_database(address, arango_port)
-    generate_co2at_graph(address, arango_port)
-    # while True:
-    #     generate_scope_datapoints(address, influx_port)
-    #     sleep(1)
+    influx_address, arango_address, influx_port, arango_port = fetch_env_variables()
+    create_influx_database(influx_address, influx_port)
+    create_arango_database(arango_address, arango_port)
+    generate_co2at_graph(arango_address, arango_port)
+    while True:
+        generate_scope_datapoints(influx_address, influx_port)
+        sleep(1)
     
 if __name__ == '__main__':
     main()

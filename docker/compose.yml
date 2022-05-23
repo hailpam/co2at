@@ -21,21 +21,8 @@ services:
     image: "co2at.loader"
     depends_on:
       - "arangodb"
-    command: >
-      /bin/bash -c "
-        while ! nc -z influxdb 8086;
-        do
-          echo waiting...;
-          sleep 1;
-        done;
-        echo connected!;
-      "
     environment:
-      - DOCKER_DB_ADDRESS=influxdb
+      - DOCKER_DB_INFLUX_ADDRESS=influxdb
+      - DOCKER_DB_ARANGO_ADDRESS=arangodb
       - DOCKER_DB_INFLUX_PORT=8086
       - DOCKER_DB_ARANGO_PORT=8529
-
-# networks:
-#   default:
-#     external:
-#       name: co2at-external
