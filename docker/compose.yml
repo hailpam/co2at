@@ -9,8 +9,33 @@ services:
       - "127.0.0.1:8086:8086"
   arangodb:
     image: "arangodb"
+    depends_on:
+      - "influxdb"
     environment:
       - ARANGO_NO_AUTH=false
       - ARANGO_ROOT_PASSWORD=ROOT
     ports:
       - "127.0.0.1:8529:8529"
+
+  loader:
+    image: "co2at.loader"
+    depends_on:
+      - "arangodb"
+    command: >
+      /bin/bash -c "
+        while ! nc -z influxdb 8086;
+        do
+          echo waiting...;
+          sleep 1;
+        done;
+        echo connected!;
+      "
+    environment:
+      - DOCKER_DB_ADDRESS=influxdb
+      - DOCKER_DB_INFLUX_PORT=8086
+      - DOCKER_DB_ARANGO_PORT=8529
+
+networks:
+  default:
+    external:
+      name: co2at-external
