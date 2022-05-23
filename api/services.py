@@ -64,3 +64,11 @@ def retrieve_product(company):
         if conn:
             conn.close()
     return products
+
+def retrieve_graph(company):
+    data = {
+        'query': 'FOR c in company FILTER c.name == \"%s\" FOR v, e, p IN 1..3 ANY c company_to, product_to, input_to, output_to RETURN p' % company,
+        'count': True,
+        'batchSize': 1000
+    }
+    return requests.post('http://localhost:8529/_api/cursor', json=data).json()

@@ -2,7 +2,7 @@ from flask import Flask
 from flask import request
 from matplotlib import use
 
-from api.services import retrieve_company, retrieve_data, retrieve_product, retrieve_user
+from api.services import retrieve_company, retrieve_data, retrieve_graph, retrieve_product, retrieve_user
 
 import json
 import base64
@@ -46,5 +46,5 @@ def get_product():
 
 @app.route('/api/v1/graph')
 def get_graph():
-    # based on products
-    return 'Not ready yet'
+    company = request.args.get('company')
+    return retrieve_graph(company)
