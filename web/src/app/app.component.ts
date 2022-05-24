@@ -22,19 +22,21 @@ export class AppComponent {
   isLoggedIn = false;
 
   ngOnInit(): void {
+    const user = sessionStorage.getItem('user');
     this.isLoggedIn = sessionStorage.getItem('user') !== null;
   }
 
   logout(): void {
     sessionStorage.removeItem('user');
-    this._snackBar.open('Logout successful!!', '', {
-      horizontalPosition: this.horizontalPosition,
-      verticalPosition: this.verticalPosition,
-    });
+    // this._snackBar.open('Logout successful!!', '', {
+    //   horizontalPosition: this.horizontalPosition,
+    //   verticalPosition: this.verticalPosition,
+    // });
     this.router.navigate(['/']).then(
       () => {
         // TODO find a way to refresh the app-root
-        setTimeout(() => { window.location.reload() }, 700);
+        // setTimeout(() => { window.location.reload() }, 700);
+        window.location.reload();
       }
     );
   }

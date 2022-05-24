@@ -24,13 +24,24 @@
         </a>
       </div>
       <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs>
-        <ul fxLayout fxLayoutGap="20px" class="navigation-items">
+        <ul fxLayout fxLayoutGap="5x" class="navigation-items">
           <!-- <li>
             <a routerLink="/dashboard">
               <mat-icon class="icon">dashboard</mat-icon>
               <span class="label">Dashboard</span>
             </a>
           </li> -->
+          <li *ngIf="isLoggedIn">
+            <a>
+              <button mat-button [matMenuTriggerFor]="menu"><mat-icon class="icon">reorder</mat-icon></button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item>Products</button>
+                <button mat-menu-item>Certificates</button>
+                <button mat-menu-item>Reports</button>
+                <button mat-menu-item>Analytics</button>
+              </mat-menu>
+            </a>
+          </li>
           <li *ngIf="isLoggedIn">
             <a>
               <button mat-button [matMenuTriggerFor]="menu"><mat-icon class="icon">perm_identity</mat-icon></button>

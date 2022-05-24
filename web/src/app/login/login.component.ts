@@ -38,14 +38,15 @@ export class LoginComponent implements OnInit {
         console.log(response)
         if (Object.keys(response).length !== 0) {
           sessionStorage.setItem('user', JSON.stringify(response));
-          this._snackBar.open('Login successful!!', '', {
-            horizontalPosition: this.horizontalPosition,
-            verticalPosition: this.verticalPosition,
-          });
+          // this._snackBar.open('Login successful!!', '', {
+          //   horizontalPosition: this.horizontalPosition,
+          //   verticalPosition: this.verticalPosition,
+          // });
           this.router.navigate(['/dashboard']).then(
             () => {
               // TODO find a way to refresh the app-root
-              setTimeout(() => { window.location.reload() }, 700);
+              // setTimeout(() => { window.location.reload() }, 700);
+              window.location.reload();
             }
           );;
         } else {

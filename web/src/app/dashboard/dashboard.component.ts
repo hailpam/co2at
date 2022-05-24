@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, NavigationExtras } from '@angular/router';
 import { DataSource } from '@angular/cdk/table';
 import { Observable } from 'rxjs/Observable';
-import  {MatTableModule } from '@angular/material/table';
+import {FormControl} from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { EChartsOption } from 'echarts';
 
 import { Post } from '../post';
 import { DataService } from '../data/data.service';
@@ -20,8 +21,29 @@ export class DashboardComponent {
 
   user = {
     name: '',
-    surname: ''
+    surname: '',
+    role: '',
+    company: ''
   };
+
+  chartOption: EChartsOption = {
+    xAxis: {
+      type: 'category',
+      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+    },
+    yAxis: {
+      type: 'value',
+    },
+    series: [
+      {
+        data: [820, 932, 901, 934, 1290, 1330, 1320],
+        type: 'line',
+      },
+    ],
+  };
+
+  date = new FormControl(new Date());
+  serializedDate = new FormControl(new Date().toISOString());
 
   ngOnInit(): void {
     const user = sessionStorage.getItem('user')
