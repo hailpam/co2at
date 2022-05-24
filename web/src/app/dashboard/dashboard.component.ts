@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import {FormControl} from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { EChartsOption } from 'echarts';
+import { TooltipComponent, GridComponent, LegendComponent } from "echarts/components";
 
 import { Post } from '../post';
 import { DataService } from '../data/data.service';
@@ -18,6 +19,45 @@ import {PostDialogComponent} from '../post-dialog/post-dialog.component';
 
 export class DashboardComponent {
   constructor(private router: Router, public dialog: MatDialog, private dataService: DataService) {}
+
+  echartsOptions: EChartsOption = {
+      tooltip: {
+          trigger: "axis",
+          axisPointer: {
+          type: "shadow"
+          }
+      },
+      grid: {
+          containLabel: true
+      },
+      xAxis: {
+          type: "value"
+      },
+      yAxis: {
+          type: "category",
+          data: ["sat", "sun", "mon", "tue", "wed", "thu", "fri"],
+          axisLabel: {
+          interval: 0,
+          rotate: 15
+          }
+      },
+      legend: {
+          data: ["ali", "behrooz"],
+          bottom: 0
+      },
+      series: [
+      {
+          name: "ali",
+          type: "bar",
+          data: [10, 15, 17, 4, 15, 31, 2]
+      },
+      {
+          name: "behrooz",
+          type: "bar",
+          data: [1, 17, 12, 11, 40, 3, 21]
+      }
+      ]
+  };
 
   user = {
     name: '',
