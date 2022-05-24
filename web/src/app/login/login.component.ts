@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
 import {
   MatSnackBar,
   MatSnackBarHorizontalPosition,
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
 import { DataService } from '../data/data.service';
-import { delay } from 'rxjs-compat/operator/delay';
 
 @Component({
   selector: 'app-login',
@@ -58,7 +57,7 @@ export class LoginComponent implements OnInit {
       },
       (error) => {
         console.error('Request failed with error')
-      })
+      });
   }
 
   cancel(): void {

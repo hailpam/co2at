@@ -93,3 +93,4 @@ curl -G 'http://localhost:8086/query?pretty=true' --data-urlencode "db=co2at" --
 
 # API
 curl -G "http://127.0.0.1:5000/api/v1/user" -H "Authorization: Basic amRvZTpKRE9F"
+curl -G 'http://127.0.0.1:5000/api/v1/data?metric=scope&company=Acme'

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 
 import {Post} from '../post';
 import {Observable, of} from 'rxjs';
@@ -53,5 +53,15 @@ export class DataService {
       })
     };
     return this.httpClient.get('http://localhost:5000/api/v1/user', options);
+  }
+
+  getScopeTelemetryData(company: string) {
+    const options = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json'
+      }),
+      params: new HttpParams().set('metric', 'scope').set('company', company)
+    };
+    return this.httpClient.get('http://localhost:5000/api/v1/data', options);
   }
 }

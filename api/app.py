@@ -13,7 +13,9 @@ CORS(app)
 
 @app.route('/api/v1/data')
 def get_data():
-    return retrieve_data()
+    company = request.args.get('company')
+    metric = request.args.get('metric')
+    return retrieve_data(metric=metric, company=company)
 
 @app.route('/api/v1/user')
 def get_user():

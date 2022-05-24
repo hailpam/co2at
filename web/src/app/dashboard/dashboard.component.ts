@@ -1,15 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, NavigationExtras } from '@angular/router';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { DataSource } from '@angular/cdk/table';
 import { Observable } from 'rxjs/Observable';
-import {FormControl} from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { EChartsOption } from 'echarts';
-import { TooltipComponent, GridComponent, LegendComponent } from "echarts/components";
 
 import { Post } from '../post';
 import { DataService } from '../data/data.service';
-import {PostDialogComponent} from '../post-dialog/post-dialog.component';
+import { PostDialogComponent } from '../post-dialog/post-dialog.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -18,46 +16,7 @@ import {PostDialogComponent} from '../post-dialog/post-dialog.component';
 })
 
 export class DashboardComponent {
-  constructor(private router: Router, public dialog: MatDialog, private dataService: DataService) {}
-
-  echartsOptions: EChartsOption = {
-      tooltip: {
-          trigger: "axis",
-          axisPointer: {
-          type: "shadow"
-          }
-      },
-      grid: {
-          containLabel: true
-      },
-      xAxis: {
-          type: "value"
-      },
-      yAxis: {
-          type: "category",
-          data: ["sat", "sun", "mon", "tue", "wed", "thu", "fri"],
-          axisLabel: {
-          interval: 0,
-          rotate: 15
-          }
-      },
-      legend: {
-          data: ["ali", "behrooz"],
-          bottom: 0
-      },
-      series: [
-      {
-          name: "ali",
-          type: "bar",
-          data: [10, 15, 17, 4, 15, 31, 2]
-      },
-      {
-          name: "behrooz",
-          type: "bar",
-          data: [1, 17, 12, 11, 40, 3, 21]
-      }
-      ]
-  };
+  constructor(private router: Router, public dialog: MatDialog, private dataService: DataService) { }
 
   user = {
     name: '',
@@ -66,29 +25,117 @@ export class DashboardComponent {
     company: ''
   };
 
-  chartOption: EChartsOption = {
-    xAxis: {
-      type: 'category',
-      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-    },
-    yAxis: {
-      type: 'value',
-    },
-    series: [
-      {
-        data: [820, 932, 901, 934, 1290, 1330, 1320],
-        type: 'line',
-      },
-    ],
-  };
-
-  date = new FormControl(new Date());
-  serializedDate = new FormControl(new Date().toISOString());
+  chartOption1: EChartsOption = {}; 
+  chartOption2: EChartsOption = {}; 
+  chartOption3: EChartsOption = {}; 
+  //  = {
+  //   // title: {
+  //   //   text: 'ECharts Getting Started Example'
+  //   // },
+  //   tooltip: {},
+  //   legend: {
+  //     data: ['sales']
+  //   },
+  //   xAxis: {
+  //     data: ['Shirts', 'Cardigans', 'Chiffons', 'Pants', 'Heels', 'Socks']
+  //   },
+  //   yAxis: {},
+  //   series: [
+  //     {
+  //       name: 'sales',
+  //       type: 'line',
+  //       data: [5, 20, 36, 10, 10, 20]
+  //     }
+  //   ]
+  // };
 
   ngOnInit(): void {
     const user = sessionStorage.getItem('user')
     if (user !== null) {
       this.user = JSON.parse(user);
+      this.dataService.getScopeTelemetryData(this.user.company).subscribe(
+        (response) => {
+          const results = JSON.parse(JSON.stringify(response)).results[0].series[0];
+          const metric = results.name;
+          const columns = results.columns;
+          const values = results.values;
+          
+          let times = [];
+          let scope1Values = [];
+          let scope2Values = [];
+          let scope3Values = [];
+          for (let value of values) {
+            times.push(value[0]);
+            scope1Values.push(value[1]);
+            scope2Values.push(value[2]);
+            scope3Values.push(value[3]);
+          }
+
+          this.chartOption1 = {
+            tooltip: {},
+            legend: {
+              data: [ 'CO2e Scope1', 'CO2e Scope2', 'CO2e Scope3' ]
+            },
+            xAxis: {
+              data: times
+            },
+            yAxis: {},
+            series: [
+              {
+                name: 'CO2e Scope1',
+                type: 'line',
+                data: scope1Values
+              },
+              {
+                name: 'CO2e Scope2',
+                type: 'line',
+                data: scope2Values
+              },
+              {
+                name: 'CO2e Scope3',
+                type: 'line',
+                data: scope3Values
+              }
+            ]
+          };
+          this.chartOption2 = {
+            tooltip: {},
+            legend: {
+              data: [ 'CO2e Scope2' ]
+            },
+            xAxis: {
+              data: times
+            },
+            yAxis: {},
+            series: [
+              {
+                name: 'CO2e Scope2',
+                type: 'line',
+                data: scope2Values
+              }
+            ]
+          };
+          this.chartOption3 = {
+            tooltip: {},
+            legend: {
+              data: [ 'CO2e Scope3' ]
+            },
+            xAxis: {
+              data: times
+            },
+            yAxis: {},
+            series: [
+              {
+                name: 'CO2e Scope3',
+                type: 'line',
+                data: scope3Values
+              }
+            ]
+          };
+        },
+        (error) => {
+          console.log('Error fetching the Scope telemetry data...');
+        });
     }
   }
 
@@ -96,8 +143,8 @@ export class DashboardComponent {
   dataSource = new PostDataSource(this.dataService);
 
   deletePost(id: number) {
-      this.dataService.deletePost(id);
-      this.dataSource = new PostDataSource(this.dataService);
+    this.dataService.deletePost(id);
+    this.dataSource = new PostDataSource(this.dataService);
   }
 
   openDialog(): void {
@@ -121,5 +168,5 @@ export class PostDataSource extends DataSource<any> {
     return this.dataService.getData();
   }
 
-  disconnect() {}
+  disconnect() { }
 }
