@@ -1,7 +1,10 @@
-# Portal
+# CO2@
 This is the primary Single Page Application (SPA) which defines the ensemble of components able to export web capabilities for the OmniByz platform.
 
 Disclaimer. This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.12.
+
+## Install Dependencies
+In order to install the dependencies run `npm install` from the project folder.
 
 ## Development server
 
@@ -9,7 +12,7 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 
 ## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Run `ng generate component component-name` to generate a new component (e.g. `ng generate component login --module app` from the /app directory). You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
 ## Build
 

@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -12,13 +13,17 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AppRouters } from './app.routes';
 import { DataService } from './data/data.service';
 import { PostDialogComponent } from './post-dialog/post-dialog.component';
+import { LoginComponent } from './login/login.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatMenuModule } from '@angular/material/menu'
 
 @NgModule({
   declarations: [
     AppComponent,
     WelcomeComponent,
     DashboardComponent,
-    PostDialogComponent
+    PostDialogComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +32,10 @@ import { PostDialogComponent } from './post-dialog/post-dialog.component';
     MaterialModule,
     FlexLayoutModule,
     AppRouters,
-    FormsModule
+    FormsModule,
+    HttpClientModule,
+    MatSnackBarModule,
+    MatMenuModule
   ],
   providers: [
     DataService

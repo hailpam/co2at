@@ -1,0 +1,41 @@
+
+<div>
+    <br/>
+    <div class="container">
+        <div fxLayout="row" fxLayoutAlign="center center" class="content">
+            <mat-card class="card">
+                <mat-card-title fxLayout.gt-xs="row" fxLayout.xs="column" fxLayoutAlign="space-around center">
+                    <div>
+                        <button mat-fab disabled>
+                            <mat-icon>perm_identity</mat-icon>
+                        </button>
+                    </div>
+                </mat-card-title>
+                <br/>
+                <mat-card-content>
+                    <div>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Username</mat-label>
+                            <input matInput [(ngModel)]="username">
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field appearance="fill">
+                            <mat-label>Password</mat-label>
+                            <input type="password" matInput [(ngModel)]="password">
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <button button="submit" mat-raised-button color="primary" style="float: left;" (click)="login()">
+                            Login
+                        </button>
+                        <button mat-raised-button style="float: right;" (click)="cancel()">
+                            Cancel
+                        </button>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+    <br/>
+</div>

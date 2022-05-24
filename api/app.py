@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_cors import CORS
 from flask import request
 from matplotlib import use
 
@@ -8,6 +9,7 @@ import json
 import base64
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/api/v1/data')
 def get_data():
@@ -16,7 +18,6 @@ def get_data():
 @app.route('/api/v1/user')
 def get_user():
     auth = request.headers.get('Authorization')
-    print(auth)
     if not auth:
         return json.dumps({}, indent=4)
     parts = auth.split(' ')
@@ -24,7 +25,6 @@ def get_user():
         return json.dumps({}, indent=4)
     decoded = base64.b64decode(parts[1]).decode('UTF-8')
     parts = decoded.split(':')
-    print(decoded)
     if len(parts) != 2:
         return json.dumps({}, indent=4)
     username = parts[0]

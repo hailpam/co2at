@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router, NavigationExtras } from '@angular/router';
 import { DataSource } from '@angular/cdk/table';
 import { Observable } from 'rxjs/Observable';
 import  {MatTableModule } from '@angular/material/table';
@@ -15,7 +16,18 @@ import {PostDialogComponent} from '../post-dialog/post-dialog.component';
 })
 
 export class DashboardComponent {
-  constructor(public dialog: MatDialog, private dataService: DataService) {
+  constructor(private router: Router, public dialog: MatDialog, private dataService: DataService) {}
+
+  user = {
+    name: '',
+    surname: ''
+  };
+
+  ngOnInit(): void {
+    const user = sessionStorage.getItem('user')
+    if (user !== null) {
+      this.user = JSON.parse(user);
+    }
   }
 
   displayedColumns = ['date_posted', 'title', 'category', 'delete'];

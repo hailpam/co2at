@@ -1,4 +1,6 @@
 import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+
 import {Post} from '../post';
 import {Observable, of} from 'rxjs';
 
@@ -19,7 +21,7 @@ export class DataService {
     {value: 'IOS-Development', viewValue: 'IOS Development'}
   ];
 
-  constructor() {
+  constructor(private httpClient: HttpClient) {
   }
 
   getData(): Observable<Post[]> {
@@ -40,5 +42,16 @@ export class DataService {
 
   dataLength() {
     return this.ELEMENT_DATA.length;
+  }
+
+  getUserData(username: string, password: string) {
+    const b64 = btoa(username+":"+password)
+    const options = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json',
+        'Authorization': 'Basic ' +b64, 
+      })
+    };
+    return this.httpClient.get('http://localhost:5000/api/v1/user', options);
   }
 }
