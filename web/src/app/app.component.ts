@@ -7,6 +7,8 @@ import {
 } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 
+import { ProfileDialogComponent } from './profile-dialog/profile-dialog.component';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -40,5 +42,12 @@ export class AppComponent {
         window.location.reload();
       }
     );
+  }
+
+  onProfileClick(): void {
+    this.dialog.open(ProfileDialogComponent, {
+      width: '600px',
+      data: 'Add Post'
+    });
   }
 }

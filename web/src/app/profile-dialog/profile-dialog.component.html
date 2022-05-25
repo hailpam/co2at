@@ -1,0 +1,22 @@
+<mat-dialog-content>
+    <div class="content">
+        <div fxLayout="row" fxLayoutAlign="center center" class="content">
+            <button mat-fab disabled>
+                <mat-icon>perm_identity</mat-icon>
+            </button>
+        </div>
+        <br>
+        <mat-card class="card">
+            {{ user.name }} {{ user.surname }}
+        </mat-card>
+        <mat-card class="card">
+            {{ user.role }}
+        </mat-card>
+        <mat-card class="card">
+            {{ user.company }}
+        </mat-card>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>
