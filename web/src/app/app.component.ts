@@ -54,4 +54,16 @@ export class AppComponent {
   goToProducts(): void {
     this.router.navigate(['/products']);
   }
+
+  goToReports(): void {
+    this.router.navigate(['/reports']);
+  }
+
+  goToAds(): void {
+    this.router.navigate(['/ads']);
+  }
+
+  goToCertificates(): void {
+    this.router.navigate(['/certificates']);
+  }
 }

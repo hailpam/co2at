@@ -28,7 +28,7 @@ export class ProductsComponent implements AfterViewInit {
     const user = sessionStorage.getItem('user');
     if (user != null) {
       const u = JSON.parse(user);
-      const products = this.dataService.getProducts(u.company).subscribe(
+      this.dataService.getProducts(u.company).subscribe(
         (response) => {
           console.log(response);
           const deserialised = JSON.parse(JSON.stringify(response));
@@ -39,7 +39,6 @@ export class ProductsComponent implements AfterViewInit {
           console.error('Fetching the products data');
         }
       );
-      console.log(products);
     }
   }
   

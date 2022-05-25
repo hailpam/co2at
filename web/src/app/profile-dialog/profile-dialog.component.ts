@@ -7,9 +7,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileDialogComponent implements OnInit {
 
+  user = {
+    name: '',
+    surname: '',
+    role: '',
+    company: ''
+  };
+
   constructor() { }
 
   ngOnInit(): void {
+    const user = sessionStorage.getItem('user');
+    if (user != null) {
+      this.user = JSON.parse(user);
+    }
   }
-
 }

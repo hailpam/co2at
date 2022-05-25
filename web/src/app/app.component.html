@@ -34,11 +34,11 @@
             <a>
               <button mat-button [matMenuTriggerFor]="menu"><mat-icon class="icon">reorder</mat-icon></button>
               <mat-menu #menu="matMenu">
-                <button mat-menu-item>Ads</button>
+                <button mat-menu-item (click)="goToAds()">Ads</button>
                 <button mat-menu-item>Analytics</button>
-                <button mat-menu-item>Certificates</button>
+                <button mat-menu-item (click)="goToCertificates()">Certificates</button>
                 <button mat-menu-item (click)="goToProducts()">Products</button>
-                <button mat-menu-item>Reports</button>
+                <button mat-menu-item (click)="goToReports()">Reports</button>
               </mat-menu>
             </a>
           </li>

@@ -26,6 +26,9 @@ import { PlotlyModule } from 'angular-plotly.js';
 
 import { ProfileDialogComponent } from './profile-dialog/profile-dialog.component';
 import { ProductsComponent } from './products/products.component';
+import { ReportsComponent } from './reports/reports.component';
+import { AdsComponent } from './ads/ads.component';
+import { CertificatesComponent } from './certificates/certificates.component';
 
 PlotlyModule.plotlyjs = PlotlyJS;
 
@@ -35,7 +38,10 @@ PlotlyModule.plotlyjs = PlotlyJS;
     DashboardComponent,
     LoginComponent,
     ProfileDialogComponent,
-    ProductsComponent
+    ProductsComponent,
+    ReportsComponent,
+    AdsComponent,
+    CertificatesComponent
   ],
   imports: [
     BrowserModule,
