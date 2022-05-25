@@ -7,7 +7,6 @@ import { EChartsOption } from 'echarts';
 
 import { Post } from '../post';
 import { DataService } from '../data/data.service';
-import { PostDialogComponent } from '../post-dialog/post-dialog.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,7 +16,7 @@ import { PostDialogComponent } from '../post-dialog/post-dialog.component';
 })
 
 export class DashboardComponent {
-  constructor(private router: Router, public dialog: MatDialog, private dataService: DataService) { }
+  constructor(private router: Router, private dataService: DataService) { }
 
   user = {
     name: '',
@@ -196,21 +195,6 @@ export class DashboardComponent {
   displayedColumns = ['date_posted', 'title', 'category', 'delete'];
   dataSource = new PostDataSource(this.dataService);
 
-  deletePost(id: number) {
-    this.dataService.deletePost(id);
-    this.dataSource = new PostDataSource(this.dataService);
-  }
-
-  openDialog(): void {
-    let dialogRef = this.dialog.open(PostDialogComponent, {
-      width: '600px',
-      data: 'Add Post'
-    });
-    dialogRef.componentInstance.event.subscribe((result) => {
-      this.dataService.addPost(result.data);
-      this.dataSource = new PostDataSource(this.dataService);
-    });
-  }
 }
 
 export class PostDataSource extends DataSource<any> {

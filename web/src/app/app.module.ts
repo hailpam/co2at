@@ -8,11 +8,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MaterialModule } from './material.module';
-import { WelcomeComponent } from './welcome/welcome.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AppRouters } from './app.routes';
 import { DataService } from './data/data.service';
-import { PostDialogComponent } from './post-dialog/post-dialog.component';
 import { LoginComponent } from './login/login.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatMenuModule } from '@angular/material/menu';
@@ -30,9 +28,7 @@ PlotlyModule.plotlyjs = PlotlyJS;
 @NgModule({
   declarations: [
     AppComponent,
-    WelcomeComponent,
     DashboardComponent,
-    PostDialogComponent,
     LoginComponent
   ],
   imports: [
@@ -62,7 +58,6 @@ PlotlyModule.plotlyjs = PlotlyJS;
     AppComponent
   ],
   entryComponents: [
-    PostDialogComponent
   ]
 })
 export class AppModule { }
