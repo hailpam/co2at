@@ -19,9 +19,19 @@
             </div>
         </div>
         <br>
+        <div class="container">
             <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center" class="content">
                 <plotly-plot [data]="graph1.data" [layout]="graph1.layout"></plotly-plot>
+                <plotly-plot [data]="graph2.data" [layout]="graph2.layout"></plotly-plot>
             </div>
+        </div>
+        <br>
+        <div class="container">
+            <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center" class="content">
+                <plotly-plot [data]="graph3.data" [layout]="graph3.layout"></plotly-plot>
+                <plotly-plot [data]="graph4.data" [layout]="graph4.layout"></plotly-plot>
+            </div>
+        </div>
         <br>
     </div>
 </div>

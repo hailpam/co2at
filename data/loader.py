@@ -341,6 +341,7 @@ def generate_scope_datapoints(address, port):
         address = '127.0.0.1'
     if not port:
         port = 8086
+    # to be added Product and East region
     datapoint = 'scope,company=Acme,region=us-west scope1=%f,scope2=%f,scope3=%f'
     scope1 = random.random()
     scope2 = random.random()
