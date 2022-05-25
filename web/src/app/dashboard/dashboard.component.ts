@@ -1,11 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { DataSource } from '@angular/cdk/table';
-import { Observable } from 'rxjs/Observable';
-import { MatDialog } from '@angular/material/dialog';
-import { EChartsOption } from 'echarts';
 
-import { Post } from '../post';
 import { DataService } from '../data/data.service';
 
 @Component({
@@ -191,20 +186,4 @@ export class DashboardComponent {
         });
     }
   }
-
-  displayedColumns = ['date_posted', 'title', 'category', 'delete'];
-  dataSource = new PostDataSource(this.dataService);
-
-}
-
-export class PostDataSource extends DataSource<any> {
-  constructor(private dataService: DataService) {
-    super();
-  }
-
-  connect(): Observable<Post[]> {
-    return this.dataService.getData();
-  }
-
-  disconnect() { }
 }

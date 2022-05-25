@@ -18,12 +18,14 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCard, MatCardModule } from '@angular/material/card';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 import { NgxEchartsModule } from 'ngx-echarts';
 import * as PlotlyJS from 'plotly.js-dist-min';
 import { PlotlyModule } from 'angular-plotly.js';
 
 import { ProfileDialogComponent } from './profile-dialog/profile-dialog.component';
+import { ProductsComponent } from './products/products.component';
 
 PlotlyModule.plotlyjs = PlotlyJS;
 
@@ -32,7 +34,8 @@ PlotlyModule.plotlyjs = PlotlyJS;
     AppComponent,
     DashboardComponent,
     LoginComponent,
-    ProfileDialogComponent
+    ProfileDialogComponent,
+    ProductsComponent
   ],
   imports: [
     BrowserModule,
@@ -52,7 +55,8 @@ PlotlyModule.plotlyjs = PlotlyJS;
     }),
     PlotlyModule,
     MatDialogModule,
-    MatCardModule
+    MatCardModule,
+    MatPaginatorModule
   ],
   providers: [
     DataService,

@@ -50,4 +50,8 @@ export class AppComponent {
       data: 'Add Post'
     });
   }
+
+  goToProducts(): void {
+    this.router.navigate(['/products']);
+  }
 }
