@@ -5,6 +5,7 @@ import {
   MatSnackBarHorizontalPosition,
   MatSnackBarVerticalPosition,
 } from '@angular/material/snack-bar';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,7 @@ import {
 export class AppComponent {
   title = 'CO2@';
   
-  constructor(private router: Router, private _snackBar: MatSnackBar) {}
+  constructor(private router: Router, private dialog: MatDialog, private _snackBar: MatSnackBar) {}
   
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'top';

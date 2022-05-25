@@ -18,6 +18,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatCardModule } from '@angular/material/card';
 
 import { NgxEchartsModule } from 'ngx-echarts';
 import * as PlotlyJS from 'plotly.js-dist-min';
@@ -49,7 +51,9 @@ PlotlyModule.plotlyjs = PlotlyJS;
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts'),
     }),
-    PlotlyModule
+    PlotlyModule,
+    MatDialogModule,
+    MatCardModule
   ],
   providers: [
     DataService
