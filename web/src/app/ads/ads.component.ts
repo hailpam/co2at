@@ -17,7 +17,8 @@ export class AdsComponent implements OnInit {
     'creator',
     'recipient',
     'nr_click',
-    'acked'
+    'acked',
+    'actions'
   ];
   dataSource = new MatTableDataSource<AdElement>(AD_DATA);
 

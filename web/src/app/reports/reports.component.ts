@@ -21,7 +21,8 @@ export class ReportsComponent implements OnInit {
     'co2e_retailer',
     'co2e_producer',
     'co2e_logistic',
-    'co2e_waste'
+    'co2e_waste',
+    'actions'
   ];
   dataSource = new MatTableDataSource<ReportElement>(REPORT_DATA);
 

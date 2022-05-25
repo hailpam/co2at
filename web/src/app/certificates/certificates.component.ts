@@ -19,7 +19,8 @@ export class CertificatesComponent implements OnInit {
     'provenance',
     'co2e_scope1',
     'co2e_scope2',
-    'co2e_scope3'
+    'co2e_scope3',
+    'actions'
   ];
   dataSource = new MatTableDataSource<CertificateElement>(CERTIFICATE_DATA);
 

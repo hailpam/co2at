@@ -16,7 +16,8 @@ export class ProductsComponent implements AfterViewInit {
   displayedColumns: string[] = [
     'name',
     'type',
-    'producer'
+    'producer',
+    'actions'
   ];
   dataSource = new MatTableDataSource<ProductElement>(PRODUCT_DATA);
 
