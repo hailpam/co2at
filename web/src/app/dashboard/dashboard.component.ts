@@ -27,7 +27,6 @@ export class DashboardComponent {
 
   chartOption1: EChartsOption = {}; 
   chartOption2: EChartsOption = {}; 
-  chartOption3: EChartsOption = {}; 
   //  = {
   //   // title: {
   //   //   text: 'ECharts Getting Started Example'
@@ -73,6 +72,17 @@ export class DashboardComponent {
 
           this.chartOption1 = {
             tooltip: {},
+            toolbox: {
+              show: true,
+              feature: {
+                restore: { show: true },
+                saveAsImage: { show: true },
+                dataView: { show: true },
+                dataZoom: { show: true },
+                magicType: { show: true },
+                brush: { show: true }
+              }
+            },
             legend: {
               data: [ 'CO2e Scope1', 'CO2e Scope2', 'CO2e Scope3' ]
             },
@@ -99,36 +109,66 @@ export class DashboardComponent {
             ]
           };
           this.chartOption2 = {
-            tooltip: {},
-            legend: {
-              data: [ 'CO2e Scope2' ]
-            },
-            xAxis: {
-              data: times
-            },
-            yAxis: {},
-            series: [
-              {
-                name: 'CO2e Scope2',
-                type: 'line',
-                data: scope2Values
+            toolbox: {
+              show: true,
+              feature: {
+                restore: { show: true },
+                saveAsImage: { show: true },
+                dataView: { show: true },
+                dataZoom: { show: true },
+                magicType: { show: true },
+                brush: { show: true }
               }
-            ]
-          };
-          this.chartOption3 = {
-            tooltip: {},
-            legend: {
-              data: [ 'CO2e Scope3' ]
             },
-            xAxis: {
-              data: times
-            },
-            yAxis: {},
             series: [
               {
-                name: 'CO2e Scope3',
-                type: 'line',
-                data: scope3Values
+                type: 'gauge',
+                axisLine: {
+                  lineStyle: {
+                    width: 30,
+                    color: [
+                      [0.3, '#67e0e3'],
+                      [0.7, '#37a2da'],
+                      [1, '#fd666d']
+                    ]
+                  }
+                },
+                pointer: {
+                  itemStyle: {
+                    color: 'auto'
+                  }
+                },
+                axisTick: {
+                  distance: -30,
+                  length: 8,
+                  lineStyle: {
+                    color: '#fff',
+                    width: 2
+                  }
+                },
+                splitLine: {
+                  distance: -30,
+                  length: 30,
+                  lineStyle: {
+                    color: '#fff',
+                    width: 4
+                  }
+                },
+                axisLabel: {
+                  color: 'auto',
+                  distance: 40,
+                  fontSize: 20
+                },
+                detail: {
+                  valueAnimation: true,
+                  formatter: '{value} km/h',
+                  color: 'auto'
+                },
+                data: [
+                  {
+                    value: 70
+                  }
+                ]
               }
             ]
           };

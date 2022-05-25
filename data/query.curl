@@ -92,5 +92,5 @@ curl -X POST 'http://localhost:8529/_api/cursor' -d '{ "query" : "FOR c in compa
 curl -G 'http://localhost:8086/query?pretty=true' --data-urlencode "db=co2at" --data-urlencode "q=SELECT * FROM \"scope\""
 
 # API
-curl -G "http://127.0.0.1:5000/api/v1/user" -H "Authorization: Basic amRvZTpKRE9F"
-curl -G 'http://127.0.0.1:5000/api/v1/data?metric=scope&company=Acme'
+curl -G "http://127.0.0.1:5050/api/v1/user" -H "Authorization: Basic amRvZTpKRE9F"
+curl -G 'http://127.0.0.1:5050/api/v1/data?metric=scope&company=Acme'

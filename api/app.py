@@ -1,7 +1,6 @@
 from flask import Flask
-from flask_cors import CORS
+from flask_cors import CORS, cross_origin
 from flask import request
-from matplotlib import use
 
 from api.services import retrieve_company, retrieve_data, retrieve_graph, retrieve_product, retrieve_user
 
@@ -18,6 +17,7 @@ def get_data():
     return retrieve_data(metric=metric, company=company)
 
 @app.route('/api/v1/user')
+@cross_origin()
 def get_user():
     auth = request.headers.get('Authorization')
     if not auth:

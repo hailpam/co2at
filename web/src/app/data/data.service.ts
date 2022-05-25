@@ -52,7 +52,7 @@ export class DataService {
         'Authorization': 'Basic ' +b64, 
       })
     };
-    return this.httpClient.get('http://localhost:5000/api/v1/user', options);
+    return this.httpClient.get('http://localhost:5050/api/v1/user', options);
   }
 
   getScopeTelemetryData(company: string) {
@@ -62,6 +62,6 @@ export class DataService {
       }),
       params: new HttpParams().set('metric', 'scope').set('company', company)
     };
-    return this.httpClient.get('http://localhost:5000/api/v1/data', options);
+    return this.httpClient.get('http://localhost:5050/api/v1/data', options);
   }
 }
