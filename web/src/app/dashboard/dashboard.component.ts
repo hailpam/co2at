@@ -12,7 +12,8 @@ import { PostDialogComponent } from '../post-dialog/post-dialog.component';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.less']
+  styleUrls: ['./dashboard.component.less'],
+  template: '<plotly-plot [data]="graph.data" [layout]="graph.layout"></plotly-plot>'
 })
 
 export class DashboardComponent {
@@ -25,28 +26,34 @@ export class DashboardComponent {
     company: ''
   };
 
-  chartOption1: EChartsOption = {}; 
-  chartOption2: EChartsOption = {}; 
-  //  = {
-  //   // title: {
-  //   //   text: 'ECharts Getting Started Example'
-  //   // },
-  //   tooltip: {},
-  //   legend: {
-  //     data: ['sales']
-  //   },
-  //   xAxis: {
-  //     data: ['Shirts', 'Cardigans', 'Chiffons', 'Pants', 'Heels', 'Socks']
-  //   },
-  //   yAxis: {},
-  //   series: [
-  //     {
-  //       name: 'sales',
-  //       type: 'line',
-  //       data: [5, 20, 36, 10, 10, 20]
-  //     }
-  //   ]
-  // };
+  public graph = {
+    data: [
+      {
+        domain: { x: [0, 1], y: [0, 1] },
+        value: 270,
+        title: { text: "Speed" },
+        type: "indicator",
+        mode: "gauge+number"
+      }
+    ],
+    layout: { width: 320, height: 240, title: 'A Fancy Plot' }
+  };
+
+  public graph1 = {
+    data: [
+      // { x: [1, 2, 3], y: [2, 6, 3], type: 'scatter', mode: 'lines+points', marker: {color: 'red'} },
+      { x: [1, 2, 3], y: [2, 5, 3], type: 'line', mode: 'lines+points', name: 'test' },
+    ],
+    layout: {
+      title: 'Title of the Graph',
+      xaxis: {
+        title: 'x-axis title'
+      },
+      yaxis: {
+        title: 'y-axis title'
+      }
+    }
+  }
 
   ngOnInit(): void {
     const user = sessionStorage.getItem('user')
@@ -58,7 +65,7 @@ export class DashboardComponent {
           const metric = results.name;
           const columns = results.columns;
           const values = results.values;
-          
+
           let times = [];
           let scope1Values = [];
           let scope2Values = [];
@@ -70,108 +77,23 @@ export class DashboardComponent {
             scope3Values.push(value[3]);
           }
 
-          this.chartOption1 = {
-            tooltip: {},
-            toolbox: {
-              show: true,
-              feature: {
-                restore: { show: true },
-                saveAsImage: { show: true },
-                dataView: { show: true },
-                dataZoom: { show: true },
-                magicType: { show: true },
-                brush: { show: true }
-              }
-            },
-            legend: {
-              data: [ 'CO2e Scope1', 'CO2e Scope2', 'CO2e Scope3' ]
-            },
-            xAxis: {
-              data: times
-            },
-            yAxis: {},
-            series: [
-              {
-                name: 'CO2e Scope1',
-                type: 'line',
-                data: scope1Values
+          this.graph1 = {
+            data: [
+              // { x: [1, 2, 3], y: [2, 6, 3], type: 'scatter', mode: 'lines+points', marker: {color: 'red'} },
+              { x: times, y: scope1Values, type: 'line', mode: 'lines+markers', name: 'CO2e Scope1' },
+              { x: times, y: scope2Values, type: 'line', mode: 'lines+markers', name: 'CO2e Scope2' },
+              { x: times, y: scope3Values, type: 'line', mode: 'lines+markers', name: 'CO2e Scope3' },
+            ],
+            layout: {
+              title: 'CO2e Emissions over Time',
+              xaxis: {
+                title: 'time'
               },
-              {
-                name: 'CO2e Scope2',
-                type: 'line',
-                data: scope2Values
-              },
-              {
-                name: 'CO2e Scope3',
-                type: 'line',
-                data: scope3Values
+              yaxis: {
+                title: 'emissions'
               }
-            ]
-          };
-          this.chartOption2 = {
-            toolbox: {
-              show: true,
-              feature: {
-                restore: { show: true },
-                saveAsImage: { show: true },
-                dataView: { show: true },
-                dataZoom: { show: true },
-                magicType: { show: true },
-                brush: { show: true }
-              }
-            },
-            series: [
-              {
-                type: 'gauge',
-                axisLine: {
-                  lineStyle: {
-                    width: 30,
-                    color: [
-                      [0.3, '#67e0e3'],
-                      [0.7, '#37a2da'],
-                      [1, '#fd666d']
-                    ]
-                  }
-                },
-                pointer: {
-                  itemStyle: {
-                    color: 'auto'
-                  }
-                },
-                axisTick: {
-                  distance: -30,
-                  length: 8,
-                  lineStyle: {
-                    color: '#fff',
-                    width: 2
-                  }
-                },
-                splitLine: {
-                  distance: -30,
-                  length: 30,
-                  lineStyle: {
-                    color: '#fff',
-                    width: 4
-                  }
-                },
-                axisLabel: {
-                  color: 'auto',
-                  distance: 40,
-                  fontSize: 20
-                },
-                detail: {
-                  valueAnimation: true,
-                  formatter: '{value} km/h',
-                  color: 'auto'
-                },
-                data: [
-                  {
-                    value: 70
-                  }
-                ]
-              }
-            ]
-          };
+            }
+          }
         },
         (error) => {
           console.log('Error fetching the Scope telemetry data...');

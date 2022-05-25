@@ -20,6 +20,10 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 
 import { NgxEchartsModule } from 'ngx-echarts';
+import * as PlotlyJS from 'plotly.js-dist-min';
+import { PlotlyModule } from 'angular-plotly.js';
+
+PlotlyModule.plotlyjs = PlotlyJS;
 
 @NgModule({
   declarations: [
@@ -44,7 +48,8 @@ import { NgxEchartsModule } from 'ngx-echarts';
     MatNativeDateModule,
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts'),
-    })
+    }),
+    PlotlyModule
   ],
   providers: [
     DataService

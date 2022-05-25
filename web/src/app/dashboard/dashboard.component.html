@@ -12,12 +12,16 @@
         </div>
         <br>
         <div class="container">
-            <div echarts [options]="chartOption1"></div>
+            <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center" class="content">
+                <plotly-plot [data]="graph.data" [layout]="graph.layout"></plotly-plot>
+                <plotly-plot [data]="graph.data" [layout]="graph.layout"></plotly-plot>
+                <plotly-plot [data]="graph.data" [layout]="graph.layout"></plotly-plot>
+            </div>
         </div>
         <br>
-        <div class="container">
-            <div echarts [options]="chartOption2"></div>
-        </div>
+            <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center" class="content">
+                <plotly-plot [data]="graph1.data" [layout]="graph1.layout"></plotly-plot>
+            </div>
         <br>
     </div>
 </div>
