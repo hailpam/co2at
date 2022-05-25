@@ -341,12 +341,16 @@ def generate_scope_datapoints(address, port):
         address = '127.0.0.1'
     if not port:
         port = 8086
+    products = ['Goodone', 'Greatone', 'Badone', 'Decentone']
+    regions = ['us-west', 'us-east']
     # to be added Product and East region
-    datapoint = 'scope,company=Acme,region=us-west scope1=%f,scope2=%f,scope3=%f'
+    datapoint = 'scope,company=Acme,region=%s,product=%s scope1=%f,scope2=%f,scope3=%f'
     scope1 = random.random()
     scope2 = random.random()
     scope3 = random.random()
-    res = requests.post('http://%s:%s/write?db=co2at' % (address, port), datapoint % (scope1, scope2, scope3))
+    product = products[random.randrange(0, len(products))]
+    region = regions[random.randrange(0, len(regions))]
+    res = requests.post('http://%s:%s/write?db=co2at' % (address, port), datapoint % (region, product, scope1, scope2, scope3))
     if res.status_code != 204:
         print('unable to push a datapoint: %s' % res.text)
 

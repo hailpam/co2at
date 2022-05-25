@@ -52,6 +52,82 @@ def retrieve_company(name):
             conn.close()
     return company
 
+def retrieve_certificate(company):
+    certificates = []
+    try:
+        conn = sqlite3.connect(db_path)
+        cursor = conn.execute('SELECT * FROM certificates WHERE producer = "%s"' % (company))
+        for row in cursor:
+            certificate = {}
+            certificate['created_at'] = row[0]
+            certificate['product'] = row[1]
+            certificate['producer'] = row[2]
+            certificate['provenance'] = row[3]
+            certificate['report_id'] = row[4]
+            certificate['certificate_id'] = row[5]
+            certificate['co2e_scope1'] = row[6]
+            certificate['co2e_scope2'] = row[7]
+            certificate['co2e_scope3'] = row[8]
+            certificates.append(certificate)
+    except Exception as e:
+        print('error: %s' % e)
+    finally:
+        if conn:
+            conn.close()
+    return certificates
+
+def retrieve_report(company):
+    reports = []
+    try:
+        conn = sqlite3.connect(db_path)
+        cursor = conn.execute('SELECT * FROM reports WHERE company = "%s"' % (company))
+        for row in cursor:
+            report = {}
+            report['created_at'] = row[0]
+            report['company'] = row[1]
+            report['product'] = row[2]
+            report['graph_id'] = row[3]
+            report['graph_level'] = row[4]
+            report['report_id'] = row[5]
+            report['certificate_id'] = row[6]
+            report['co2e_supplier'] = row[7]
+            report['co2e_retailer'] = row[8]
+            report['co2e_producer'] = row[9]
+            report['co2e_logistic'] = row[10]
+            report['co2e_waste'] = row[11]
+            reports.append(report)
+    except Exception as e:
+        print('error: %s' % e)
+    finally:
+        if conn:
+            conn.close()
+    return reports
+
+def retrieve_ad(company):
+    ads = []
+    try:
+        conn = sqlite3.connect(db_path)
+        cursor = conn.execute('SELECT * FROM ads WHERE (creator = "%s" OR recipient = "%s")' % (company, company))
+        for row in cursor:
+            ad = {}
+            ad['created_at'] = row[0]
+            ad['ad_id'] = row[1]
+            ad['type'] = row[2]
+            ad['product'] = row[3]
+            ad['graph_id'] = row[4]
+            ad['recommendation_id'] = row[5]
+            ad['creator'] = row[6]
+            ad['recipient'] = row[7]
+            ad['nr_click'] = row[8]
+            ad['acked'] = row[9]
+            ads.append(ad)
+    except Exception as e:
+        print('error: %s' % e)
+    finally:
+        if conn:
+            conn.close()
+    return ads
+
 def retrieve_product(company):
     products = []
     try:
