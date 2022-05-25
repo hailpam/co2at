@@ -5,32 +5,44 @@
             <div fxLayout="column" fxLayoutAlign="center center" class="content">
                 <mat-card class="card">
                     <mat-card-title>
-                        Welcome {{ user.name }}, {{ user.role }} at {{ user.company }}!
+                        Emissions summary for {{ user.company }}
                     </mat-card-title>
                 </mat-card>
             </div>
         </div>
         <br>
-        <div class="container">
-            <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center" class="content">
-                <plotly-plot [data]="graph.data" [layout]="graph.layout"></plotly-plot>
-                <plotly-plot [data]="graph.data" [layout]="graph.layout"></plotly-plot>
-                <plotly-plot [data]="graph.data" [layout]="graph.layout"></plotly-plot>
-            </div>
+        <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center" class="content">
+            <mat-card class="card">
+                <mat-card-content>
+                    <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center" class="content">
+                        <plotly-plot [data]="graph.data" [layout]="graph.layout"></plotly-plot>
+                        <plotly-plot [data]="graph.data" [layout]="graph.layout"></plotly-plot>
+                        <plotly-plot [data]="graph.data" [layout]="graph.layout"></plotly-plot>
+                    </div>
+                </mat-card-content>
+            </mat-card>
         </div>
         <br>
-        <div class="container">
-            <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center" class="content">
-                <plotly-plot [data]="graph1.data" [layout]="graph1.layout"></plotly-plot>
-                <plotly-plot [data]="graph2.data" [layout]="graph2.layout"></plotly-plot>
-            </div>
+        <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center" class="content">
+            <mat-card class="card">
+                <mat-card-content>
+                    <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center" class="content">
+                        <plotly-plot [data]="graph1.data" [layout]="graph1.layout"></plotly-plot>
+                        <plotly-plot [data]="graph2.data" [layout]="graph2.layout"></plotly-plot>
+                    </div>
+                </mat-card-content>
+            </mat-card>
         </div>
         <br>
-        <div class="container">
-            <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center" class="content">
-                <plotly-plot [data]="graph3.data" [layout]="graph3.layout"></plotly-plot>
-                <plotly-plot [data]="graph4.data" [layout]="graph4.layout"></plotly-plot>
-            </div>
+        <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center" class="content">
+            <mat-card class="card">
+                <mat-card-content>
+                    <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center" class="content">
+                        <plotly-plot [data]="graph3.data" [layout]="graph3.layout"></plotly-plot>
+                        <plotly-plot [data]="graph4.data" [layout]="graph4.layout"></plotly-plot>
+                    </div>
+                </mat-card-content>
+            </mat-card>
         </div>
         <br>
     </div>

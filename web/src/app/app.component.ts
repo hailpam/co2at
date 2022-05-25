@@ -23,10 +23,15 @@ export class AppComponent {
   verticalPosition: MatSnackBarVerticalPosition = 'top';
 
   isLoggedIn = false;
+  user = '';
 
   ngOnInit(): void {
     const user = sessionStorage.getItem('user');
-    this.isLoggedIn = sessionStorage.getItem('user') !== null;
+    if (user != null) {
+      this.isLoggedIn = true;
+      const u = JSON.parse(user);
+      this.user = u.name;
+    }
   }
 
   logout(): void {
