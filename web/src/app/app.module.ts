@@ -31,6 +31,8 @@ import { ReportsComponent } from './reports/reports.component';
 import { AdsComponent } from './ads/ads.component';
 import { CertificatesComponent } from './certificates/certificates.component';
 import { ProductComponent } from './product/product.component';
+import { ReportComponent } from './report/report.component';
+import { CertificateComponent } from './certificate/certificate.component';
 
 PlotlyModule.plotlyjs = PlotlyJS;
 
@@ -44,7 +46,9 @@ PlotlyModule.plotlyjs = PlotlyJS;
     ReportsComponent,
     AdsComponent,
     CertificatesComponent,
-    ProductComponent
+    ProductComponent,
+    ReportComponent,
+    CertificateComponent
   ],
   imports: [
     BrowserModule,

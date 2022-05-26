@@ -52,6 +52,10 @@ export class ReportsComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
+  onClick(element: ReportElement) {
+    this.router.navigateByUrl('/report', { state: element });
+  }
+
   goToHome(): void {
     this.router.navigateByUrl("");
   }

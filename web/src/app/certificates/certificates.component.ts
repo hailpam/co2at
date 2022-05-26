@@ -58,6 +58,10 @@ export class CertificatesComponent implements OnInit {
   goBack(): void {
     this.router.navigateByUrl("");
   }
+
+  onClick(element: CertificateElement) {
+    this.router.navigateByUrl('/certificate', { state: element });
+  }
 }
 
 export interface CertificateElement {
