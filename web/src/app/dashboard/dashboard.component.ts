@@ -211,7 +211,7 @@ export class DashboardComponent {
     layout: { 
       width: 320, 
       height: 240, 
-      title: 'Average Emissions' 
+      // title: 'Average Emissions'
     }
   };
 
@@ -228,7 +228,7 @@ export class DashboardComponent {
     layout: { 
       width: 320, 
       height: 240, 
-      title: 'Average Emissions' 
+      // title: 'Average Emissions' 
     }
   };
 
@@ -245,7 +245,7 @@ export class DashboardComponent {
     layout: { 
       width: 320, 
       height: 240, 
-      title: 'Average Emissions' 
+      // title: 'Average Emissions' 
     }
   };
 
@@ -268,7 +268,7 @@ export class DashboardComponent {
     layout: { 
       width: 320, 
       height: 240, 
-      title: 'Average Emissions',
+      // title: 'Average Emissions',
       xaxis: { range: [0, 62] } 
     }
   };
@@ -360,7 +360,7 @@ export class DashboardComponent {
       }
     ],
     layout: {
-      title: 'Emissions by Product and Region',
+      title: 'Emissions Flows',
     }
   }
 
@@ -373,7 +373,7 @@ export class DashboardComponent {
       values:  [ 0, 100, 200, 40, 59, 60, 30, 10, 10, 10, 20, 20, 20, 21, 13, 24, 33, 11, 23 ],
     }],
     layout: {
-      title: 'Emissions by Product and Region',
+      title: 'Hierarchy of Emissions',
     }
   }
 
