@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { throwToolbarMixedModesError } from '@angular/material/toolbar';
 import { Router } from '@angular/router';
 
 import { DataService } from '../data/data.service';
@@ -28,11 +29,19 @@ export class DashboardComponent {
         (response) => {
           const deserialized = JSON.parse(JSON.stringify(response))
           const series = deserialized.results[0].series;
+
           let values = [];
+          let regions = new Map();
           for (let serie of series) {
-            console.log(serie);
             for (let value of serie.values) {
               values.push(value);
+              if (!regions.has(serie.tags.region)) {
+                regions.set(serie.tags.region, new Map());
+              }
+              if (!regions.get(serie.tags.region).has(serie.tags.product)) {
+                regions.get(serie.tags.region).set(serie.tags.product, []);
+              }
+              regions.get(serie.tags.region).get(serie.tags.product).push(value);
             }
           }
           
@@ -51,9 +60,9 @@ export class DashboardComponent {
 
           this.lineSeries1 = {
             data: [
-              { x: times, y: scope1Values, type: 'line', mode: 'lines+markers', name: 'CO2e Scope1' },
-              { x: times, y: scope2Values, type: 'line', mode: 'lines+markers', name: 'CO2e Scope2' },
-              { x: times, y: scope3Values, type: 'line', mode: 'lines+markers', name: 'CO2e Scope3' },
+              { x: times, y: scope1Values, type: 'scatter', mode: 'scatter+markers', name: 'CO2e Scope1' },
+              { x: times, y: scope2Values, type: 'scatter', mode: 'scatter+markers', name: 'CO2e Scope2' },
+              { x: times, y: scope3Values, type: 'scatter', mode: 'scatter+markers', name: 'CO2e Scope3' },
             ],
             layout: {
               title: 'CO2e Emissions over Time',
@@ -79,6 +88,109 @@ export class DashboardComponent {
 
           this.indicator1.data[1].y = scopeTotValues;
           this.indicator1.data[0].value = avgScopeTot;
+          
+          // processing for the sankey
+
+          let i = 0;
+          let index = new Map();
+          let labels = []
+          for (let region of regions) {
+            if (!index.has(region[0])) {
+              index.set(region[0], i);
+              i += 1;
+              labels.push(region[0])
+            }
+          }
+          for (let region of regions) {
+            for (let product of region[1]) {
+              if (!index.has(product[0])) {
+                index.set(product[0], i);
+                i += 1;
+                labels.push(product[0]);
+              }
+            }
+          }
+          index.set('Scope1', i);
+          i += 1;
+          labels.push('Scope1');
+          index.set('Scope2', i);
+          i += 1;
+          labels.push('Scope2');
+          index.set('Scope3', i);
+          labels.push('Scope3');
+          
+          let src = [];
+          let dst = [];
+          let val = [];
+          for (let region of regions) {
+            for (let product of region[1]) {
+              src.push(index.get(region[0]));
+              dst.push(index.get(product[0]));
+              let avg = []
+              for (let i = 0; i < product[1].length; i++) {
+                avg.push(product[1][i][1] + product[1][i][2] + product[1][i][3]); 
+              }
+              val.push(avg.reduce((a, b) => a + b, 0) / avg.length);
+
+              let j = 1;
+              for (let scope of ['Scope1', 'Scope2', 'Scope3']) {
+                avg = [];
+                src.push(index.get(product[0]));
+                dst.push(index.get(scope));
+                for (let i = 0; i < product[1].length; i++) {
+                  avg.push(product[1][i][j]);
+                }
+                val.push(avg.reduce((a, b) => a + b, 0) / avg.length);
+                j += 1;
+              }
+            }
+          }
+          this.sankey1.data[0].node.label = labels;
+          this.sankey1.data[0].link.source = src;
+          this.sankey1.data[0].link.target = dst;
+          this.sankey1.data[0].link.value = val;
+
+          // processing for the sunburst
+          let ids = []
+          ids.push(this.user.company);
+          let lbls = []
+          lbls.push(this.user.company);
+          let prnts = []
+          prnts.push('');
+          let vals = []
+          vals.push(0);
+          for (let region of regions) {
+            let regionTot = 0;
+            for (let product of region[1]) {
+              let j = 1;
+              let scopeX = 0;
+              let scopeTot = 0;
+              for (let scope of ['Scope1', 'Scope2', 'Scope3']) {
+                ids.push(region[0] + product[0] + scope);
+                lbls.push(scope);
+                prnts.push(region[0] + product[0]);
+                for (let i = 0; i < product[1].length; i++) {
+                  scopeX += product[1][i][j];
+                }
+                vals.push(scopeX / product[1].length);
+                scopeTot += scopeX / product[1].length;
+                j += 1;
+              }
+              ids.push(region[0] + product[0]);
+              lbls.push(product[0]);
+              prnts.push(region[0]);
+              vals.push(scopeTot);
+              regionTot += scopeTot;
+            }
+            ids.push(region[0]);
+            lbls.push(region[0]);
+            prnts.push(this.user.company);
+            vals.push(regionTot);
+          }
+          this.sanburst1.data[0].ids = ids;
+          this.sanburst1.data[0].labels = lbls;
+          this.sanburst1.data[0].parents = prnts;
+          this.sanburst1.data[0].values = vals;
         },
         (error) => {
           console.log('Error fetching the Scope telemetry data...');
@@ -225,7 +337,7 @@ export class DashboardComponent {
     }
   }
 
-  public graph3 = {
+  public sankey1 = {
     data: [
       {
         type: "sankey",
@@ -238,7 +350,6 @@ export class DashboardComponent {
             width: 0.5
           },
           label: ["Scope1", "Scope2", "Scope3", "East", "West", "ProductA", "ProductB"],
-          // color: ["blue", "blue", "blue", "blue", "blue", "blue"]
         },
 
         link: {
@@ -253,19 +364,16 @@ export class DashboardComponent {
     }
   }
 
-  public graph4 = {
+  public sanburst1 = {
     data: [{
       type: "sunburst",
-      labels: ["Acme", "East", "West", "ProductA", "ProductB", "ProductA", "ProductB"],
-      parents: ["", "Acme", "Acme", "East", "East", "West", "West"],
-      values:  [10, 14, 12, 11, 11, 13, 13],
-      // outsidetextfont: {size: 20, color: "#377eb8"},
-      // leaf: {opacity: 0.4},
-      // marker: {line: {width: 2}},
+      ids: [ "Acme", "East", "West", "E-ProductA", "E-ProductB", "W-ProductA", "W-ProductB", "E-P1-Scope1", "E-P1-Scope2", "E-P1-Scope3", "E-P2-Scope1", "E-P2-Scope2", "E-P2-Scope3", "W-P1-Scope1", "W-P1-Scope2", "W-P1-Scope3", "W-P2-Scope1", "W-P2-Scope2", "W-P2-Scope3" ],
+      labels: [ "Acme", "East", "West", "ProductA", "ProductB", "ProductA", "ProductB", "Scope1", "Scope2", "Scope3", "Scope1", "Scope2", "Scope3", "Scope1", "Scope2", "Scope3", "Scope1", "Scope2", "Scope3" ],
+      parents: [ "", "Acme", "Acme", "East", "East", "West", "West", "E-ProductA", "E-ProductA", "E-ProductA", "E-ProductB", "E-ProductB", "E-ProductB", "W-ProductA", "W-ProductA", "W-ProductA", "W-ProductB", "W-ProductB", "W-ProductB" ],
+      values:  [ 0, 100, 200, 40, 59, 60, 30, 10, 10, 10, 20, 20, 20, 21, 13, 24, 33, 11, 23 ],
     }],
     layout: {
       title: 'Emissions by Product and Region',
-      // margin: {l: 0, r: 0, b: 0, t: 0},
     }
   }
 
