@@ -6,15 +6,13 @@
             </button>
         </div>
         <br>
-        <mat-card class="card">
-            {{ user.name }} {{ user.surname }}
-        </mat-card>
-        <mat-card class="card">
-            {{ user.role }}
-        </mat-card>
-        <mat-card class="card">
-            {{ user.company }}
-        </mat-card>
+        <mat-list>
+            <mat-list-item> {{ user.name }} {{ user.surname }}</mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item> {{ user.role }} </mat-list-item>
+            <mat-divider></mat-divider>
+            <mat-list-item> {{ user.company }} </mat-list-item>
+        </mat-list>
     </div>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
