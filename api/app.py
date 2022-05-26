@@ -14,7 +14,8 @@ CORS(app)
 def get_data():
     company = request.args.get('company')
     metric = request.args.get('metric')
-    return retrieve_data(metric=metric, company=company)
+    product = request.args.get('product')
+    return retrieve_data(metric=metric, company=company, product=product)
 
 @app.route('/api/v1/user')
 @cross_origin()

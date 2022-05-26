@@ -1,0 +1,43 @@
+<br>
+<div fxLayout="column" fxLayoutAlign="center center" class="content">
+    <div fxLayout="row" fxLayoutAlign="center center" class="content">
+        <button mat-icon-button (click)="goToHome()">
+            <mat-icon>home</mat-icon>
+        </button>
+        <button mat-icon-button (click)="goBack()">
+            <mat-icon>keyboard_return</mat-icon>
+        </button>
+    </div>
+    <mat-card class="card">
+        <mat-card-title>
+            Product
+        </mat-card-title>
+        <mat-card-content>
+            <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="left left" class="content">
+                <mat-card class="card">
+                    <mat-list>
+                        <mat-list-item> {{ product.name }} </mat-list-item>
+                        <mat-divider></mat-divider>
+                        <mat-list-item> {{ product.type }} </mat-list-item>
+                        <mat-divider></mat-divider>
+                        <mat-list-item> {{ product.producer }} </mat-list-item>
+                    </mat-list>
+                </mat-card>
+                <mat-card class="card" align="center">
+                    <qrcode [qrdata]="qrCodeInfo" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+                </mat-card>
+                <mat-card class="card">
+                    <plotly-plot [data]="indicator1.data" [layout]="indicator1.layout"></plotly-plot>
+                </mat-card>
+                <mat-card>
+                    <plotly-plot [data]="pie1.data" [layout]="pie1.layout"></plotly-plot>
+                </mat-card>
+            </div>
+            <br>
+            <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center" class="content">
+                <plotly-plot [data]="sankey1.data" [layout]="sankey1.layout"></plotly-plot>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>
+<br>

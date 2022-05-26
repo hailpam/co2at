@@ -172,6 +172,204 @@ INSERT INTO certificates (
     co2e_scope3
 ) VALUES (
     1653477792111,
+    'Goodone',
+    'Acme',
+    'us-west',
+    '',
+    '16cf75e7-16bb-4c74-be2b-edb1c75ef0590',
+    1.20,
+    0.30,
+    0.40
+);
+
+INSERT INTO certificates (
+    created_at,
+    product,
+    producer,
+    provenance,
+    report_id,
+    certificate_id,
+    co2e_scope1,
+    co2e_scope2,
+    co2e_scope3
+) VALUES (
+    1653477792111,
+    'Badone',
+    'Acme',
+    'us-west',
+    '',
+    '16cf75e7-16bb-4c74-be2b-edb1c75ef051',
+    1.21,
+    0.31,
+    0.41
+);
+
+INSERT INTO certificates (
+    created_at,
+    product,
+    producer,
+    provenance,
+    report_id,
+    certificate_id,
+    co2e_scope1,
+    co2e_scope2,
+    co2e_scope3
+) VALUES (
+    1653477792111,
+    'Decentone',
+    'Acme',
+    'us-west',
+    '',
+    '16cf75e7-16bb-4c74-be2b-edb1c75ef052',
+    1.22,
+    0.32,
+    0.42
+);
+
+INSERT INTO certificates (
+    created_at,
+    product,
+    producer,
+    provenance,
+    report_id,
+    certificate_id,
+    co2e_scope1,
+    co2e_scope2,
+    co2e_scope3
+) VALUES (
+    1653477792111,
+    'Greatone',
+    'Acme',
+    'us-west',
+    '',
+    '16cf75e7-16bb-4c74-be2b-edb1c75ef053',
+    1.23,
+    0.33,
+    0.43
+);
+
+INSERT INTO certificates (
+    created_at,
+    product,
+    producer,
+    provenance,
+    report_id,
+    certificate_id,
+    co2e_scope1,
+    co2e_scope2,
+    co2e_scope3
+) VALUES (
+    1653477792111,
+    'Goodone',
+    'Acme',
+    'us-west',
+    '',
+    '16cf75e7-16bb-4c74-be2b-edb1c75ef054',
+    1.24,
+    0.34,
+    0.44
+);
+
+INSERT INTO certificates (
+    created_at,
+    product,
+    producer,
+    provenance,
+    report_id,
+    certificate_id,
+    co2e_scope1,
+    co2e_scope2,
+    co2e_scope3
+) VALUES (
+    1653477792111,
+    'Badone',
+    'Acme',
+    'us-west',
+    '',
+    '16cf75e7-16bb-4c74-be2b-edb1c75ef055',
+    1.25,
+    0.35,
+    0.45
+);
+
+INSERT INTO certificates (
+    created_at,
+    product,
+    producer,
+    provenance,
+    report_id,
+    certificate_id,
+    co2e_scope1,
+    co2e_scope2,
+    co2e_scope3
+) VALUES (
+    1653477792111,
+    'Decentone',
+    'Acme',
+    'us-west',
+    '',
+    '16cf75e7-16bb-4c74-be2b-edb1c75ef056',
+    1.26,
+    0.36,
+    0.46
+);
+
+INSERT INTO certificates (
+    created_at,
+    product,
+    producer,
+    provenance,
+    report_id,
+    certificate_id,
+    co2e_scope1,
+    co2e_scope2,
+    co2e_scope3
+) VALUES (
+    1653477792111,
+    'Greatone',
+    'Acme',
+    'us-west',
+    '',
+    '16cf75e7-16bb-4c74-be2b-edb1c75ef057',
+    1.27,
+    0.37,
+    0.47
+);
+
+INSERT INTO certificates (
+    created_at,
+    product,
+    producer,
+    provenance,
+    report_id,
+    certificate_id,
+    co2e_scope1,
+    co2e_scope2,
+    co2e_scope3
+) VALUES (
+    1653477792111,
+    'Goodone',
+    'Acme',
+    'us-west',
+    '',
+    '16cf75e7-16bb-4c74-be2b-edb1c75ef058',
+    1.2,
+    0.3,
+    0.4
+);
+
+INSERT INTO certificates (
+    created_at,
+    product,
+    producer,
+    provenance,
+    report_id,
+    certificate_id,
+    co2e_scope1,
+    co2e_scope2,
+    co2e_scope3
+) VALUES (
+    1653477792111,
     'Badone',
     'Acme',
     'us-west',
@@ -202,13 +400,265 @@ INSERT INTO reports (
     'Decentone',
     'f0115c3e-3441-4102-b2c5-bde91e3dfb9b',
     1,
-    '8b68e87d-e1aa-4115-a514-39014cba540d',
+    '8b68e87d-e1aa-4115-a514-39014cba5400',
     '',
-    0.7,
-    0.2,
-    0.5,
-    0.3,
-    0.8
+    0.70,
+    0.20,
+    0.50,
+    0.30,
+    0.80
+);
+
+INSERT INTO reports (
+    created_at,
+    company,
+    product,
+    graph_id,
+    graph_level,
+    report_id,
+    certificate_id,
+    co2e_supplier,
+    co2e_retailer,
+    co2e_producer,
+    co2e_logistic,
+    co2e_waste
+) VALUES (
+    1653477792010,
+    'Acme',
+    'Greatone',
+    'f0115c3e-3441-4102-b2c5-bde91e3dfb9b',
+    1,
+    '8b68e87d-e1aa-4115-a514-39014cba5401',
+    '',
+    0.71,
+    0.21,
+    0.51,
+    0.31,
+    0.81
+);
+
+INSERT INTO reports (
+    created_at,
+    company,
+    product,
+    graph_id,
+    graph_level,
+    report_id,
+    certificate_id,
+    co2e_supplier,
+    co2e_retailer,
+    co2e_producer,
+    co2e_logistic,
+    co2e_waste
+) VALUES (
+    1653477792010,
+    'Acme',
+    'Badone',
+    'f0115c3e-3441-4102-b2c5-bde91e3dfb9b',
+    1,
+    '8b68e87d-e1aa-4115-a514-39014cba5402',
+    '',
+    0.72,
+    0.22,
+    0.52,
+    0.32,
+    0.82
+);
+
+INSERT INTO reports (
+    created_at,
+    company,
+    product,
+    graph_id,
+    graph_level,
+    report_id,
+    certificate_id,
+    co2e_supplier,
+    co2e_retailer,
+    co2e_producer,
+    co2e_logistic,
+    co2e_waste
+) VALUES (
+    1653477792010,
+    'Acme',
+    'Goodone',
+    'f0115c3e-3441-4102-b2c5-bde91e3dfb9b',
+    1,
+    '8b68e87d-e1aa-4115-a514-39014cba5403',
+    '',
+    0.73,
+    0.23,
+    0.53,
+    0.33,
+    0.83
+);
+
+INSERT INTO reports (
+    created_at,
+    company,
+    product,
+    graph_id,
+    graph_level,
+    report_id,
+    certificate_id,
+    co2e_supplier,
+    co2e_retailer,
+    co2e_producer,
+    co2e_logistic,
+    co2e_waste
+) VALUES (
+    1653477792010,
+    'Acme',
+    'Decentone',
+    'f0115c3e-3441-4102-b2c5-bde91e3dfb9b',
+    1,
+    '8b68e87d-e1aa-4115-a514-39014cba5404',
+    '',
+    0.74,
+    0.24,
+    0.54,
+    0.34,
+    0.84
+);
+
+INSERT INTO reports (
+    created_at,
+    company,
+    product,
+    graph_id,
+    graph_level,
+    report_id,
+    certificate_id,
+    co2e_supplier,
+    co2e_retailer,
+    co2e_producer,
+    co2e_logistic,
+    co2e_waste
+) VALUES (
+    1653477792010,
+    'Acme',
+    'Greatone',
+    'f0115c3e-3441-4102-b2c5-bde91e3dfb9b',
+    1,
+    '8b68e87d-e1aa-4115-a514-39014cba5405',
+    '',
+    0.75,
+    0.25,
+    0.55,
+    0.35,
+    0.85
+);
+
+INSERT INTO reports (
+    created_at,
+    company,
+    product,
+    graph_id,
+    graph_level,
+    report_id,
+    certificate_id,
+    co2e_supplier,
+    co2e_retailer,
+    co2e_producer,
+    co2e_logistic,
+    co2e_waste
+) VALUES (
+    1653477792010,
+    'Acme',
+    'Badone',
+    'f0115c3e-3441-4102-b2c5-bde91e3dfb9b',
+    1,
+    '8b68e87d-e1aa-4115-a514-39014cba5406',
+    '',
+    0.76,
+    0.26,
+    0.56,
+    0.36,
+    0.86
+);
+
+INSERT INTO reports (
+    created_at,
+    company,
+    product,
+    graph_id,
+    graph_level,
+    report_id,
+    certificate_id,
+    co2e_supplier,
+    co2e_retailer,
+    co2e_producer,
+    co2e_logistic,
+    co2e_waste
+) VALUES (
+    1653477792010,
+    'Acme',
+    'Goodone',
+    'f0115c3e-3441-4102-b2c5-bde91e3dfb9b',
+    1,
+    '8b68e87d-e1aa-4115-a514-39014cba5407',
+    '',
+    0.77,
+    0.27,
+    0.57,
+    0.37,
+    0.87
+);
+
+INSERT INTO reports (
+    created_at,
+    company,
+    product,
+    graph_id,
+    graph_level,
+    report_id,
+    certificate_id,
+    co2e_supplier,
+    co2e_retailer,
+    co2e_producer,
+    co2e_logistic,
+    co2e_waste
+) VALUES (
+    1653477792010,
+    'Acme',
+    'Decentone',
+    'f0115c3e-3441-4102-b2c5-bde91e3dfb9b',
+    1,
+    '8b68e87d-e1aa-4115-a514-39014cba5408',
+    '',
+    0.78,
+    0.28,
+    0.58,
+    0.38,
+    0.88
+);
+
+INSERT INTO reports (
+    created_at,
+    company,
+    product,
+    graph_id,
+    graph_level,
+    report_id,
+    certificate_id,
+    co2e_supplier,
+    co2e_retailer,
+    co2e_producer,
+    co2e_logistic,
+    co2e_waste
+) VALUES (
+    1653477792010,
+    'Acme',
+    'Goodone',
+    'f0115c3e-3441-4102-b2c5-bde91e3dfb9b',
+    1,
+    '8b68e87d-e1aa-4115-a514-39014cba5409',
+    '',
+    0.79,
+    0.29,
+    0.59,
+    0.39,
+    0.89
 );
 
 -- Adding Ads
@@ -232,6 +682,414 @@ INSERT INTO ads (
     '3908fc1e-53dd-42fd-8b47-ddd8aa63d55e',
     'DHL',
     'Acme',
+    0,
+    0
+);
+
+INSERT INTO ads (
+    created_at,
+    ad_id,
+    type,
+    product,
+    graph_id,
+    recommendation_id,
+    creator,
+    recipient,
+    nr_click,
+    acked
+) VALUES (
+    1653477792100,
+    '9f651d04-df04-4f11-9463-9d5fbde74fd6',
+    'B2B',
+    'Goodone',
+    '52049bfc-b275-4067-9121-aab59a88813d',
+    '3908fc1e-53dd-42fd-8b47-ddd8aa63d55e',
+    'DHL',
+    'Acme',
+    0,
+    0
+);
+
+INSERT INTO ads (
+    created_at,
+    ad_id,
+    type,
+    product,
+    graph_id,
+    recommendation_id,
+    creator,
+    recipient,
+    nr_click,
+    acked
+) VALUES (
+    1653477792100,
+    '9f651d04-df04-4f11-9463-9d5fbde74fd7',
+    'B2B',
+    'Greatone',
+    '52049bfc-b275-4067-9121-aab59a88813d',
+    '3908fc1e-53dd-42fd-8b47-ddd8aa63d55e',
+    'DHL',
+    'Acme',
+    0,
+    0
+);
+
+INSERT INTO ads (
+    created_at,
+    ad_id,
+    type,
+    product,
+    graph_id,
+    recommendation_id,
+    creator,
+    recipient,
+    nr_click,
+    acked
+) VALUES (
+    1653477792100,
+    '9f651d04-df04-4f11-9463-9d5fbde74fd8',
+    'B2B',
+    'Badone',
+    '52049bfc-b275-4067-9121-aab59a88813d',
+    '3908fc1e-53dd-42fd-8b47-ddd8aa63d55e',
+    'DHL',
+    'Acme',
+    0,
+    0
+);
+
+INSERT INTO ads (
+    created_at,
+    ad_id,
+    type,
+    product,
+    graph_id,
+    recommendation_id,
+    creator,
+    recipient,
+    nr_click,
+    acked
+) VALUES (
+    1653477792100,
+    '9f651d04-df04-4f11-9463-9d5fbde74fd9',
+    'B2B',
+    'Decentone',
+    '52049bfc-b275-4067-9121-aab59a88813d',
+    '3908fc1e-53dd-42fd-8b47-ddd8aa63d55e',
+    'UPS',
+    'Acme',
+    0,
+    0
+);
+
+INSERT INTO ads (
+    created_at,
+    ad_id,
+    type,
+    product,
+    graph_id,
+    recommendation_id,
+    creator,
+    recipient,
+    nr_click,
+    acked
+) VALUES (
+    1653477792100,
+    '9f651d04-df04-4f11-9463-9d5fbde74fe5',
+    'B2B',
+    'Goodone',
+    '52049bfc-b275-4067-9121-aab59a88813d',
+    '3908fc1e-53dd-42fd-8b47-ddd8aa63d55e',
+    'UPS',
+    'Acme',
+    0,
+    0
+);
+
+INSERT INTO ads (
+    created_at,
+    ad_id,
+    type,
+    product,
+    graph_id,
+    recommendation_id,
+    creator,
+    recipient,
+    nr_click,
+    acked
+) VALUES (
+    1653477792100,
+    '9f651d04-df04-4f11-9463-9d5fbde74fb5',
+    'B2B',
+    'Badone',
+    '52049bfc-b275-4067-9121-aab59a88813d',
+    '3908fc1e-53dd-42fd-8b47-ddd8aa63d55e',
+    'UPS',
+    'Acme',
+    0,
+    0
+);
+
+INSERT INTO ads (
+    created_at,
+    ad_id,
+    type,
+    product,
+    graph_id,
+    recommendation_id,
+    creator,
+    recipient,
+    nr_click,
+    acked
+) VALUES (
+    1653477792100,
+    '9f651d04-df04-4f11-9463-9d5fbde74fc5',
+    'B2B',
+    'Greatone',
+    '52049bfc-b275-4067-9121-aab59a88813d',
+    '3908fc1e-53dd-42fd-8b47-ddd8aa63d55e',
+    'UPS',
+    'Acme',
+    0,
+    0
+);
+
+INSERT INTO ads (
+    created_at,
+    ad_id,
+    type,
+    product,
+    graph_id,
+    recommendation_id,
+    creator,
+    recipient,
+    nr_click,
+    acked
+) VALUES (
+    1653477792100,
+    '9f651d04-df04-4f11-9463-9d5fbde74fz0',
+    'B2C',
+    'Greatone',
+    '52049bfc-b275-4067-9121-aab59a88813d',
+    '3908fc1e-53dd-42fd-8b47-ddd8aa63d55e',
+    'Acme',
+    'Joe Connor',
+    0,
+    0
+);
+
+INSERT INTO ads (
+    created_at,
+    ad_id,
+    type,
+    product,
+    graph_id,
+    recommendation_id,
+    creator,
+    recipient,
+    nr_click,
+    acked
+) VALUES (
+    1653477792100,
+    '9f651d04-df04-4f11-9463-9d5fbde74fz1',
+    'B2C',
+    'Greatone',
+    '52049bfc-b275-4067-9121-aab59a88813d',
+    '3908fc1e-53dd-42fd-8b47-ddd8aa63d55e',
+    'Acme',
+    'Joe Connor',
+    0,
+    0
+);
+
+INSERT INTO ads (
+    created_at,
+    ad_id,
+    type,
+    product,
+    graph_id,
+    recommendation_id,
+    creator,
+    recipient,
+    nr_click,
+    acked
+) VALUES (
+    1653477792100,
+    '9f651d04-df04-4f11-9463-9d5fbde74fz2',
+    'B2C',
+    'Greatone',
+    '52049bfc-b275-4067-9121-aab59a88813d',
+    '3908fc1e-53dd-42fd-8b47-ddd8aa63d55e',
+    'Acme',
+    'Joe Connor',
+    0,
+    0
+);
+
+INSERT INTO ads (
+    created_at,
+    ad_id,
+    type,
+    product,
+    graph_id,
+    recommendation_id,
+    creator,
+    recipient,
+    nr_click,
+    acked
+) VALUES (
+    1653477792100,
+    '9f651d04-df04-4f11-9463-9d5fbde74fz3',
+    'B2C',
+    'Greatone',
+    '52049bfc-b275-4067-9121-aab59a88813d',
+    '3908fc1e-53dd-42fd-8b47-ddd8aa63d55e',
+    'Acme',
+    'Joe Connor',
+    0,
+    0
+);
+
+INSERT INTO ads (
+    created_at,
+    ad_id,
+    type,
+    product,
+    graph_id,
+    recommendation_id,
+    creator,
+    recipient,
+    nr_click,
+    acked
+) VALUES (
+    1653477792100,
+    '9f651d04-df04-4f11-9463-9d5fbde74fz4',
+    'B2C',
+    'Greatone',
+    '52049bfc-b275-4067-9121-aab59a88813d',
+    '3908fc1e-53dd-42fd-8b47-ddd8aa63d55e',
+    'Acme',
+    'Joe Connor',
+    0,
+    0
+);
+
+INSERT INTO ads (
+    created_at,
+    ad_id,
+    type,
+    product,
+    graph_id,
+    recommendation_id,
+    creator,
+    recipient,
+    nr_click,
+    acked
+) VALUES (
+    1653477792100,
+    '9f651d04-df04-4f11-9463-9d5fbde74fz5',
+    'B2C',
+    'Greatone',
+    '52049bfc-b275-4067-9121-aab59a88813d',
+    '3908fc1e-53dd-42fd-8b47-ddd8aa63d55e',
+    'Acme',
+    'Joe Connor',
+    0,
+    0
+);
+
+INSERT INTO ads (
+    created_at,
+    ad_id,
+    type,
+    product,
+    graph_id,
+    recommendation_id,
+    creator,
+    recipient,
+    nr_click,
+    acked
+) VALUES (
+    1653477792100,
+    '9f651d04-df04-4f11-9463-9d5fbde74fz6',
+    'B2C',
+    'Greatone',
+    '52049bfc-b275-4067-9121-aab59a88813d',
+    '3908fc1e-53dd-42fd-8b47-ddd8aa63d55e',
+    'Acme',
+    'Joe Connor',
+    0,
+    0
+);
+
+INSERT INTO ads (
+    created_at,
+    ad_id,
+    type,
+    product,
+    graph_id,
+    recommendation_id,
+    creator,
+    recipient,
+    nr_click,
+    acked
+) VALUES (
+    1653477792100,
+    '9f651d04-df04-4f11-9463-9d5fbde74fz7',
+    'B2C',
+    'Greatone',
+    '52049bfc-b275-4067-9121-aab59a88813d',
+    '3908fc1e-53dd-42fd-8b47-ddd8aa63d55e',
+    'Acme',
+    'Joe Connor',
+    0,
+    0
+);
+
+INSERT INTO ads (
+    created_at,
+    ad_id,
+    type,
+    product,
+    graph_id,
+    recommendation_id,
+    creator,
+    recipient,
+    nr_click,
+    acked
+) VALUES (
+    1653477792100,
+    '9f651d04-df04-4f11-9463-9d5fbde74fz8',
+    'B2C',
+    'Greatone',
+    '52049bfc-b275-4067-9121-aab59a88813d',
+    '3908fc1e-53dd-42fd-8b47-ddd8aa63d55e',
+    'Acme',
+    'Joe Connor',
+    0,
+    0
+);
+
+INSERT INTO ads (
+    created_at,
+    ad_id,
+    type,
+    product,
+    graph_id,
+    recommendation_id,
+    creator,
+    recipient,
+    nr_click,
+    acked
+) VALUES (
+    1653477792100,
+    '9f651d04-df04-4f11-9463-9d5fbde74fz9',
+    'B2C',
+    'Greatone',
+    '52049bfc-b275-4067-9121-aab59a88813d',
+    '3908fc1e-53dd-42fd-8b47-ddd8aa63d55e',
+    'Acme',
+    'Joe Connor',
     0,
     0
 );

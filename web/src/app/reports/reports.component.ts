@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 
 import { DataService } from '../data/data.service';
 
@@ -11,7 +12,7 @@ import { DataService } from '../data/data.service';
 })
 export class ReportsComponent implements OnInit {
 
-  constructor(private dataService: DataService) { }
+  constructor(private dataService: DataService, private router: Router) { }
 
   displayedColumns: string[] = [
     'created_at',
@@ -49,6 +50,14 @@ export class ReportsComponent implements OnInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  goToHome(): void {
+    this.router.navigateByUrl("");
+  }
+
+  goBack(): void {
+    this.router.navigateByUrl("");
   }
 }
 

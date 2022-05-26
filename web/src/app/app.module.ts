@@ -23,12 +23,14 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { NgxEchartsModule } from 'ngx-echarts';
 import * as PlotlyJS from 'plotly.js-dist-min';
 import { PlotlyModule } from 'angular-plotly.js';
+import { QRCodeModule } from 'angularx-qrcode';
 
 import { ProfileDialogComponent } from './profile-dialog/profile-dialog.component';
 import { ProductsComponent } from './products/products.component';
 import { ReportsComponent } from './reports/reports.component';
 import { AdsComponent } from './ads/ads.component';
 import { CertificatesComponent } from './certificates/certificates.component';
+import { ProductComponent } from './product/product.component';
 
 PlotlyModule.plotlyjs = PlotlyJS;
 
@@ -41,7 +43,8 @@ PlotlyModule.plotlyjs = PlotlyJS;
     ProductsComponent,
     ReportsComponent,
     AdsComponent,
-    CertificatesComponent
+    CertificatesComponent,
+    ProductComponent
   ],
   imports: [
     BrowserModule,
@@ -62,7 +65,8 @@ PlotlyModule.plotlyjs = PlotlyJS;
     PlotlyModule,
     MatDialogModule,
     MatCardModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    QRCodeModule
   ],
   providers: [
     DataService,

@@ -1,5 +1,13 @@
 <br>
 <div fxLayout="column" fxLayoutAlign="center center" class="content">
+    <div fxLayout="row" fxLayoutAlign="center center" class="content">
+        <button mat-icon-button (click)="goToHome()">
+            <mat-icon>home</mat-icon> 
+        </button>
+        <button mat-icon-button (click)="goBack()">
+            <mat-icon>keyboard_return</mat-icon> 
+        </button>
+    </div>
     <mat-card class="card">
         <mat-card-title>
             Products
@@ -31,7 +39,11 @@
 
                     <ng-container matColumnDef="actions">
                         <th mat-header-cell *matHeaderCellDef> Actions </th>
-                        <td mat-cell *matCellDef="let element"> <mat-icon>arrow_right_alt</mat-icon> </td>
+                        <td mat-cell *matCellDef="let element">
+                            <button mat-icon-button>
+                                <mat-icon (click)="onClick(element)">arrow_right_alt</mat-icon> 
+                            </button>
+                        </td>
                     </ng-container>
             
                     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

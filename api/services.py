@@ -10,8 +10,11 @@ def retrieve_data(metric='scope', company='Acme', product=None, period=1, bucket
     return {}
 
 def retrieve_scope_data(company='Acme', product=None, period=0.5, bucket=60):
+    query = 'SELECT MEAN(scope1) as "scope1", MEAN(scope2) as "scope2", MEAN(scope3) as "scope3" FROM "scope" WHERE company=\'%s\' AND time > now() - %dh GROUP BY time(%ds), product, region' % (company, period, bucket)
+    if product:
+        query = 'SELECT MEAN(scope1) as "scope1", MEAN(scope2) as "scope2", MEAN(scope3) as "scope3" FROM "scope" WHERE company=\'%s\' AND product=\'%s\' AND time > now() - %dh GROUP BY time(%ds), product, region' % (company, product, period, bucket)
     params = {
-        'q': 'SELECT MEAN(scope1) as "scope1", MEAN(scope2) as "scope2", MEAN(scope3) as "scope3" FROM "scope" WHERE company=\'%s\' AND time > now() - %dh GROUP BY time(%ds), product, region' % (company, period, bucket),
+        'q': query,
         'db': 'co2at',
         'pretty': True
     }

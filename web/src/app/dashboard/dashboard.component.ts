@@ -193,7 +193,7 @@ export class DashboardComponent {
           this.sanburst1.data[0].values = vals;
         },
         (error) => {
-          console.log('Error fetching the Scope telemetry data...');
+          console.error('Error fetching the Scope telemetry data...');
         });
     }
   }
