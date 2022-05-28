@@ -16,6 +16,8 @@
             <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center" class="content">
                 <mat-card class="card">
                     <mat-list>
+                        <mat-list-item> {{ certificate.created_at | date: 'MMM d, y, h:mm:ss a' }} </mat-list-item>
+                        <mat-divider></mat-divider>
                         <mat-list-item> {{ certificate.product }} </mat-list-item>
                         <mat-divider></mat-divider>
                         <mat-list-item> {{ certificate.producer }} </mat-list-item>

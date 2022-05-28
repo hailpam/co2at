@@ -14,9 +14,11 @@ export class CertificateComponent implements OnInit {
   reportQrCodeInfo = '';
 
   certificate = {
+    created_at: 0,
     producer: '',
     product: '',
     provenance: '',
+    report_id: '',
     co2e_scope1: 0.0,
     co2e_scope2: 0.0,
     co2e_scope3: 0.0
@@ -26,10 +28,9 @@ export class CertificateComponent implements OnInit {
     const state = this.router.getCurrentNavigation()?.extras.state;
     if (state !== undefined && state !== null) {
       this.certificate = JSON.parse(JSON.stringify(state))
-      console.log(this.certificate);
       this.certQrCodeInfo = this.certificate.product + this.certificate.producer + this.certificate.provenance + this.certificate.co2e_scope1 + this.certificate.co2e_scope2 + this.certificate.co2e_scope3;
       // TODO link report if present, and prepare the QR code for the report
-      this.reportQrCodeInfo = 'report';
+      this.reportQrCodeInfo = this.certificate.report_id !== '' ? this.certificate.report_id : 'report';
     }
   }
 

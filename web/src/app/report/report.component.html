@@ -13,24 +13,37 @@
             Reports
         </mat-card-title>
         <mat-card-content>
-            Product Info (QR) + Cliccable Link
-            Certificate Info (QR) + Cliccable Link
-            Single Stat Emissions
-            Emissions Graph
-            <div fxLayout="row" fxLayoutAlign="center center" class="content">
-                <plotly-plot [data]="geoMapScopeTot.data" [layout]="geoMapScopeTot.layout"></plotly-plot>
+            <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center" class="content">
+                <mat-card class="card">
+                    <mat-list>
+                        <mat-list-item> {{ report.created_at | date: 'MMM d, y, h:mm:ss a' }} </mat-list-item>
+                        <mat-divider></mat-divider>
+                        <mat-list-item> {{ report.product }} </mat-list-item>
+                        <mat-divider></mat-divider>
+                        <mat-list-item> {{ report.company }} </mat-list-item>
+                    </mat-list>
+                </mat-card>
+                <mat-card class="card" align="center">
+                    <qrcode [qrdata]="reportQrCodeInfo" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+                </mat-card>
+                <mat-card class="card" align="center">
+                    <qrcode [qrdata]="certQrCodeInfo" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+                </mat-card>
             </div>
-            <div fxLayout="row" fxLayoutAlign="center center" class="content">
-                <plotly-plot [data]="singleStatScope1.data" [layout]="singleStatScope1.layout"></plotly-plot>
-                <plotly-plot [data]="singleStatScope1.data" [layout]="singleStatScope1.layout"></plotly-plot>
-                <plotly-plot [data]="singleStatScope1.data" [layout]="singleStatScope1.layout"></plotly-plot>
+            <br>
+            <div fxLayout="row" fxLayoutGap="px" fxLayoutAlign="center center" class="content">
+                <plotly-plot [data]="singleStatSupplier.data" [layout]="singleStatSupplier.layout"></plotly-plot>
+                <plotly-plot [data]="singleStatProducer.data" [layout]="singleStatProducer.layout"></plotly-plot>
+                <plotly-plot [data]="singleStatRetailer.data" [layout]="singleStatRetailer.layout"></plotly-plot>
             </div>
-            <div fxLayout="row" fxLayoutAlign="center center" class="content">
-                <plotly-plot [data]="singleStatScope1.data" [layout]="singleStatScope1.layout"></plotly-plot>
-                <plotly-plot [data]="singleStatScope1.data" [layout]="singleStatScope1.layout"></plotly-plot>
+            <div fxLayout="row" fxLayoutGap="px" fxLayoutAlign="center center" class="content">
+                <plotly-plot [data]="singleStatLogistic.data" [layout]="singleStatLogistic.layout"></plotly-plot>
+                <plotly-plot [data]="singleStatWaste.data" [layout]="singleStatWaste.layout"></plotly-plot>
+                <plotly-plot [data]="singleStatTot.data" [layout]="singleStatTot.layout"></plotly-plot>
             </div>
             <div fxLayout="row" fxLayoutAlign="center center" class="content">
                 <plotly-plot [data]="parallelCoordinatesBreakdown.data" [layout]="parallelCoordinatesBreakdown.layout"></plotly-plot>
+                <plotly-plot [data]="geoMapScopeTot.data" [layout]="geoMapScopeTot.layout"></plotly-plot>
             </div>
         </mat-card-content>
     </mat-card>
