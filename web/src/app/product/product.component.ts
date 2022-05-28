@@ -132,7 +132,7 @@ export class ProductComponent implements OnInit {
             i += 1;
           }
         }
-        // console.log(idx);
+        
         for (let edge of edges) {
           const key = edge[0];
           const value = edge[1];

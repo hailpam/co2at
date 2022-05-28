@@ -60,6 +60,10 @@ export class CertificateComponent implements OnInit {
     this.router.navigateByUrl("/certificates");
   }
 
+  browseOnBlockchain(): void {
+    window.open('https://www.blockchain.com/en/search?search=' + this.certificate.certificate_id, '_blank');
+  }
+
   public singleStatScope1 = {
     data: [
       {

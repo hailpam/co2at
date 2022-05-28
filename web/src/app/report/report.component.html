@@ -10,7 +10,12 @@
     </div>
     <mat-card class="card">
         <mat-card-title>
-            Report [{{ report.report_id }}]
+            <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="left center" class="content">
+                <button mat-icon-button (click)="browseOnBlockchain()">
+                    <mat-icon>open_in_new</mat-icon>
+                </button>
+                Report 
+            </div>
         </mat-card-title>
         <mat-card-content>
             <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center" class="content">
@@ -44,6 +49,9 @@
             <div fxLayout="row" fxLayoutAlign="center center" class="content">
                 <plotly-plot [data]="parallelCoordinatesBreakdown.data" [layout]="parallelCoordinatesBreakdown.layout"></plotly-plot>
                 <plotly-plot [data]="geoMapScopeTot.data" [layout]="geoMapScopeTot.layout"></plotly-plot>
+            </div>
+            <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center" class="content">
+                <plotly-plot [data]="sankey1.data" [layout]="sankey1.layout"></plotly-plot>
             </div>
         </mat-card-content>
     </mat-card>

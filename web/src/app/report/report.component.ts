@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 import { Router } from '@angular/router';
 
+import { DataService } from '../data/data.service';
+
 @Component({
   selector: 'app-report',
   templateUrl: './report.component.html',
@@ -25,7 +27,7 @@ export class ReportComponent implements OnInit {
     co2e_waste: 0.0
   };
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private dataService: DataService) {
     const state = this.router.getCurrentNavigation()?.extras.state;
     console.log(this.router.getCurrentNavigation()?.extras.state);
     if (state !== undefined && state !== null) {
@@ -56,6 +58,100 @@ export class ReportComponent implements OnInit {
     // geomap stats
     this.geoMapScopeTot.data[0].marker.size[0] = co2e * 10;
     this.geoMapScopeTot.data[0].marker.color[0] = co2e * 10;
+
+    // fetch the graph data
+    this.dataService.getGraphData(this.report.company).subscribe(
+      (response) => {
+        const deserialized = JSON.parse(JSON.stringify(response));
+
+        let productId = '';
+        let vertices = new Map();
+        let edges = new Map();
+        for (let result of deserialized.result) {
+          for (let vertex of result.vertices) {
+            // store info
+            if (!vertices.has(vertex._id)) {
+              vertices.set(vertex._id, vertex);
+              if (vertex.name === this.report.product) {
+                productId = vertex._id;
+              }
+            }
+            if (!edges.has(vertex._id)) {
+              edges.set(vertex._id, new Set());
+            }
+          }
+
+          // store relationships
+          for (let edge of result.edges) {
+            edges.get(edge._from).add(edge._to);
+          }
+        }
+
+        // traversal: selected the spanning tree
+        let selected = new Set();
+        let stack = [];
+        for (let edge of edges) {
+          const key = edge[0];
+          const value = edge[1];
+          if (selected.has(key)) {
+            continue;
+          }
+          if (key === productId) {
+            selected.add(key);
+            for (let v of value) {
+              stack.push(v);
+              selected.add(v);
+            }
+          }
+          if (value.has(key)) {
+            selected.add(key);
+          }
+          while (stack.length > 0) {
+            const elem = stack.pop();
+            for (let v of edges.get(elem)) {
+              stack.push(v);
+              selected.add(v);
+            }
+          }
+        }
+
+        let src = [];
+        let tgt = [];
+        let val = [];
+        let lbl = [];
+        let idx = new Map();
+        let i = 0;
+        for (let vertex of vertices) {
+          const key = vertex[0];
+          const value = vertex[1];
+          if (selected.has(key)) {
+            idx.set(value.name, i);
+            lbl.push(value.name);
+            i += 1;
+          }
+        }
+        
+        for (let edge of edges) {
+          const key = edge[0];
+          const value = edge[1];
+          for (let cty of value) {
+            if (selected.has(key) || selected.has(cty)) {
+              src.push(idx.get(vertices.get(key).name));
+              tgt.push(idx.get(vertices.get(cty).name));
+              val.push(1);
+            }
+          }
+        }
+
+        this.sankey1.data[0].node.label = lbl;
+        this.sankey1.data[0].link.source = src;
+        this.sankey1.data[0].link.target = tgt;
+        this.sankey1.data[0].link.value = val;
+      },
+      (error) => {
+        console.error('Error fetching the graph data for the product', error);
+      }
+    );
   }
 
   goToHome(): void {
@@ -64,6 +160,10 @@ export class ReportComponent implements OnInit {
 
   goBack(): void {
     this.router.navigateByUrl("/reports");
+  }
+
+  browseOnBlockchain(): void {
+    window.open('https://www.blockchain.com/en/search?search=' + this.report.report_id, '_blank');
   }
 
   public singleStatTot = {
@@ -229,6 +329,34 @@ export class ReportComponent implements OnInit {
     }],
     layout: {
       width: 600
+    }
+  };
+
+  public sankey1 = {
+    data: [
+      {
+        type: "sankey",
+        orientation: "h",
+        node: {
+          pad: 15,
+          thickness: 30,
+          line: {
+            color: "black",
+            width: 0.5
+          },
+          label: ["Scope1", "Scope2", "Scope3", "East", "West", "ProductA", "ProductB"],
+        },
+        link: {
+          source: [0, 0, 1, 1, 2, 2, 4, 4, 3],
+          target: [3, 4, 3, 4, 3, 4, 5, 6, 6],
+          value: [8, 4, 5, 2, 3, 6, 7, 7, 3]
+        }
+      }
+    ],
+    layout: {
+      title: 'Freezed Emissions Flows (at report time)',
+      width: 1118,
+      height: 772,
     }
   };
 }

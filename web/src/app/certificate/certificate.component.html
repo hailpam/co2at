@@ -10,7 +10,12 @@
     </div>
     <mat-card class="card">
         <mat-card-title>
-            Certificate [{{ certificate.certificate_id }}]
+            <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="left center" class="content">
+                <button mat-icon-button (click)="browseOnBlockchain()">
+                    <mat-icon>open_in_new</mat-icon>
+                </button>
+                Certificate 
+            </div>
         </mat-card-title>
         <mat-card-content>
             <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center" class="content">
