@@ -7,12 +7,23 @@ db_path = os.environ['CO2AT_DB_PATH']
 def retrieve_data(metric='scope', company='Acme', product=None, period=1, bucket=60):
     if metric == 'scope':
         return retrieve_scope_data(company, product, period, bucket)
+    if metric == 'credit':
+        return retrieve_credit_data(period)
     return {}
 
 def retrieve_scope_data(company='Acme', product=None, period=0.5, bucket=60):
     query = 'SELECT MEAN(scope1) as "scope1", MEAN(scope2) as "scope2", MEAN(scope3) as "scope3" FROM "scope" WHERE company=\'%s\' AND time > now() - %dh GROUP BY time(%ds), product, region' % (company, period, bucket)
     if product:
         query = 'SELECT MEAN(scope1) as "scope1", MEAN(scope2) as "scope2", MEAN(scope3) as "scope3" FROM "scope" WHERE company=\'%s\' AND product=\'%s\' AND time > now() - %dh GROUP BY time(%ds), product, region' % (company, product, period, bucket)
+    params = {
+        'q': query,
+        'db': 'co2at',
+        'pretty': True
+    }
+    return requests.get('http://127.0.0.1:8086/query?pretty=true', params=params).json()
+
+def retrieve_credit_data(period=0.5, bucket=60):
+    query = 'SELECT MEAN(available) as "available" FROM "credit" WHERE time > now() - %dh GROUP BY time(%ds), institution, region' % (period, bucket)
     params = {
         'q': query,
         'db': 'co2at',

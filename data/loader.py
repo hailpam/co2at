@@ -354,6 +354,22 @@ def generate_scope_datapoints(address, port):
     if res.status_code != 204:
         print('unable to push a datapoint: %s' % res.text)
 
+def generate_credits_datapoints(address, port):
+    if not address:
+        address = '127.0.0.1'
+    if not port:
+        port = 8086
+    institutions = ['GreenerInstitutionA', 'GreenerInstitutionB', 'GreenerInstitutionC', 'GreenerInstitutionD']
+    regions = ['us-west', 'us-east']
+    # to be added Product and East region
+    datapoint = 'credit,region=%s,institution=%s available=%f'
+    available = random.random() * 1e6
+    institution = institutions[random.randrange(0, len(institutions))]
+    region = regions[random.randrange(0, len(regions))]
+    res = requests.post('http://%s:%s/write?db=co2at' % (address, port), datapoint % (region, institution, available))
+    if res.status_code != 204:
+        print('unable to push a datapoint: %s' % res.text)
+
 def main():
     influx_address, arango_address, influx_port, arango_port = fetch_env_variables()
     create_influx_database(influx_address, influx_port)
@@ -361,6 +377,7 @@ def main():
     generate_co2at_graph(arango_address, arango_port)
     while True:
         generate_scope_datapoints(influx_address, influx_port)
+        generate_credits_datapoints(influx_address, influx_port)
         sleep(1)
     
 if __name__ == '__main__':

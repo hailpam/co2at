@@ -226,7 +226,7 @@ export class ReportComponent implements OnInit {
         delta: { reference: 1 },
         value: 220,
         domain: { x: [0, 1], y: [0, 1] },
-        title: { text: "Retailer" }
+        title: { text: "Retailer",  }
       }
     ],
     layout: {
