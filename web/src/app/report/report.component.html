@@ -13,6 +13,25 @@
             Reports
         </mat-card-title>
         <mat-card-content>
+            Product Info (QR) + Cliccable Link
+            Certificate Info (QR) + Cliccable Link
+            Single Stat Emissions
+            Emissions Graph
+            <div fxLayout="row" fxLayoutAlign="center center" class="content">
+                <plotly-plot [data]="geoMapScopeTot.data" [layout]="geoMapScopeTot.layout"></plotly-plot>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="center center" class="content">
+                <plotly-plot [data]="singleStatScope1.data" [layout]="singleStatScope1.layout"></plotly-plot>
+                <plotly-plot [data]="singleStatScope1.data" [layout]="singleStatScope1.layout"></plotly-plot>
+                <plotly-plot [data]="singleStatScope1.data" [layout]="singleStatScope1.layout"></plotly-plot>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="center center" class="content">
+                <plotly-plot [data]="singleStatScope1.data" [layout]="singleStatScope1.layout"></plotly-plot>
+                <plotly-plot [data]="singleStatScope1.data" [layout]="singleStatScope1.layout"></plotly-plot>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="center center" class="content">
+                <plotly-plot [data]="parallelCoordinatesBreakdown.data" [layout]="parallelCoordinatesBreakdown.layout"></plotly-plot>
+            </div>
         </mat-card-content>
     </mat-card>
 </div>

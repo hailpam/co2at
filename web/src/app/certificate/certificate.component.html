@@ -1,5 +1,5 @@
 <br>
-<div fxLayout="column" fxLayoutAlign="center center" class="content">
+<div fxLayout="column" fxLayoutGap="20px" fxLayoutAlign="center center" class="content">
     <div fxLayout="row" fxLayoutAlign="center center" class="content">
         <button mat-icon-button (click)="goToHome()">
             <mat-icon>home</mat-icon> 
@@ -13,6 +13,33 @@
             Certificate
         </mat-card-title>
         <mat-card-content>
+            <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center" class="content">
+                <mat-card class="card">
+                    <mat-list>
+                        <mat-list-item> {{ certificate.product }} </mat-list-item>
+                        <mat-divider></mat-divider>
+                        <mat-list-item> {{ certificate.producer }} </mat-list-item>
+                        <mat-divider></mat-divider>
+                        <mat-list-item> {{ certificate.provenance }} </mat-list-item>
+                    </mat-list>
+                </mat-card>
+                <mat-card class="card" align="center">
+                    <qrcode [qrdata]="certQrCodeInfo" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+                </mat-card>
+                <mat-card class="card" align="center">
+                    <qrcode [qrdata]="reportQrCodeInfo" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+                </mat-card>
+            </div>
+            <br>
+            <div fxLayout="row" fxLayoutAlign="center center" class="content">
+                <plotly-plot [data]="singleStatScope1.data" [layout]="singleStatScope1.layout"></plotly-plot>
+                <plotly-plot [data]="singleStatScope2.data" [layout]="singleStatScope2.layout"></plotly-plot>
+                <plotly-plot [data]="singleStatScope3.data" [layout]="singleStatScope3.layout"></plotly-plot>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="center center" class="content">
+                <plotly-plot [data]="parallelCoordinatesBreakdown.data" [layout]="parallelCoordinatesBreakdown.layout"></plotly-plot>
+                <plotly-plot [data]="geoMapScopeTot.data" [layout]="geoMapScopeTot.layout"></plotly-plot>
+            </div>
         </mat-card-content>
     </mat-card>
 </div>
