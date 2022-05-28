@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AdsComponent } from './ads/ads.component';
 import { CertificateComponent } from './certificate/certificate.component';
 import { CertificatesComponent } from './certificates/certificates.component';
+import { CreditTransactionComponent } from './credit-transaction/credit-transaction.component';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
@@ -20,7 +21,8 @@ const routes: Routes = [
   { path: 'certificates', component: CertificatesComponent },
   { path: 'product', component: ProductComponent },
   { path: 'report', component: ReportComponent },
-  { path: 'certificate', component: CertificateComponent }
+  { path: 'certificate', component: CertificateComponent },
+  { path: 'credit', component: CreditTransactionComponent }
 ];
 
 @NgModule({

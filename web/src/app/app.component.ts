@@ -71,4 +71,8 @@ export class AppComponent {
   goToCertificates(): void {
     this.router.navigate(['/certificates']);
   }
+  
+  goToTransactCredits(): void {
+    this.router.navigate(['/credit']);
+  }
 }
