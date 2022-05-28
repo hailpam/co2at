@@ -19,6 +19,7 @@ export class CertificateComponent implements OnInit {
     product: '',
     provenance: '',
     report_id: '',
+    certificate_id: '',
     co2e_scope1: 0.0,
     co2e_scope2: 0.0,
     co2e_scope3: 0.0

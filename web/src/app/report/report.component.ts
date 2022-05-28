@@ -17,6 +17,7 @@ export class ReportComponent implements OnInit {
     product: '',
     company: '',
     certificate_id: '',
+    report_id: '',
     co2e_logistic: 0.0,
     co2e_producer: 0.0,
     co2e_retailer: 0.0,
