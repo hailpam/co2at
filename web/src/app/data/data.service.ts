@@ -37,6 +37,16 @@ export class DataService {
     return this.httpClient.get('http://localhost:5050/api/v1/data', options);
   }
 
+  getCreditTelemetryData() {
+    const options = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json'
+      }),
+      params: new HttpParams().set('metric', 'credit')
+    };
+    return this.httpClient.get('http://localhost:5050/api/v1/data', options);
+  }
+
   getGraphData(company: string) {
     const options = {
       headers: new HttpHeaders({

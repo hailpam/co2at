@@ -7,6 +7,8 @@ DROP TABLE products;
 DROP TABLE certificates;
 DROP TABLE reports;
 DROP TABLE ads;
+DROP TABLE balance;
+DROP TABLE transaction_log;
 
 -- Tables addition
 
@@ -69,6 +71,32 @@ CREATE TABLE ads (
     recipient text NOT NULL,
     nr_click INTEGER NOT NULL,
     acked INTEGER NOT NULL
+);
+
+CREATE TABLE balance (
+    credits INTEGER NOT NULL,
+    debits INTEGER NOT NULL,
+    targets INTEGER NOT NULL
+);
+
+CREATE TABLE transaction_log (
+    created_at INTEGER NOT NULL,
+    operation text NOT NULL,
+    op_from text NOT NULL,
+    op_to text NOT NULL,
+    amount REAL NOT NULL
+);
+
+-- Adding a row for the balance
+
+INSERT INTO balance (
+    credits,
+    debits,
+    targets
+) VALUES (
+    0,
+    10000,
+    100000
 );
 
 -- Adding 2 users for the Acme, Inc. company
