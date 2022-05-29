@@ -56,6 +56,40 @@ export class CreditTransactionComponent implements OnInit {
       this.dataService.getCreditTelemetryData().subscribe(
         (response) => {
           console.log(response);
+          const deserialised = JSON.parse(JSON.stringify(response));
+          let series = new Map();
+          for (let serie of deserialised.results[0].series) {
+            const key = serie.tags['institution'] +"@"+ serie.tags['region'];
+            if (!series.has(key)) {
+              series.set(key, []);
+            }
+            for (let value of serie.values) {
+              series.get(key).push(value[1]);
+            }
+          }
+
+          let times = []
+          let times1 = [];
+          const values = deserialised.results[0].series[0];
+          console.log(values);
+          let i = 0;
+          for (let value of values.values) {
+            times1.push(value[0]);
+            times.push(i);
+            i += 1;
+          }
+          
+          this.lineSeries.data = [];
+          for (let serie of series) {
+            this.lineSeries.data.push(
+              { 
+                x: times, 
+                y: serie[1], 
+                type: 'line', 
+                mode: 'lines+points', 
+                name: serie[0] }
+            );
+          }
         },
         (error) => {
           console.error('Fetching the credit telemetry data');
@@ -125,6 +159,25 @@ export class CreditTransactionComponent implements OnInit {
     ],
     layout: { 
       width: 400, height: 250 
+    }
+  };
+
+  public lineSeries = {
+    data: [
+      { x: [1, 2, 3], y: [2, 5, 3], type: 'line', mode: 'lines+points', name: 'test1' },
+      { x: [0, 1, 2], y: [3, 4, 3], type: 'line', mode: 'lines+points', name: 'test2' },
+    ],
+    layout: {
+      autosize: true,
+      width: 1100,
+      height: 500,
+      title: 'Credits trends over time by Institution',
+      xaxis: {
+        title: 'credits'
+      },
+      yaxis: {
+        title: 'time'
+      }
     }
   };
 }

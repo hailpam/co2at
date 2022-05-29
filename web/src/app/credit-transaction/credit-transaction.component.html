@@ -13,10 +13,9 @@
             Credit(s)/Debit(s) Transactions
         </mat-card-title>
         <mat-card-content>
-            Market Availability
-            Company Credits + Debits + Targets
-            Transaction Form
-            Transaction Log
+            <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center" class="content">
+                <plotly-plot [data]="lineSeries.data" [layout]="lineSeries.layout"></plotly-plot>
+            </div>
             <div fxLayout="row" fxLayoutAlign="center center" class="content">
                 <plotly-plot [data]="singleStatTarget.data" [layout]="singleStatTarget.layout"></plotly-plot>
                 <plotly-plot [data]="singleStatCredits.data" [layout]="singleStatCredits.layout"></plotly-plot>
