@@ -192,7 +192,7 @@ export class ReportComponent implements OnInit {
         delta: { reference: 1 },
         value: 220,
         domain: { x: [0, 1], y: [0, 1] },
-        title: { text: "Supplier" }
+        title: { text: "Supply" }
       }
     ],
     layout: {
@@ -209,7 +209,7 @@ export class ReportComponent implements OnInit {
         delta: { reference: 1 },
         value: 220,
         domain: { x: [0, 1], y: [0, 1] },
-        title: { text: "Producer" }
+        title: { text: "Produce" }
       }
     ],
     layout: {
@@ -226,7 +226,7 @@ export class ReportComponent implements OnInit {
         delta: { reference: 1 },
         value: 220,
         domain: { x: [0, 1], y: [0, 1] },
-        title: { text: "Retailer",  }
+        title: { text: "Retail",  }
       }
     ],
     layout: {
@@ -306,19 +306,19 @@ export class ReportComponent implements OnInit {
       },
       dimensions: [{
         range: [0, 2],
-        label: 'Supplier',
+        label: 'Supply',
         values: [ 0.2 ]
       }, {
         range: [0, 2],
-        label: 'Producer',
+        label: 'Produce',
         values: [ 1.1 ]
       }, {
         range: [0, 2],
-        label: 'Retailer',
+        label: 'Retail',
         values: [ 0.7 ]
       }, {
         range: [0, 2],
-        label: 'Logistics',
+        label: 'Logistic',
         values: [ 1.1 ]
       }, {
         range: [0, 2],
