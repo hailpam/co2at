@@ -2,7 +2,7 @@ from flask import Flask
 from flask_cors import CORS, cross_origin
 from flask import request
 
-from api.services import retrieve_certificate, retrieve_company, retrieve_data, retrieve_graph, retrieve_product, retrieve_report, retrieve_user, retrieve_ad
+from api.services import retrieve_balance, retrieve_certificate, retrieve_company, retrieve_data, retrieve_graph, retrieve_product, retrieve_report, retrieve_transaction, retrieve_user, retrieve_ad
 
 import json
 import base64
@@ -69,3 +69,15 @@ def get_ad():
     company = request.args.get('company')
     ads = retrieve_ad(company)
     return json.dumps(ads, indent=4)
+
+@app.route('/api/v1/balance')
+def get_balance():
+    company = request.args.get('company')
+    balance = retrieve_balance(company)
+    return json.dumps(balance, indent=4)
+
+@app.route('/api/v1/transaction')
+def get_transaction():
+    company = request.args.get('company')
+    transactions = retrieve_transaction(company)
+    return json.dumps(transactions, indent=4)

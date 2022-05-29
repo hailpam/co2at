@@ -96,4 +96,24 @@ export class DataService {
     };
     return this.httpClient.get('http://localhost:5050/api/v1/certificate', options);
   }
+
+  getBalance(company: string) {
+    const options = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json'
+      }),
+      params: new HttpParams().set('company', company)
+    };
+    return this.httpClient.get('http://localhost:5050/api/v1/balance', options);
+  }
+
+  getTransactions(company: string) {
+    const options = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json'
+      }),
+      params: new HttpParams().set('company', company)
+    };
+    return this.httpClient.get('http://localhost:5050/api/v1/transaction', options);
+  }
 }

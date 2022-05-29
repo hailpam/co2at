@@ -160,6 +160,44 @@ def retrieve_product(company):
             conn.close()
     return products
 
+def retrieve_balance(company):
+    balance = {}
+    try:
+        conn = sqlite3.connect(db_path)
+        cursor = conn.execute('SELECT * FROM balance WHERE company = "%s"' % (company))
+        for row in cursor:
+            balance['company'] = row[0]
+            balance['credits'] = row[1]
+            balance['debits'] = row[2]
+            balance['targets'] = row[3]
+    except Exception as e:
+        print('error: %s' % e)
+    finally:
+        if conn:
+            conn.close()
+    return balance
+
+def retrieve_transaction(company):
+    transactions = []
+    try:
+        conn = sqlite3.connect(db_path)
+        cursor = conn.execute('SELECT * FROM transaction_log WHERE (op_from = "%s" OR op_to = "%s")' % (company, company))
+        for row in cursor:
+            transaction = {}
+            transaction['created_at'] = row[0]
+            transaction['operation'] = row[1]
+            transaction['op_from'] = row[2]
+            transaction['op_to'] = row[3]
+            transaction['amount'] = row[4]
+            transaction['dollar'] = row[5]
+            transactions.append(transaction)
+    except Exception as e:
+        print('error: %s' % e)
+    finally:
+        if conn:
+            conn.close()
+    return transactions
+
 def retrieve_graph(company):
     data = {
         'query': 'FOR c in company FILTER c.name == \"%s\" FOR v, e, p IN 1..3 ANY c company_to, product_to, input_to, output_to RETURN p' % company,

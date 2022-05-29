@@ -74,6 +74,7 @@ CREATE TABLE ads (
 );
 
 CREATE TABLE balance (
+    company text PRIMARY KEY,
     credits INTEGER NOT NULL,
     debits INTEGER NOT NULL,
     targets INTEGER NOT NULL
@@ -84,19 +85,184 @@ CREATE TABLE transaction_log (
     operation text NOT NULL,
     op_from text NOT NULL,
     op_to text NOT NULL,
-    amount REAL NOT NULL
+    amount REAL NOT NULL,
+    dollar REAL NOT NULL
 );
 
 -- Adding a row for the balance
 
 INSERT INTO balance (
+    company,
     credits,
     debits,
     targets
 ) VALUES (
+    'Acme',
     0,
     10000,
     100000
+);
+
+-- Adding a few transactions
+
+INSERT INTO transaction_log (
+    created_at,
+    operation,
+    op_from,
+    op_to,
+    amount,
+    dollar
+) VALUES (
+    1653805302111,
+    'buy',
+    'GreenerInstitutionA',
+    'Acme',
+    101.0,
+    1111.0
+);
+
+INSERT INTO transaction_log (
+    created_at,
+    operation,
+    op_from,
+    op_to,
+    amount,
+    dollar
+) VALUES (
+    1653805302211,
+    'buy',
+    'GreenerInstitutionA',
+    'Acme',
+    101.0,
+    1111.0
+);
+
+INSERT INTO transaction_log (
+    created_at,
+    operation,
+    op_from,
+    op_to,
+    amount,
+    dollar
+) VALUES (
+    1653805302311,
+    'buy',
+    'GreenerInstitutionD',
+    'Acme',
+    33.0,
+    4500.0
+);
+
+INSERT INTO transaction_log (
+    created_at,
+    operation,
+    op_from,
+    op_to,
+    amount,
+    dollar
+) VALUES (
+    1653805302411,
+    'buy',
+    'GreenerInstitutionC',
+    'Acme',
+    45.0,
+    4500.0
+);
+
+INSERT INTO transaction_log (
+    created_at,
+    operation,
+    op_from,
+    op_to,
+    amount,
+    dollar
+) VALUES (
+    1653805302511,
+    'buy',
+    'GreenerInstitutionB',
+    'Acme',
+    44.0,
+    8800.0
+);
+
+INSERT INTO transaction_log (
+    created_at,
+    operation,
+    op_from,
+    op_to,
+    amount,
+    dollar
+) VALUES (
+    1653805302611,
+    'buy',
+    'GreenerInstitutionA',
+    'Acme',
+    23.0,
+    3500.0
+);
+
+INSERT INTO transaction_log (
+    created_at,
+    operation,
+    op_from,
+    op_to,
+    amount,
+    dollar
+) VALUES (
+    16538053021711,
+    'buy',
+    'GreenerInstitutionD',
+    'Acme',
+    22.0,
+    2200.0
+);
+
+INSERT INTO transaction_log (
+    created_at,
+    operation,
+    op_from,
+    op_to,
+    amount,
+    dollar
+) VALUES (
+    1653805302111,
+    'buy',
+    'GreenerInstitutionC',
+    'Acme',
+    111.0,
+    3504.0
+);
+
+INSERT INTO transaction_log (
+    created_at,
+    operation,
+    op_from,
+    op_to,
+    amount,
+    dollar
+) VALUES (
+    1653805302811,
+    'buy',
+    'GreenerInstitutionB',
+    'Acme',
+    15.0,
+    2000.0
+);
+
+INSERT INTO transaction_log (
+    created_at,
+    operation,
+    op_from,
+    op_to,
+    amount,
+    dollar
+) VALUES (
+    1653805302911,
+    'buy',
+    'GreenerInstitutionA',
+    'Acme',
+    11.0,
+    1111.0
 );
 
 -- Adding 2 users for the Acme, Inc. company
