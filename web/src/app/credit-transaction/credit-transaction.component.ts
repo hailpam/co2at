@@ -69,24 +69,20 @@ export class CreditTransactionComponent implements OnInit {
           }
 
           let times = []
-          let times1 = [];
           const values = deserialised.results[0].series[0];
-          console.log(values);
           let i = 0;
           for (let value of values.values) {
-            times1.push(value[0]);
             times.push(i);
             i += 1;
           }
-          
           this.lineSeries.data = [];
           for (let serie of series) {
             this.lineSeries.data.push(
               { 
                 x: times, 
                 y: serie[1], 
-                type: 'line', 
-                mode: 'lines+points', 
+                type: 'scatter', 
+                mode: 'scatter+markers', 
                 name: serie[0] }
             );
           }
@@ -169,14 +165,14 @@ export class CreditTransactionComponent implements OnInit {
     ],
     layout: {
       autosize: true,
-      width: 1100,
+      width: 1200,
       height: 500,
       title: 'Credits trends over time by Institution',
       xaxis: {
-        title: 'credits'
+        title: 'time [min]'
       },
       yaxis: {
-        title: 'time'
+        title: 'credits'
       }
     }
   };

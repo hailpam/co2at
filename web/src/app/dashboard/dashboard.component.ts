@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { throwToolbarMixedModesError } from '@angular/material/toolbar';
 import { Router } from '@angular/router';
+import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 
 import { DataService } from '../data/data.service';
 
@@ -58,6 +59,7 @@ export class DashboardComponent {
             scopeTotValues.push(value[1] + value[2] + value[3]);
           }
 
+          console.log(times);
           this.lineSeries1 = {
             data: [
               { x: times, y: scope1Values, type: 'scatter', mode: 'scatter+markers', name: 'CO2e Scope1' },

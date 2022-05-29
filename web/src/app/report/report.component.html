@@ -36,12 +36,12 @@
                 </mat-card>
             </div>
             <br>
-            <div fxLayout="row" fxLayoutGap="px" fxLayoutAlign="center center" class="content">
+            <div fxLayout="row" fxLayoutAlign="center center" class="content">
                 <plotly-plot [data]="singleStatSupplier.data" [layout]="singleStatSupplier.layout"></plotly-plot>
                 <plotly-plot [data]="singleStatProducer.data" [layout]="singleStatProducer.layout"></plotly-plot>
                 <plotly-plot [data]="singleStatRetailer.data" [layout]="singleStatRetailer.layout"></plotly-plot>
             </div>
-            <div fxLayout="row" fxLayoutGap="px" fxLayoutAlign="center center" class="content">
+            <div fxLayout="row" fxLayoutAlign="center center" class="content">
                 <plotly-plot [data]="singleStatLogistic.data" [layout]="singleStatLogistic.layout"></plotly-plot>
                 <plotly-plot [data]="singleStatWaste.data" [layout]="singleStatWaste.layout"></plotly-plot>
                 <plotly-plot [data]="singleStatTot.data" [layout]="singleStatTot.layout"></plotly-plot>
