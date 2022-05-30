@@ -10,6 +10,7 @@ import { InboxComponent } from './inbox/inbox.component';
 import { LoginComponent } from './login/login.component';
 import { ProductComponent } from './product/product.component';
 import { ProductsComponent } from './products/products.component';
+import { RecommendationsComponent } from './recommendations/recommendations.component';
 import { ReportComponent } from './report/report.component';
 import { ReportsComponent } from './reports/reports.component';
 
@@ -24,7 +25,8 @@ const routes: Routes = [
   { path: 'report', component: ReportComponent },
   { path: 'certificate', component: CertificateComponent },
   { path: 'credit', component: CreditTransactionComponent },
-  { path: 'inbox', component: InboxComponent }
+  { path: 'inbox', component: InboxComponent },
+  { path: 'recommendations', component: RecommendationsComponent },
 ];
 
 @NgModule({

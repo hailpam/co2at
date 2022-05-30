@@ -202,6 +202,46 @@ def retrieve_transaction(company):
             conn.close()
     return transactions
 
+def retrieve_notification(company):
+    notifications = []
+    try:
+        conn = sqlite3.connect(db_path)
+        cursor = conn.execute('SELECT * FROM notifications WHERE company = "%s"' % (company))
+        for row in cursor:
+            notification = {}
+            notification['created_at'] = row[0]
+            notification['company'] = row[1]
+            notification['type'] = row[2]
+            notification['brief'] = row[3]
+            notification['reference'] = row[4]
+            notifications.append(notification)
+    except Exception as e:
+        print('error: %s' % e)
+    finally:
+        if conn:
+            conn.close()
+    return notifications
+
+def retrieve_recommendation(company):
+    recommendations = []
+    try:
+        conn = sqlite3.connect(db_path)
+        cursor = conn.execute('SELECT * FROM recommendations WHERE company = "%s"' % (company))
+        for row in cursor:
+            recommendation = {}
+            recommendation['created_at'] = row[0]
+            recommendation['company'] = row[1]
+            recommendation['for'] = row[2]
+            recommendation['scope'] = row[3]
+            recommendation['summary'] = row[4]
+            recommendations.append(recommendation)
+    except Exception as e:
+        print('error: %s' % e)
+    finally:
+        if conn:
+            conn.close()
+    return recommendations
+
 def retrieve_graph(company):
     data = {
         'query': 'FOR c in company FILTER c.name == \"%s\" FOR v, e, p IN 1..3 ANY c company_to, product_to, input_to, output_to RETURN p' % company,

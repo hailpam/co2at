@@ -79,4 +79,8 @@ export class AppComponent {
   goToInbox(): void {
     this.router.navigate(['/inbox']);
   }
+
+  goToRecommendations(): void {
+    this.router.navigate(['/recommendations']);
+  }
 }

@@ -9,6 +9,8 @@ DROP TABLE reports;
 DROP TABLE ads;
 DROP TABLE balance;
 DROP TABLE transaction_log;
+DROP TABLE notifications;
+DROP TABLE recommendations;
 
 -- Tables addition
 
@@ -91,6 +93,54 @@ CREATE TABLE transaction_log (
     op_to text NOT NULL,
     amount REAL NOT NULL,
     dollar REAL NOT NULL
+);
+
+CREATE TABLE notifications (
+    created_at INTEGER NOT NULL,
+    company text NOT NULL,
+    type text NOT NULL,
+    brief text NOT NULL,
+    reference text NOT NULL
+);
+
+CREATE TABLE recommendations (
+    created_at INTEGER NOT NULL,
+    company text NOT NULL,
+    for text NOT NULL, 
+    scope text NOT NULL,
+    summary text NOT NULL
+);
+
+-- Adding notifications
+
+INSERT INTO notifications (
+    created_at,
+    company,
+    type, 
+    brief,
+    reference
+) VALUES (
+    1653940877111,
+    'Acme',
+    'Ad',
+    'A recommendation for your product to be checked out',
+    'Goodone'
+);
+
+-- Adding recommendations
+
+INSERT INTO recommendations (
+    created_at,
+    company,
+    for,
+    scope,
+    summary
+) VALUES (
+    1653940877111,
+    'Acme',
+    'Acme',
+    'Logistics',
+    'Replace your truck XYZ to save up 20% of emissions for product Goodone'
 );
 
 -- Adding a row for the balance
