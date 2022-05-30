@@ -75,4 +75,8 @@ export class AppComponent {
   goToTransactCredits(): void {
     this.router.navigate(['/credit']);
   }
+
+  goToInbox(): void {
+    this.router.navigate(['/inbox']);
+  }
 }

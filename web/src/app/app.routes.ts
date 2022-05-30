@@ -6,6 +6,7 @@ import { CertificatesComponent } from './certificates/certificates.component';
 import { CreditTransactionComponent } from './credit-transaction/credit-transaction.component';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { InboxComponent } from './inbox/inbox.component';
 import { LoginComponent } from './login/login.component';
 import { ProductComponent } from './product/product.component';
 import { ProductsComponent } from './products/products.component';
@@ -22,7 +23,8 @@ const routes: Routes = [
   { path: 'product', component: ProductComponent },
   { path: 'report', component: ReportComponent },
   { path: 'certificate', component: CertificateComponent },
-  { path: 'credit', component: CreditTransactionComponent }
+  { path: 'credit', component: CreditTransactionComponent },
+  { path: 'inbox', component: InboxComponent }
 ];
 
 @NgModule({
