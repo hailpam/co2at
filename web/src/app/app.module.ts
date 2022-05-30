@@ -19,6 +19,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCard, MatCardModule } from '@angular/material/card';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import {MatBadgeModule} from '@angular/material/badge';
 
 import { NgxEchartsModule } from 'ngx-echarts';
 import * as PlotlyJS from 'plotly.js-dist-min';
@@ -65,6 +66,7 @@ PlotlyModule.plotlyjs = PlotlyJS;
     MatMenuModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatBadgeModule,
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts'),
     }),

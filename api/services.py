@@ -152,6 +152,10 @@ def retrieve_product(company):
             product['name'] = row[0]
             product['type'] = row[1]
             product['producer'] = row[2]
+            product['size'] = row[3]
+            product['weight'] = row[4]
+            product['packaging'] = row[5]
+            product['price'] = row[6]
             products.append(product)
     except Exception as e:
         print('error: %s' % e)

@@ -14,8 +14,12 @@ export class ProductComponent implements OnInit {
 
   product = {
     name: '',
+    type: '',
     producer: '',
-    type: ''
+    size: '',
+    weight: '',
+    packaging: '',
+    price: 0.0
   };
 
   constructor(private router: Router, private dataService: DataService) {

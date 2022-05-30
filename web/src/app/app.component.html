@@ -41,8 +41,16 @@
                 <button mat-menu-item (click)="goToCertificates()">Certificates</button>
                 <button mat-menu-item (click)="goToTransactCredits()">Credits&Debits</button>
                 <button mat-menu-item (click)="goToProducts()">Products</button>
+                <button mat-menu-item>Recommendations</button>
                 <button mat-menu-item (click)="goToReports()">Reports</button>
               </mat-menu>
+            </a>
+          </li>
+          <li *ngIf="isLoggedIn">
+            <a>
+              <button mat-button>
+                <mat-icon matBadge="0" matBadgeColor="warn">inbox</mat-icon>
+              </button>
             </a>
           </li>
           <li *ngIf="isLoggedIn">

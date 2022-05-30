@@ -30,7 +30,11 @@ CREATE TABLE companies (
 CREATE TABLE products (
     name text PRIMARY KEY,
     type text NOT NULL,
-    producer text NOT NULL
+    producer text NOT NULL,
+    size text NOT NULL,
+    weight text NOT NULL,
+    packaging text NOT NULL,
+    price REAL NOT NULL
 );
 
 CREATE TABLE certificates (
@@ -316,41 +320,73 @@ INSERT INTO companies (
 INSERT INTO products (
     name,
     type,
-    producer
+    producer,
+    size,
+    weight,
+    packaging,
+    price
 ) VALUES (
     'Goodone',
     'Cheese',
-    'Acme'
+    'Acme',
+    '10cmx10cm',
+    '100gr',
+    'recyclable',
+    1.50
 );
 
 INSERT INTO products (
     name,
     type,
-    producer
+    producer,
+    size,
+    weight,
+    packaging,
+    price
 ) VALUES (
     'Greatone',
     'Cheese',
-    'Acme'
+    'Acme',
+    '10cmx10cm',
+    '100gr',
+    'recyclable',
+    2.50
 );
 
 INSERT INTO products (
     name,
     type,
-    producer
+    producer,
+    size,
+    weight,
+    packaging,
+    price
 ) VALUES (
     'Badone',
     'Cheese',
-    'Acme'
+    'Acme',
+    '10cmx10cm',
+    '100gr',
+    'recyclable',
+    0.50
 );
 
 INSERT INTO products (
     name,
     type,
-    producer
+    producer,
+    size,
+    weight,
+    packaging,
+    price
 ) VALUES (
     'Decentone',
     'Cheese',
-    'Acme'
+    'Acme',
+    '10cmx10cm',
+    '100gr',
+    'recyclable',
+    1.00
 );
 
 -- Adding Certificates

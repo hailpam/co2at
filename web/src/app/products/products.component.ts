@@ -18,6 +18,10 @@ export class ProductsComponent implements AfterViewInit {
     'name',
     'type',
     'producer',
+    'size',
+    'weight',
+    'packaging',
+    'price',
     'actions'
   ];
   dataSource = new MatTableDataSource<ProductElement>(PRODUCT_DATA);
@@ -65,9 +69,13 @@ export class ProductsComponent implements AfterViewInit {
 export interface ProductElement {
   name: string,
   type: string,
-  producer: string
+  producer: string,
+  size: string,
+  weight: string,
+  packaging: string,
+  price: number
 }
 
 const PRODUCT_DATA: ProductElement[] = [
-  { name: 'test', type: 'test', producer: 'test' }
+  { name: 'test', type: 'test', producer: 'test', size: 'test', weight: 'test', packaging: 'test', price: 0.0 }
 ];

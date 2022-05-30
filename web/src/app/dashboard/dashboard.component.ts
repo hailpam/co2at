@@ -292,8 +292,8 @@ export class DashboardComponent {
 
   public pie1 = {
     data: [{
-      values: [1.2, 0.8, 0.3],
-      labels: ['CO2e Scope1', 'CO2e Scope2', 'CO2e Scope3'],
+      values: [76, 16, 6, 2],
+      labels: ['Carbon Dioxide', 'Methane', 'Nitrous Oxide', 'HFC,PFC,SF6'],
       domain: { column: 0 },
       name: 'GHG Emissions',
       hoverinfo: 'label+percent+name',
