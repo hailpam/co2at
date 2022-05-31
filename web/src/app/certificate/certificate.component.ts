@@ -13,6 +13,7 @@ export class CertificateComponent implements OnInit {
 
   certQrCodeInfo = '';
   reportQrCodeInfo = '';
+  geoMapping = new Map();
 
   certificate = {
     created_at: 0,
@@ -30,8 +31,15 @@ export class CertificateComponent implements OnInit {
     const state = this.router.getCurrentNavigation()?.extras.state;
     if (state !== undefined && state !== null) {
       this.certificate = JSON.parse(JSON.stringify(state))
+      if (this.certificate.provenance === 'us-west') {
+        this.geoMapping.set(this.certificate.provenance, 'CA');
+      }
+      if (this.certificate.provenance === 'us-east') {
+        this.geoMapping.set(this.certificate.provenance, 'NY');
+      }
+
       this.certQrCodeInfo = this.certificate.product + this.certificate.producer + this.certificate.provenance + this.certificate.co2e_scope1 + this.certificate.co2e_scope2 + this.certificate.co2e_scope3;
-      this.reportQrCodeInfo = this.certificate.report_id !== '' ? this.certificate.report_id : 'report';
+      this.reportQrCodeInfo = this.certificate.report_id !== '' ? this.certificate.report_id : 'ReportUnavailable';
     }
   }
 
@@ -50,16 +58,17 @@ export class CertificateComponent implements OnInit {
     const coe2e = this.certificate.co2e_scope1 + this.certificate.co2e_scope2 + this.certificate.co2e_scope3;
     this.geoMapScopeTot.data[0].marker.size[0] = coe2e * 10;
     this.geoMapScopeTot.data[0].marker.color[0] = coe2e * 10;
+    this.geoMapScopeTot.data[0].locations[0] = this.geoMapping.get(this.certificate.provenance);
 
     // get report data
     const user = sessionStorage.getItem('user');
     if (user !== null) {
       const u = JSON.parse(user);
-      this.dataService.getCertificateByReport(u.company, this.certificate.report_id).subscribe(
+      this.dataService.getReportByCertificate(u.company, this.certificate.certificate_id).subscribe(
         (response) => {
           const deserialised = JSON.parse(JSON.stringify(response));
           if (Object.keys(deserialised).length > 0) {
-            this.reportQrCodeInfo = deserialised.producer + deserialised.product + deserialised.provenance + deserialised.co2e_scope1 + deserialised.co2e_scope2 + deserialised.co2e_scope3;
+            this.reportQrCodeInfo = deserialised.product + deserialised.company + deserialised.co2e_supplier + deserialised.co2e_logistic + deserialised.co2e_producer + deserialised.co2e_retailer + deserialised.co2e_waste;
           }
         },
         (error) => {
@@ -161,7 +170,8 @@ export class CertificateComponent implements OnInit {
     data: [{
       type: 'scattergeo',
       mode: 'markers',
-      locations: [ 'USA' ],
+      locations: [ 'CA' ],
+      locationmode: 'USA-states',
       marker: {
         size: [20],
         color: [20],

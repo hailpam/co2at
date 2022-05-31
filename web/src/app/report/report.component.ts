@@ -13,10 +13,12 @@ export class ReportComponent implements OnInit {
 
   certQrCodeInfo = 'certificate';
   reportQrCodeInfo = 'report';
+  geoMapping = new Map();
 
   report = {
     created_at: 0,
     product: '',
+    provenance: '',
     company: '',
     certificate_id: '',
     report_id: '',
@@ -32,9 +34,16 @@ export class ReportComponent implements OnInit {
     console.log(this.router.getCurrentNavigation()?.extras.state);
     if (state !== undefined && state !== null) {
       this.report = JSON.parse(JSON.stringify(state));
-      this.reportQrCodeInfo = this.report.product + this.report.company;
+      if (this.report.provenance === 'us-west') {
+        this.geoMapping.set(this.report.provenance, 'CA');
+      }
+      if (this.report.provenance === 'us-east') {
+        this.geoMapping.set(this.report.provenance, 'NY');
+      }
+
+      this.reportQrCodeInfo = this.report.product + this.report.company + this.report.co2e_supplier + this.report.co2e_logistic + this.report.co2e_producer + this.report.co2e_retailer + this.report.co2e_waste;
       // TODO resolve certificate and bring in the details
-      this.certQrCodeInfo = this.report.certificate_id !== '' ? this.report.certificate_id: 'report';
+      this.certQrCodeInfo = this.report.certificate_id !== '' ? this.report.certificate_id: 'CertificateUnavailable';
     }
   }
 
@@ -58,16 +67,17 @@ export class ReportComponent implements OnInit {
     // geomap stats
     this.geoMapScopeTot.data[0].marker.size[0] = co2e * 10;
     this.geoMapScopeTot.data[0].marker.color[0] = co2e * 10;
+    this.geoMapScopeTot.data[0].locations[0] = this.geoMapping.get(this.report.provenance);
 
     // get certificate data
     const user = sessionStorage.getItem('user');
     if (user !== null) {
       const u = JSON.parse(user);
-      this.dataService.getReportByCertificate(u.company, this.report.certificate_id).subscribe(
+      this.dataService.getCertificateByReport(u.company, this.report.report_id).subscribe(
         (response) => {
           const deserialised = JSON.parse(JSON.stringify(response));
           if (Object.keys(deserialised).length > 0) {
-            this.certQrCodeInfo = deserialised.company + deserialised.product + deserialised.co2e_supplier + deserialised.co2e_retailer + deserialised.co2e_product + deserialised.co2e_logistic + deserialised.co2e_waste;
+            this.certQrCodeInfo = deserialised.product + deserialised.producer + deserialised.provenance + deserialised.co2e_scope1 + deserialised.co2e_scope2 + deserialised.co2e_scope3;;
           }
         },
         (error) => {
@@ -289,7 +299,8 @@ export class ReportComponent implements OnInit {
     data: [{
       type: 'scattergeo',
       mode: 'markers',
-      locations: [ 'USA' ],
+      locations: [ 'CA' ],
+      locationmode: 'USA-states',
       marker: {
         size: [20],
         color: [20],

@@ -59,7 +59,6 @@ export class DashboardComponent {
             scopeTotValues.push(value[1] + value[2] + value[3]);
           }
 
-          console.log(times);
           this.lineSeries1 = {
             data: [
               { x: times, y: scope1Values, type: 'scatter', mode: 'scatter+markers', name: 'CO2e Scope1' },

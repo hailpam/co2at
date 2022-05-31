@@ -33,18 +33,10 @@ export class LoginComponent implements OnInit {
     const userData = this.dataService.getUserData(this.username, this.password);
     userData.subscribe(
       (response) => {
-        console.log('response received')
-        console.log(response)
         if (Object.keys(response).length !== 0) {
           sessionStorage.setItem('user', JSON.stringify(response));
-          // this._snackBar.open('Login successful!!', '', {
-          //   horizontalPosition: this.horizontalPosition,
-          //   verticalPosition: this.verticalPosition,
-          // });
           this.router.navigate(['/dashboard']).then(
             () => {
-              // TODO find a way to refresh the app-root
-              // setTimeout(() => { window.location.reload() }, 700);
               window.location.reload();
             }
           );;
@@ -56,7 +48,7 @@ export class LoginComponent implements OnInit {
         }
       },
       (error) => {
-        console.error('Request failed with error')
+        console.error('Unable to authenticate the user: ' + error)
       });
   }
 

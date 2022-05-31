@@ -5,7 +5,6 @@ Prototype of the CO2@ Platform
 ## TODO
 - Finalise the graph model with data
 - Go beyond the Sankey panel, and create a real graph
-- Better geolocation
 - Fake forms for transaction of credits, addition of a product, generation of a certificate and a report
 
 ## DONE
@@ -14,3 +13,4 @@ Prototype of the CO2@ Platform
 - Complete products' attributes
 - GHG from market benchmark
 - Link certificates and reports
+- Better geolocation
