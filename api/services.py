@@ -66,6 +66,13 @@ def retrieve_company(name):
             conn.close()
     return company
 
+def retrieve_certificate_by_report(company, report):
+    certificates = retrieve_certificate(company)
+    for certificate in certificates:
+        if certificate['report_id'] == report:
+            return certificate
+    return {}
+
 def retrieve_certificate(company):
     certificates = []
     try:
@@ -89,6 +96,13 @@ def retrieve_certificate(company):
         if conn:
             conn.close()
     return certificates
+
+def retrieve_report_by_certificate(company, certificate):
+    reports = retrieve_report(company)
+    for report in reports:
+        if report['certificate_id'] == certificate:
+            return report
+    return {}
 
 def retrieve_report(company):
     reports = []

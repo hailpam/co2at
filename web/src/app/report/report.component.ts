@@ -59,6 +59,23 @@ export class ReportComponent implements OnInit {
     this.geoMapScopeTot.data[0].marker.size[0] = co2e * 10;
     this.geoMapScopeTot.data[0].marker.color[0] = co2e * 10;
 
+    // get certificate data
+    const user = sessionStorage.getItem('user');
+    if (user !== null) {
+      const u = JSON.parse(user);
+      this.dataService.getReportByCertificate(u.company, this.report.certificate_id).subscribe(
+        (response) => {
+          const deserialised = JSON.parse(JSON.stringify(response));
+          if (Object.keys(deserialised).length > 0) {
+            this.certQrCodeInfo = deserialised.company + deserialised.product + deserialised.co2e_supplier + deserialised.co2e_retailer + deserialised.co2e_product + deserialised.co2e_logistic + deserialised.co2e_waste;
+          }
+        },
+        (error) => {
+          console.error('Fetching the report from the certificate: ', error)
+        }
+      );
+    }
+
     // fetch the graph data
     this.dataService.getGraphData(this.report.company).subscribe(
       (response) => {

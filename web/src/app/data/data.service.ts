@@ -77,6 +77,16 @@ export class DataService {
     return this.httpClient.get('http://localhost:5050/api/v1/report', options);
   }
 
+  getReportByCertificate(company: string, certificate: string) {
+    const options = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json'
+      }),
+      params: new HttpParams().set('company', company).set('certificate', certificate)
+    };
+    return this.httpClient.get('http://localhost:5050/api/v1/report', options);
+  }
+
   getAds(company: string) {
     const options = {
       headers: new HttpHeaders({
@@ -93,6 +103,16 @@ export class DataService {
         'Content-type': 'application/json'
       }),
       params: new HttpParams().set('company', company)
+    };
+    return this.httpClient.get('http://localhost:5050/api/v1/certificate', options);
+  }
+
+  getCertificateByReport(company: string, report: string) {
+    const options = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json'
+      }),
+      params: new HttpParams().set('company', company).set('report', report)
     };
     return this.httpClient.get('http://localhost:5050/api/v1/certificate', options);
   }
