@@ -77,7 +77,9 @@ CREATE TABLE ads (
     creator text NOT NULL,
     recipient text NOT NULL,
     nr_click INTEGER NOT NULL,
-    acked INTEGER NOT NULL
+    acked INTEGER NOT NULL,
+    saving REAL NOT NULL,
+    scope text NOT NULL
 );
 
 CREATE TABLE balance (
@@ -1003,7 +1005,9 @@ INSERT INTO ads (
     creator,
     recipient,
     nr_click,
-    acked
+    acked,
+    saving,
+    scope
 ) VALUES (
     1653477792100,
     '9f651d04-df04-4f11-9463-9d5fbde74fd5',
@@ -1014,7 +1018,9 @@ INSERT INTO ads (
     'DHL',
     'Acme',
     0,
-    0
+    0,
+    10,
+    'Logistic'
 );
 
 INSERT INTO ads (
@@ -1027,7 +1033,9 @@ INSERT INTO ads (
     creator,
     recipient,
     nr_click,
-    acked
+    acked,
+    saving,
+    scope
 ) VALUES (
     1653477792100,
     '9f651d04-df04-4f11-9463-9d5fbde74fd6',
@@ -1038,7 +1046,9 @@ INSERT INTO ads (
     'DHL',
     'Acme',
     0,
-    0
+    0,
+    11,
+    'Logistic'
 );
 
 INSERT INTO ads (
@@ -1051,7 +1061,9 @@ INSERT INTO ads (
     creator,
     recipient,
     nr_click,
-    acked
+    acked,
+    saving,
+    scope
 ) VALUES (
     1653477792100,
     '9f651d04-df04-4f11-9463-9d5fbde74fd7',
@@ -1062,7 +1074,9 @@ INSERT INTO ads (
     'DHL',
     'Acme',
     0,
-    0
+    0,
+    13,
+    'Logistic'
 );
 
 INSERT INTO ads (
@@ -1075,7 +1089,9 @@ INSERT INTO ads (
     creator,
     recipient,
     nr_click,
-    acked
+    acked,
+    saving,
+    scope
 ) VALUES (
     1653477792100,
     '9f651d04-df04-4f11-9463-9d5fbde74fd8',
@@ -1086,7 +1102,9 @@ INSERT INTO ads (
     'DHL',
     'Acme',
     0,
-    0
+    0,
+    9,
+    'Logistic'
 );
 
 INSERT INTO ads (
@@ -1099,7 +1117,9 @@ INSERT INTO ads (
     creator,
     recipient,
     nr_click,
-    acked
+    acked,
+    saving,
+    scope
 ) VALUES (
     1653477792100,
     '9f651d04-df04-4f11-9463-9d5fbde74fd9',
@@ -1110,7 +1130,9 @@ INSERT INTO ads (
     'UPS',
     'Acme',
     0,
-    0
+    0,
+    8,
+    'Logistic'
 );
 
 INSERT INTO ads (
@@ -1123,7 +1145,9 @@ INSERT INTO ads (
     creator,
     recipient,
     nr_click,
-    acked
+    acked,
+    saving,
+    scope
 ) VALUES (
     1653477792100,
     '9f651d04-df04-4f11-9463-9d5fbde74fe5',
@@ -1134,7 +1158,9 @@ INSERT INTO ads (
     'UPS',
     'Acme',
     0,
-    0
+    0,
+    18,
+    'Logistic'
 );
 
 INSERT INTO ads (
@@ -1147,7 +1173,9 @@ INSERT INTO ads (
     creator,
     recipient,
     nr_click,
-    acked
+    acked,
+    saving,
+    scope
 ) VALUES (
     1653477792100,
     '9f651d04-df04-4f11-9463-9d5fbde74fb5',
@@ -1158,7 +1186,9 @@ INSERT INTO ads (
     'UPS',
     'Acme',
     0,
-    0
+    0,
+    19,
+    'Logistic'
 );
 
 INSERT INTO ads (
@@ -1171,7 +1201,9 @@ INSERT INTO ads (
     creator,
     recipient,
     nr_click,
-    acked
+    acked,
+    saving,
+    scope
 ) VALUES (
     1653477792100,
     '9f651d04-df04-4f11-9463-9d5fbde74fc5',
@@ -1182,7 +1214,9 @@ INSERT INTO ads (
     'UPS',
     'Acme',
     0,
-    0
+    0,
+    21,
+    'Logistic'
 );
 
 INSERT INTO ads (
@@ -1195,7 +1229,9 @@ INSERT INTO ads (
     creator,
     recipient,
     nr_click,
-    acked
+    acked,
+    saving,
+    scope
 ) VALUES (
     1653477792100,
     '9f651d04-df04-4f11-9463-9d5fbde74fz0',
@@ -1206,7 +1242,9 @@ INSERT INTO ads (
     'Acme',
     'Joe Connor',
     0,
-    0
+    0,
+    13,
+    'Product'
 );
 
 INSERT INTO ads (
@@ -1219,7 +1257,9 @@ INSERT INTO ads (
     creator,
     recipient,
     nr_click,
-    acked
+    acked,
+    saving,
+    scope
 ) VALUES (
     1653477792100,
     '9f651d04-df04-4f11-9463-9d5fbde74fz1',
@@ -1230,7 +1270,9 @@ INSERT INTO ads (
     'Acme',
     'Joe Connor',
     0,
-    0
+    0,
+    19,
+    'Product'
 );
 
 INSERT INTO ads (
@@ -1243,7 +1285,9 @@ INSERT INTO ads (
     creator,
     recipient,
     nr_click,
-    acked
+    acked,
+    saving,
+    scope
 ) VALUES (
     1653477792100,
     '9f651d04-df04-4f11-9463-9d5fbde74fz2',
@@ -1254,7 +1298,9 @@ INSERT INTO ads (
     'Acme',
     'Joe Connor',
     0,
-    0
+    0,
+    33,
+    'Product'
 );
 
 INSERT INTO ads (
@@ -1267,7 +1313,9 @@ INSERT INTO ads (
     creator,
     recipient,
     nr_click,
-    acked
+    acked,
+    saving,
+    scope
 ) VALUES (
     1653477792100,
     '9f651d04-df04-4f11-9463-9d5fbde74fz3',
@@ -1278,7 +1326,9 @@ INSERT INTO ads (
     'Acme',
     'Joe Connor',
     0,
-    0
+    0,
+    21,
+    'Product'
 );
 
 INSERT INTO ads (
@@ -1291,7 +1341,9 @@ INSERT INTO ads (
     creator,
     recipient,
     nr_click,
-    acked
+    acked,
+    saving,
+    scope
 ) VALUES (
     1653477792100,
     '9f651d04-df04-4f11-9463-9d5fbde74fz4',
@@ -1302,7 +1354,9 @@ INSERT INTO ads (
     'Acme',
     'Joe Connor',
     0,
-    0
+    0,
+    11,
+    'Product'
 );
 
 INSERT INTO ads (
@@ -1315,7 +1369,9 @@ INSERT INTO ads (
     creator,
     recipient,
     nr_click,
-    acked
+    acked,
+    saving,
+    scope
 ) VALUES (
     1653477792100,
     '9f651d04-df04-4f11-9463-9d5fbde74fz5',
@@ -1326,7 +1382,9 @@ INSERT INTO ads (
     'Acme',
     'Joe Connor',
     0,
-    0
+    0,
+    22,
+    'Product'
 );
 
 INSERT INTO ads (
@@ -1339,7 +1397,9 @@ INSERT INTO ads (
     creator,
     recipient,
     nr_click,
-    acked
+    acked,
+    saving,
+    scope
 ) VALUES (
     1653477792100,
     '9f651d04-df04-4f11-9463-9d5fbde74fz6',
@@ -1350,7 +1410,9 @@ INSERT INTO ads (
     'Acme',
     'Joe Connor',
     0,
-    0
+    0,
+    15,
+    'Product'
 );
 
 INSERT INTO ads (
@@ -1363,7 +1425,9 @@ INSERT INTO ads (
     creator,
     recipient,
     nr_click,
-    acked
+    acked,
+    saving,
+    scope
 ) VALUES (
     1653477792100,
     '9f651d04-df04-4f11-9463-9d5fbde74fz7',
@@ -1374,7 +1438,9 @@ INSERT INTO ads (
     'Acme',
     'Joe Connor',
     0,
-    0
+    0,
+    16,
+    'Product'
 );
 
 INSERT INTO ads (
@@ -1387,7 +1453,9 @@ INSERT INTO ads (
     creator,
     recipient,
     nr_click,
-    acked
+    acked,
+    saving,
+    scope
 ) VALUES (
     1653477792100,
     '9f651d04-df04-4f11-9463-9d5fbde74fz8',
@@ -1398,7 +1466,9 @@ INSERT INTO ads (
     'Acme',
     'Joe Connor',
     0,
-    0
+    0,
+    19,
+    'Product'
 );
 
 INSERT INTO ads (
@@ -1411,7 +1481,9 @@ INSERT INTO ads (
     creator,
     recipient,
     nr_click,
-    acked
+    acked,
+    saving,
+    scope
 ) VALUES (
     1653477792100,
     '9f651d04-df04-4f11-9463-9d5fbde74fz9',
@@ -1422,5 +1494,7 @@ INSERT INTO ads (
     'Acme',
     'Joe Connor',
     0,
-    0
+    0,
+    10,
+    'Product'
 );

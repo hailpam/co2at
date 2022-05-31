@@ -149,6 +149,8 @@ def retrieve_ad(company):
             ad['recipient'] = row[7]
             ad['nr_click'] = row[8]
             ad['acked'] = row[9]
+            ad['saving'] = row[10]
+            ad['scope'] = row[11]
             ads.append(ad)
     except Exception as e:
         print('error: %s' % e)

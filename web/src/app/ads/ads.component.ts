@@ -20,6 +20,8 @@ export class AdsComponent implements OnInit {
     'recipient',
     'nr_click',
     'acked',
+    'saving',
+    'scope',
     'actions'
   ];
   dataSource = new MatTableDataSource<AdElement>(AD_DATA);
@@ -70,7 +72,9 @@ export interface AdElement {
   creator: string,
   recipient: string,
   nr_click: number,
-  acked: number
+  acked: number,
+  saving: number,
+  scope: string
 }
 
 const AD_DATA: AdElement[] = [
@@ -84,6 +88,8 @@ const AD_DATA: AdElement[] = [
     creator: '',
     recipient: '',
     nr_click: 0,
-    acked: 0
+    acked: 0,
+    saving: 0.0,
+    scope: ''
   }
 ];
