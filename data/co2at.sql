@@ -101,7 +101,9 @@ CREATE TABLE notifications (
     company text NOT NULL,
     type text NOT NULL,
     brief text NOT NULL,
-    reference text NOT NULL
+    reference text NOT NULL,
+    reference_id text NOT NULL,
+    notification_id text NOT NULL
 );
 
 CREATE TABLE recommendations (
@@ -109,7 +111,9 @@ CREATE TABLE recommendations (
     company text NOT NULL,
     for text NOT NULL, 
     scope text NOT NULL,
-    summary text NOT NULL
+    summary text NOT NULL,
+    reference_id text NOT NULL,
+    recommendation_id text NOT NULL
 );
 
 -- Adding notifications
@@ -119,13 +123,35 @@ INSERT INTO notifications (
     company,
     type, 
     brief,
-    reference
+    reference,
+    reference_id,
+    notification_id
 ) VALUES (
     1653940877111,
     'Acme',
     'Ad',
     'A recommendation for your product to be checked out',
-    'Goodone'
+    'Goodone',
+    '9f651d04-df04-4f11-9463-9d5fbde74fd5',
+    '5a4581f7-732b-4d93-bb82-a55e9ce91673'
+);
+
+INSERT INTO notifications (
+    created_at,
+    company,
+    type, 
+    brief,
+    reference,
+    reference_id,
+    notification_id
+) VALUES (
+    1653940877111,
+    'Acme',
+    'Recommendation',
+    'A recommendation for your product to be checked out',
+    'Goodone',
+    '33f20c15-2823-4157-a28b-6eb3e423b008',
+    'a2f9d8f3-4fa6-416c-81e2-368495f85722'
 );
 
 -- Adding recommendations
@@ -135,13 +161,17 @@ INSERT INTO recommendations (
     company,
     for,
     scope,
-    summary
+    summary,
+    reference_id,
+    recommendation_id
 ) VALUES (
     1653940877111,
     'Acme',
     'Acme',
     'Logistics',
-    'Replace your truck XYZ to save up 20% of emissions for product Goodone'
+    'Replace your truck XYZ to save up 20% of emissions for product Goodone',
+    'Goodone',
+    '33f20c15-2823-4157-a28b-6eb3e423b008'
 );
 
 -- Adding a row for the balance

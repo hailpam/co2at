@@ -20,7 +20,8 @@ export class RecommendationsComponent implements OnInit {
     'company',
     'for',
     'scope',
-    'summary'
+    'summary',
+    'actions'
   ];
   dataSource = new MatTableDataSource<RecommendationElement>(RECOMMENDATION_DATA);
   selection = new SelectionModel<RecommendationElement>(true, []);
@@ -82,6 +83,8 @@ export class RecommendationsComponent implements OnInit {
     this.router.navigateByUrl("");
   }
 
+  onClick(element: RecommendationElement) {
+  }
 }
 
 export interface RecommendationElement {
@@ -90,9 +93,11 @@ export interface RecommendationElement {
   for: string,
   scope: string,
   summary: string,
+  reference_id: string,
+  recommendation_id: string,
   position: number
 }
 
 const RECOMMENDATION_DATA: RecommendationElement[] = [
-  { created_at: 0, company: 'test', for: 'test', scope: 'test', summary: 'test', position: 0 }
+  { created_at: 0, company: 'test', for: 'test', scope: 'test', summary: 'test', reference_id: 'test', recommendation_id: 'test', position: 0 }
 ];

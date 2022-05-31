@@ -229,6 +229,8 @@ def retrieve_notification(company):
             notification['type'] = row[2]
             notification['brief'] = row[3]
             notification['reference'] = row[4]
+            notification['reference_id'] = row[5]
+            notification['notification_id'] = row[6]
             notifications.append(notification)
     except Exception as e:
         print('error: %s' % e)
@@ -249,6 +251,8 @@ def retrieve_recommendation(company):
             recommendation['for'] = row[2]
             recommendation['scope'] = row[3]
             recommendation['summary'] = row[4]
+            recommendation['reference_id'] = row[5]
+            recommendation['recommendation_id'] = row[6]
             recommendations.append(recommendation)
     except Exception as e:
         print('error: %s' % e)

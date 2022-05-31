@@ -68,9 +68,11 @@ export interface NotificationElement {
   company: string,
   type: string,
   brief: string,
-  reference: string
+  reference: string,
+  reference_id: string,
+  notification_id: string
 }
 
 const NOTIFICATION_DATA: NotificationElement[] = [
-  { created_at: 0, company: 'test', type: 'test', brief: 'test', reference: 'test'}
+  { created_at: 0, company: 'test', type: 'test', brief: 'test', reference: 'test', reference_id: 'test', notification_id: 'test' }
 ];
