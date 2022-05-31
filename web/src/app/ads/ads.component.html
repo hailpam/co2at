@@ -18,7 +18,10 @@
                     <mat-label>Filter</mat-label>
                     <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
                 </mat-form-field>
-                <button mat-raised-button>Create</button>
+                <div fxLayout="row" fxLayoutGap="5px" fxLayoutAlign="center center" class="content">
+                    <button mat-raised-button>Create</button>
+                    <button mat-raised-button>Delete</button>
+                </div>
             </div>
             <div class="mat-elevation-z8">
                 <table mat-table [dataSource]="dataSource">

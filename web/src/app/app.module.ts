@@ -38,6 +38,8 @@ import { CertificateComponent } from './certificate/certificate.component';
 import { CreditTransactionComponent } from './credit-transaction/credit-transaction.component';
 import { InboxComponent } from './inbox/inbox.component';
 import { RecommendationsComponent } from './recommendations/recommendations.component';
+import { AdComponent } from './ad/ad.component';
+import { RecommendationComponent } from './recommendation/recommendation.component';
 
 PlotlyModule.plotlyjs = PlotlyJS;
 
@@ -56,7 +58,9 @@ PlotlyModule.plotlyjs = PlotlyJS;
     CertificateComponent,
     CreditTransactionComponent,
     InboxComponent,
-    RecommendationsComponent
+    RecommendationsComponent,
+    AdComponent,
+    RecommendationComponent
   ],
   imports: [
     BrowserModule,
