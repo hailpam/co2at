@@ -116,4 +116,24 @@ export class DataService {
     };
     return this.httpClient.get('http://localhost:5050/api/v1/transaction', options);
   }
+
+  getNotifications(company: string) {
+    const options = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json'
+      }),
+      params: new HttpParams().set('company', company)
+    };
+    return this.httpClient.get('http://localhost:5050/api/v1/notification', options);
+  }
+
+  getRecommendations(company: string) {
+    const options = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json'
+      }),
+      params: new HttpParams().set('company', company)
+    };
+    return this.httpClient.get('http://localhost:5050/api/v1/recommendation', options);
+  }
 }

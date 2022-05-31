@@ -49,7 +49,7 @@
           <li *ngIf="isLoggedIn">
             <a>
               <button mat-button (click)="goToInbox()">
-                <mat-icon matBadge="0" matBadgeColor="warn">inbox</mat-icon>
+                <mat-icon matBadge="{{ nrNotifications }}" matBadgeColor="warn">inbox</mat-icon>
               </button>
             </a>
           </li>

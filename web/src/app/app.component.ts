@@ -7,6 +7,8 @@ import {
 } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 
+import { DataService } from './data/data.service';
+
 import { ProfileDialogComponent } from './profile-dialog/profile-dialog.component';
 
 @Component({
@@ -17,13 +19,14 @@ import { ProfileDialogComponent } from './profile-dialog/profile-dialog.componen
 export class AppComponent {
   title = 'CO2@';
   
-  constructor(private router: Router, private dialog: MatDialog, private _snackBar: MatSnackBar) {}
+  constructor(private router: Router, private dialog: MatDialog, private dataService: DataService, private _snackBar: MatSnackBar) {}
   
   horizontalPosition: MatSnackBarHorizontalPosition = 'center';
   verticalPosition: MatSnackBarVerticalPosition = 'top';
 
   isLoggedIn = false;
   user = '';
+  nrNotifications = 0;
 
   ngOnInit(): void {
     const user = sessionStorage.getItem('user');
@@ -31,6 +34,15 @@ export class AppComponent {
       this.isLoggedIn = true;
       const u = JSON.parse(user);
       this.user = u.name;
+
+      this.dataService.getNotifications(u.company).subscribe(
+        (response) => {
+          this.nrNotifications = JSON.parse(JSON.stringify(response)).length;
+        },
+        (error) => {
+          console.log('Fetching the notifications: ' + error)
+        }
+      );
     }
   }
 
