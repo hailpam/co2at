@@ -24,6 +24,9 @@
                     </mat-form-field>
                 </mat-card>
                 <mat-card class="card">
+                    <plotly-plot [data]="singleStatSpecificSaving.data" [layout]="singleStatSpecificSaving.layout"></plotly-plot>
+                </mat-card>
+                <mat-card class="card">
                     <plotly-plot [data]="singleStatSaving.data" [layout]="singleStatSaving.layout"></plotly-plot>
                 </mat-card>
             </div>

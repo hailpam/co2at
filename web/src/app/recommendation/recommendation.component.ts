@@ -25,6 +25,7 @@ export class RecommendationComponent implements OnInit {
     if (state !== undefined && state !== null) {
       this.recommendation = JSON.parse(JSON.stringify(state));
       this.singleStatSaving.data[0].value = this.recommendation.improvement/6;
+      this.singleStatSpecificSaving.data[0].value = this.recommendation.improvement;
 
       // TODO for the remaining values...
       if (this.recommendation.scope === "Logistic") {
@@ -68,6 +69,33 @@ export class RecommendationComponent implements OnInit {
           indicator: [
             {
               title: { text: "CO2e Saving%" },
+              mode: "number+delta+gauge",
+              delta: { reference: 90 }
+            }
+          ]
+        }
+      }
+    }
+  };
+
+  public singleStatSpecificSaving = {
+    data: [
+      {
+        type: "indicator",
+        value: 20,
+        delta: { reference: 10 },
+        gauge: { axis: { visible: true, range: [0, 100] } },
+        domain: { row: 0, column: 0 }
+      }
+    ],
+    layout: {
+      width: 400,
+      height: 250,
+      template: {
+        data: {
+          indicator: [
+            {
+              title: { text: "Scoped Saving%" },
               mode: "number+delta+gauge",
               delta: { reference: 90 }
             }
