@@ -13,9 +13,28 @@
             Recommendation 
         </mat-card-title>
         <mat-card-content>
-            Display description
-            Display breakdown in terms of supplier, logistics, etc.
-            Display new graph
+            <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center" class="content">
+                <mat-card class="card">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Summary</mat-label>
+                        <textarea matInput rows="14" placeholder="...">{{ recommendation.summary }}</textarea>
+                    </mat-form-field>
+                </mat-card>
+                <mat-card class="card">
+                    <plotly-plot [data]="singleStatSaving.data" [layout]="singleStatSaving.layout"></plotly-plot>
+                </mat-card>
+            </div>
+            <br>
+            <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center" class="content">
+                <plotly-plot [data]="barChartLogisticsSaving.data" [layout]="barChartLogisticsSaving.layout"></plotly-plot>
+                <plotly-plot [data]="barChartProducerSaving.data" [layout]="barChartProducerSaving.layout"></plotly-plot>
+                <plotly-plot [data]="barChartRetailerSaving.data" [layout]="barChartRetailerSaving.layout"></plotly-plot>
+            </div>
+            <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center" class="content">
+                <plotly-plot [data]="barChartSupplierSaving.data" [layout]="barChartSupplierSaving.layout"></plotly-plot>
+                <plotly-plot [data]="barChartWasteSaving.data" [layout]="barChartWasteSaving.layout"></plotly-plot>
+                <plotly-plot [data]="barChartTotSaving.data" [layout]="barChartTotSaving.layout"></plotly-plot>
+            </div>
         </mat-card-content>
     </mat-card>
 </div>

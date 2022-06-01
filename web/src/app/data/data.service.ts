@@ -97,6 +97,16 @@ export class DataService {
     return this.httpClient.get('http://localhost:5050/api/v1/ad', options);
   }
 
+  getAdByIdentifier(company: string, identifier: string) {
+    const options = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json'
+      }),
+      params: new HttpParams().set('company', company).set('identifier', identifier)
+    };
+    return this.httpClient.get('http://localhost:5050/api/v1/ad', options);
+  }
+
   getCertificates(company: string) {
     const options = {
       headers: new HttpHeaders({
@@ -153,6 +163,16 @@ export class DataService {
         'Content-type': 'application/json'
       }),
       params: new HttpParams().set('company', company)
+    };
+    return this.httpClient.get('http://localhost:5050/api/v1/recommendation', options);
+  }
+
+  getRecommendationByIdentifier(company: string, identifier: string) {
+    const options = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json'
+      }),
+      params: new HttpParams().set('company', company).set('identifier', identifier)
     };
     return this.httpClient.get('http://localhost:5050/api/v1/recommendation', options);
   }

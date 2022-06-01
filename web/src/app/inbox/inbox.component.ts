@@ -46,6 +46,33 @@ export class InboxComponent implements OnInit {
   }
 
   onClick(element: NotificationElement) {
+    if (element.type === "Ad") {
+      this.dataService.getAdByIdentifier(element.company, element.reference_id).subscribe(
+        (response) => {
+          const ad = JSON.parse(JSON.stringify(response));
+          console.log(ad);
+          this.router.navigateByUrl('/ad', { state: ad });
+        },
+        (error) => {
+          console.error('Unable to fetch the Ad: ' + error);
+        }
+      );
+      return;
+    }
+
+    if (element.type == "Recommendation") {
+      this.dataService.getRecommendationByIdentifier(element.company, element.reference_id).subscribe(
+        (response) => {
+          const recommendation = JSON.parse(JSON.stringify(response));
+          console.log(recommendation);
+          this.router.navigateByUrl('/recommendation', { state: recommendation });
+        },
+        (error) => {
+          console.error('Unable to fetch the Recommendation: ' + error);
+        }
+      );
+      return;
+    }
   }
 
   applyFilter(event: Event) {

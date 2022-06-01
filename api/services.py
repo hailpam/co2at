@@ -132,6 +132,13 @@ def retrieve_report(company):
             conn.close()
     return reports
 
+def retrieve_ad_by_identifier(company, identifier):
+    ads = retrieve_ad(company)
+    for ad in ads:
+        if ad['ad_id'] == identifier:
+            return ad
+    return {}
+
 def retrieve_ad(company):
     ads = []
     try:
@@ -151,6 +158,7 @@ def retrieve_ad(company):
             ad['acked'] = row[9]
             ad['saving'] = row[10]
             ad['scope'] = row[11]
+            ad['description'] = row[12]
             ads.append(ad)
     except Exception as e:
         print('error: %s' % e)
@@ -241,6 +249,13 @@ def retrieve_notification(company):
             conn.close()
     return notifications
 
+def retrieve_recommendation_by_identifier(company, identifier):
+    recommendations = retrieve_recommendation(company)
+    for recommendation in recommendations:
+        if recommendation['recommendation_id'] == identifier:
+            return recommendation
+    return {}
+
 def retrieve_recommendation(company):
     recommendations = []
     try:
@@ -255,6 +270,7 @@ def retrieve_recommendation(company):
             recommendation['summary'] = row[4]
             recommendation['reference_id'] = row[5]
             recommendation['recommendation_id'] = row[6]
+            recommendation['improvement'] = row[7]
             recommendations.append(recommendation)
     except Exception as e:
         print('error: %s' % e)

@@ -13,9 +13,36 @@
             Ad 
         </mat-card-title>
         <mat-card-content>
-            Distinguish B2C Vs B2B
-            Display description
-            Display savings (in terms of scope?)
+            <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center" class="content">
+                <mat-card class="card">
+                    <mat-list>
+                        <mat-list-item> {{ ad.created_at | date: 'MMM d, y, h:mm:ss a' }} </mat-list-item>
+                        <mat-divider></mat-divider>
+                        <mat-list-item> {{ ad.creator }} for {{ ad.recipient }} </mat-list-item>
+                        <mat-divider></mat-divider>
+                        <mat-list-item> {{ ad.product }} </mat-list-item>
+                        <mat-divider></mat-divider>
+                        <mat-list-item> {{ ad.scope }} </mat-list-item>
+                        <mat-divider></mat-divider>
+                        <mat-list-item> {{ ad.nr_click }} click(s) and {{ ad.acked }} time(s) acked </mat-list-item>
+                    </mat-list>
+                </mat-card>
+                <mat-card class="card">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Description</mat-label>
+                        <textarea matInput rows="14" placeholder="...">{{ ad.description }}</textarea>
+                    </mat-form-field>
+                </mat-card>
+                <mat-card class="card">
+                    <plotly-plot [data]="singleStatSaving.data" [layout]="singleStatSaving.layout"></plotly-plot>
+                </mat-card>
+            </div>
+            <br>
+            <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center" class="content">
+                <plotly-plot [data]="barChartScope1Saving.data" [layout]="barChartScope1Saving.layout"></plotly-plot>
+                <plotly-plot [data]="barChartScope2Saving.data" [layout]="barChartScope2Saving.layout"></plotly-plot>
+                <plotly-plot [data]="barChartScope3Saving.data" [layout]="barChartScope3Saving.layout"></plotly-plot>
+            </div>
         </mat-card-content>
     </mat-card>
 </div>

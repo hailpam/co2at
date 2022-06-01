@@ -78,7 +78,8 @@ export interface AdElement {
   nr_click: number,
   acked: number,
   saving: number,
-  scope: string
+  scope: string,
+  description: string
 }
 
 const AD_DATA: AdElement[] = [
@@ -94,6 +95,7 @@ const AD_DATA: AdElement[] = [
     nr_click: 0,
     acked: 0,
     saving: 0.0,
-    scope: ''
+    scope: '',
+    description: ''
   }
 ];

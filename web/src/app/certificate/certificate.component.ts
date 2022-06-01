@@ -30,7 +30,7 @@ export class CertificateComponent implements OnInit {
   constructor(private router: Router, private dataService: DataService) {
     const state = this.router.getCurrentNavigation()?.extras.state;
     if (state !== undefined && state !== null) {
-      this.certificate = JSON.parse(JSON.stringify(state))
+      this.certificate = JSON.parse(JSON.stringify(state));
       if (this.certificate.provenance === 'us-west') {
         this.geoMapping.set(this.certificate.provenance, 'CA');
       }

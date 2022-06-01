@@ -79,7 +79,8 @@ CREATE TABLE ads (
     nr_click INTEGER NOT NULL,
     acked INTEGER NOT NULL,
     saving REAL NOT NULL,
-    scope text NOT NULL
+    scope text NOT NULL,
+    description text NOT NULL
 );
 
 CREATE TABLE balance (
@@ -115,7 +116,8 @@ CREATE TABLE recommendations (
     scope text NOT NULL,
     summary text NOT NULL,
     reference_id text NOT NULL,
-    recommendation_id text NOT NULL
+    recommendation_id text NOT NULL,
+    improvement REAL NOT NULL
 );
 
 -- Adding notifications
@@ -165,15 +167,17 @@ INSERT INTO recommendations (
     scope,
     summary,
     reference_id,
-    recommendation_id
+    recommendation_id,
+    improvement
 ) VALUES (
     1653940877111,
     'Acme',
-    'Acme',
-    'Logistics',
-    'Replace your truck XYZ to save up 20% of emissions for product Goodone',
+    'Greatone',
+    'Logistic',
+    'Replace your truck XYZ with model ABC by PMC to save up 25% of emissions for product Greatone',
     'Goodone',
-    '33f20c15-2823-4157-a28b-6eb3e423b008'
+    '33f20c15-2823-4157-a28b-6eb3e423b008',
+    25
 );
 
 -- Adding a row for the balance
@@ -1007,7 +1011,8 @@ INSERT INTO ads (
     nr_click,
     acked,
     saving,
-    scope
+    scope,
+    description
 ) VALUES (
     1653477792100,
     '9f651d04-df04-4f11-9463-9d5fbde74fd5',
@@ -1020,7 +1025,8 @@ INSERT INTO ads (
     0,
     0,
     10,
-    'Logistic'
+    'Logistic',
+    'Leveraging our logistic it is possible to save at least 10% emissions for your product Decentone'
 );
 
 INSERT INTO ads (
@@ -1035,7 +1041,8 @@ INSERT INTO ads (
     nr_click,
     acked,
     saving,
-    scope
+    scope,
+    description
 ) VALUES (
     1653477792100,
     '9f651d04-df04-4f11-9463-9d5fbde74fd6',
@@ -1048,7 +1055,8 @@ INSERT INTO ads (
     0,
     0,
     11,
-    'Logistic'
+    'Logistic',
+    'Leveraging our logistic it is possible to save at least 11% emissions for your product Goodone'
 );
 
 INSERT INTO ads (
@@ -1063,7 +1071,8 @@ INSERT INTO ads (
     nr_click,
     acked,
     saving,
-    scope
+    scope,
+    description
 ) VALUES (
     1653477792100,
     '9f651d04-df04-4f11-9463-9d5fbde74fd7',
@@ -1076,7 +1085,8 @@ INSERT INTO ads (
     0,
     0,
     13,
-    'Logistic'
+    'Logistic',
+    'Leveraging our logistic it is possible to save at least 13% emissions for your product Greatone'
 );
 
 INSERT INTO ads (
@@ -1091,7 +1101,8 @@ INSERT INTO ads (
     nr_click,
     acked,
     saving,
-    scope
+    scope,
+    description
 ) VALUES (
     1653477792100,
     '9f651d04-df04-4f11-9463-9d5fbde74fd8',
@@ -1104,7 +1115,8 @@ INSERT INTO ads (
     0,
     0,
     9,
-    'Logistic'
+    'Logistic',
+    'Leveraging our logistic it is possible to save at least 9% emissions for your product Badone'
 );
 
 INSERT INTO ads (
@@ -1119,7 +1131,8 @@ INSERT INTO ads (
     nr_click,
     acked,
     saving,
-    scope
+    scope,
+    description
 ) VALUES (
     1653477792100,
     '9f651d04-df04-4f11-9463-9d5fbde74fd9',
@@ -1132,7 +1145,8 @@ INSERT INTO ads (
     0,
     0,
     8,
-    'Logistic'
+    'Logistic',
+    'Leveraging our logistic it is possible to save at least 8% emissions for your product Decentone'
 );
 
 INSERT INTO ads (
@@ -1147,7 +1161,8 @@ INSERT INTO ads (
     nr_click,
     acked,
     saving,
-    scope
+    scope,
+    description
 ) VALUES (
     1653477792100,
     '9f651d04-df04-4f11-9463-9d5fbde74fe5',
@@ -1160,7 +1175,8 @@ INSERT INTO ads (
     0,
     0,
     18,
-    'Logistic'
+    'Logistic',
+    'Leveraging our logistic it is possible to save at least 18% emissions for your product Goodone'
 );
 
 INSERT INTO ads (
@@ -1175,7 +1191,8 @@ INSERT INTO ads (
     nr_click,
     acked,
     saving,
-    scope
+    scope,
+    description
 ) VALUES (
     1653477792100,
     '9f651d04-df04-4f11-9463-9d5fbde74fb5',
@@ -1188,7 +1205,8 @@ INSERT INTO ads (
     0,
     0,
     19,
-    'Logistic'
+    'Logistic',
+    'Leveraging our logistic it is possible to save at least 19% emissions for your product Badone'
 );
 
 INSERT INTO ads (
@@ -1203,7 +1221,8 @@ INSERT INTO ads (
     nr_click,
     acked,
     saving,
-    scope
+    scope,
+    description
 ) VALUES (
     1653477792100,
     '9f651d04-df04-4f11-9463-9d5fbde74fc5',
@@ -1216,7 +1235,8 @@ INSERT INTO ads (
     0,
     0,
     21,
-    'Logistic'
+    'Logistic',
+    'Leveraging our logistic it is possible to save at least 21% emissions for your product Greatone'
 );
 
 INSERT INTO ads (
@@ -1231,7 +1251,8 @@ INSERT INTO ads (
     nr_click,
     acked,
     saving,
-    scope
+    scope,
+    description
 ) VALUES (
     1653477792100,
     '9f651d04-df04-4f11-9463-9d5fbde74fz0',
@@ -1244,7 +1265,8 @@ INSERT INTO ads (
     0,
     0,
     13,
-    'Product'
+    'Product',
+    'Switchig to our product Greatone, it would be possible, for you, to save at least 13% of emissions across scopes'
 );
 
 INSERT INTO ads (
@@ -1259,7 +1281,8 @@ INSERT INTO ads (
     nr_click,
     acked,
     saving,
-    scope
+    scope,
+    description
 ) VALUES (
     1653477792100,
     '9f651d04-df04-4f11-9463-9d5fbde74fz1',
@@ -1272,7 +1295,8 @@ INSERT INTO ads (
     0,
     0,
     19,
-    'Product'
+    'Product',
+    'Switchig to our product Greatone, it would be possible, for you, to save at least 19% of emissions across scopes'
 );
 
 INSERT INTO ads (
@@ -1287,7 +1311,8 @@ INSERT INTO ads (
     nr_click,
     acked,
     saving,
-    scope
+    scope,
+    description
 ) VALUES (
     1653477792100,
     '9f651d04-df04-4f11-9463-9d5fbde74fz2',
@@ -1300,7 +1325,8 @@ INSERT INTO ads (
     0,
     0,
     33,
-    'Product'
+    'Product',
+    'Switchig to our product Greatone, it would be possible, for you, to save at least 33% of emissions across scopes'
 );
 
 INSERT INTO ads (
@@ -1315,7 +1341,8 @@ INSERT INTO ads (
     nr_click,
     acked,
     saving,
-    scope
+    scope,
+    description
 ) VALUES (
     1653477792100,
     '9f651d04-df04-4f11-9463-9d5fbde74fz3',
@@ -1328,7 +1355,8 @@ INSERT INTO ads (
     0,
     0,
     21,
-    'Product'
+    'Product',
+    'Switchig to our product Greatone, it would be possible, for you, to save at least 21% of emissions across scopes'
 );
 
 INSERT INTO ads (
@@ -1343,7 +1371,8 @@ INSERT INTO ads (
     nr_click,
     acked,
     saving,
-    scope
+    scope,
+    description
 ) VALUES (
     1653477792100,
     '9f651d04-df04-4f11-9463-9d5fbde74fz4',
@@ -1356,7 +1385,8 @@ INSERT INTO ads (
     0,
     0,
     11,
-    'Product'
+    'Product',
+    'Switchig to our product Greatone, it would be possible, for you, to save at least 11% of emissions across scopes'
 );
 
 INSERT INTO ads (
@@ -1371,7 +1401,8 @@ INSERT INTO ads (
     nr_click,
     acked,
     saving,
-    scope
+    scope,
+    description
 ) VALUES (
     1653477792100,
     '9f651d04-df04-4f11-9463-9d5fbde74fz5',
@@ -1384,7 +1415,8 @@ INSERT INTO ads (
     0,
     0,
     22,
-    'Product'
+    'Product',
+    'Switchig to our product Greatone, it would be possible, for you, to save at least 22% of emissions across scopes'
 );
 
 INSERT INTO ads (
@@ -1399,7 +1431,8 @@ INSERT INTO ads (
     nr_click,
     acked,
     saving,
-    scope
+    scope,
+    description
 ) VALUES (
     1653477792100,
     '9f651d04-df04-4f11-9463-9d5fbde74fz6',
@@ -1412,7 +1445,8 @@ INSERT INTO ads (
     0,
     0,
     15,
-    'Product'
+    'Product',
+    'Switchig to our product Greatone, it would be possible, for you, to save at least 15% of emissions across scopes'
 );
 
 INSERT INTO ads (
@@ -1427,7 +1461,8 @@ INSERT INTO ads (
     nr_click,
     acked,
     saving,
-    scope
+    scope,
+    description
 ) VALUES (
     1653477792100,
     '9f651d04-df04-4f11-9463-9d5fbde74fz7',
@@ -1440,7 +1475,8 @@ INSERT INTO ads (
     0,
     0,
     16,
-    'Product'
+    'Product',
+    'Switchig to our product Greatone, it would be possible, for you, to save at least 16% of emissions across scopes'
 );
 
 INSERT INTO ads (
@@ -1455,7 +1491,8 @@ INSERT INTO ads (
     nr_click,
     acked,
     saving,
-    scope
+    scope,
+    description
 ) VALUES (
     1653477792100,
     '9f651d04-df04-4f11-9463-9d5fbde74fz8',
@@ -1468,7 +1505,8 @@ INSERT INTO ads (
     0,
     0,
     19,
-    'Product'
+    'Product',
+    'Switchig to our product Greatone, it would be possible, for you, to save at least 19% of emissions across scopes'
 );
 
 INSERT INTO ads (
@@ -1483,7 +1521,8 @@ INSERT INTO ads (
     nr_click,
     acked,
     saving,
-    scope
+    scope,
+    description
 ) VALUES (
     1653477792100,
     '9f651d04-df04-4f11-9463-9d5fbde74fz9',
@@ -1496,5 +1535,6 @@ INSERT INTO ads (
     0,
     0,
     10,
-    'Product'
+    'Product',
+    'Switchig to our product Greatone, it would be possible, for you, to save at least 10% of emissions across scopes'
 );

@@ -2,7 +2,7 @@ from flask import Flask
 from flask_cors import CORS, cross_origin
 from flask import request
 
-from api.services import retrieve_balance, retrieve_certificate, retrieve_certificate_by_report, retrieve_company, retrieve_data, retrieve_graph, retrieve_notification, retrieve_product, retrieve_recommendation, retrieve_report, retrieve_report_by_certificate, retrieve_transaction, retrieve_user, retrieve_ad
+from api.services import retrieve_ad_by_identifier, retrieve_balance, retrieve_certificate, retrieve_certificate_by_report, retrieve_company, retrieve_data, retrieve_graph, retrieve_notification, retrieve_product, retrieve_recommendation, retrieve_recommendation_by_identifier, retrieve_report, retrieve_report_by_certificate, retrieve_transaction, retrieve_user, retrieve_ad
 
 import json
 import base64
@@ -75,7 +75,11 @@ def get_report():
 @app.route('/api/v1/ad')
 def get_ad():
     company = request.args.get('company')
-    ads = retrieve_ad(company)
+    identifier = request.args.get('identifier')
+    if identifier:
+        ads =retrieve_ad_by_identifier(company, identifier)
+    else:
+        ads = retrieve_ad(company)
     return json.dumps(ads, indent=4)
 
 @app.route('/api/v1/balance')
@@ -99,5 +103,9 @@ def get_notification():
 @app.route('/api/v1/recommendation')
 def get_recommendation():
     company = request.args.get('company')
-    recommendations = retrieve_recommendation(company)
+    identifier = request.args.get('identifier')
+    if identifier:
+        recommendations = retrieve_recommendation_by_identifier(company, identifier)
+    else:
+        recommendations = retrieve_recommendation(company)
     return json.dumps(recommendations, indent=4)
