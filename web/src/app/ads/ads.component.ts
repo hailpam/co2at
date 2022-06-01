@@ -60,6 +60,10 @@ export class AdsComponent implements OnInit {
   goBack(): void {
     this.router.navigateByUrl("");
   }
+
+  onClick(element: AdsComponent) {
+    this.router.navigateByUrl('/ad', { state: element });
+  }
 }
 
 export interface AdElement {

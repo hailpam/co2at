@@ -1,1 +1,22 @@
-<p>recommendation works!</p>
+<br>
+<div fxLayout="column" fxLayoutGap="20px" fxLayoutAlign="center center" class="content">
+    <div fxLayout="row" fxLayoutAlign="center center" class="content">
+        <button mat-icon-button (click)="goToHome()">
+            <mat-icon>home</mat-icon> 
+        </button>
+        <button mat-icon-button (click)="goBack()">
+            <mat-icon>keyboard_return</mat-icon> 
+        </button>
+    </div>
+    <mat-card class="card">
+        <mat-card-title>
+            Recommendation 
+        </mat-card-title>
+        <mat-card-content>
+            Display description
+            Display breakdown in terms of supplier, logistics, etc.
+            Display new graph
+        </mat-card-content>
+    </mat-card>
+</div>
+<br>

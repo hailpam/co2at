@@ -84,6 +84,7 @@ export class RecommendationsComponent implements OnInit {
   }
 
   onClick(element: RecommendationElement) {
+    this.router.navigateByUrl('/recommendation', { state: element });
   }
 }
 
