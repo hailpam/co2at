@@ -54,6 +54,10 @@ export class AdComponent implements OnInit {
     this.router.navigateByUrl("/ads");
   }
 
+  goToInbox(): void {
+    this.router.navigateByUrl("/inbox");
+  }
+
   public singleStatSaving = {
     data: [
       {

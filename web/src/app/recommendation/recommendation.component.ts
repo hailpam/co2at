@@ -46,6 +46,10 @@ export class RecommendationComponent implements OnInit {
     this.router.navigateByUrl("/recommendations");
   }
 
+  goToInbox(): void {
+    this.router.navigateByUrl("/inbox");
+  }
+
   public singleStatSaving = {
     data: [
       {
