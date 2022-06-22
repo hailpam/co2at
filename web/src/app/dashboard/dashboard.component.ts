@@ -4,6 +4,10 @@ import { Router } from '@angular/router';
 import { DataService } from '../data/data.service';
 
 import * as Highcharts from 'highcharts';
+import HC_networkgraph from 'highcharts/modules/networkgraph';
+import HC_exporting from 'highcharts/modules/exporting';
+HC_networkgraph(Highcharts);
+HC_exporting(Highcharts);
 
 @Component({
   selector: 'app-dashboard',
@@ -14,70 +18,39 @@ import * as Highcharts from 'highcharts';
 
 export class DashboardComponent {
   Highcharts: typeof Highcharts = Highcharts; // required
-  chartConstructor: string = 'chart'; // optional string, defaults to 'chart'
+  chartConstructor: string = 'chart';         // optional string, defaults to 'chart'
   chartOptions: Highcharts.Options = {
     chart: {
       type: 'networkgraph',
-      height: '100%'
+      height: 600,
+      width: 1200
     },
     title: {
-        text: 'The Indo-European Language Tree'
+        text: 'Emissions over the Value Chain Graph'
     },
     subtitle: {
-        text: 'A Force-Directed Network Graph in Highcharts'
+        text: 'A Force-Directed Network Graph to diplay the Value Chain and related Emissions'
     },
     plotOptions: {
       networkgraph: {
-          keys: ['from', 'to'],
+          keys: ['from', 'to', 'color', 'description'],
           layoutAlgorithm: {
               enableSimulation: true,
-              friction: -0.9
+              integration: 'verlet',
+              linkLength: 200
           }
       }
     },
-    series: [
-      {
-        accessibility: {
-          enabled: false
-        },
-        dataLabels: {
-            enabled: true,
-            // linkFormat: ''
-        },
-        id: 'lang-tree',
-        data: [
-          ['Proto Indo-European', 'Balto-Slavic'],
-          ['Proto Indo-European', 'Germanic'],
-          ['Proto Indo-European', 'Celtic'],
-          ['Proto Indo-European', 'Italic'],
-          ['Proto Indo-European', 'Hellenic'],
-          ['Proto Indo-European', 'Anatolian'],
-          ['Proto Indo-European', 'Indo-Iranian'],
-          ['Proto Indo-European', 'Tocharian'],
-          ['Indo-Iranian', 'Dardic'],
-          ['Indo-Iranian', 'Indic'],
-          ['Indo-Iranian', 'Iranian'],
-          ['Iranian', 'Old Persian'],
-          ['Old Persian', 'Middle Persian'],
-          ['Indic', 'Sanskrit'],
-          ['Italic', 'Osco-Umbrian'],
-          ['Italic', 'Latino-Faliscan'],
-          ['Latino-Faliscan', 'Latin'],
-          ['Celtic', 'Brythonic'],
-          ['Celtic', 'Goidelic'],
-          ['Germanic', 'North Germanic'],
-          ['Germanic', 'West Germanic'],
-          ['Germanic', 'East Germanic'],
-          ['North Germanic', 'Old Norse'],
-          ['North Germanic', 'Old Swedish']
-        ]
-      }
-    ]
-  }; // required
-  chartCallback: Highcharts.ChartCallbackFunction = function (chart) { } // optional function, defaults to null
-  updateFlag: boolean = false; // optional boolean
-  oneToOneFlag: boolean = true; // optional boolean, defaults to false
-  runOutsideAngular: boolean = false; // optional boolean, defaults to false
+    series: []
+  };                                          // required
+  networkChart: any = {}; 
+  chartCallback: Highcharts.ChartCallbackFunction = (chart) => {
+    // to redraw it later on
+    this.networkChart = chart;
+  }                                                                      // optional function, defaults to null
+  updateFlag: boolean = true;                                            // optional boolean
+  oneToOneFlag: boolean = true;                                          // optional boolean, defaults to false
+  runOutsideAngular: boolean = false;                                    // optional boolean, defaults to false
 
   constructor(private router: Router, private dataService: DataService) { }
 
@@ -258,9 +231,218 @@ export class DashboardComponent {
           this.sanburst1.data[0].labels = lbls;
           this.sanburst1.data[0].parents = prnts;
           this.sanburst1.data[0].values = vals;
+
+          // processing for the graph
+          this.dataService.getGraphData(this.user.company).subscribe(
+            (response) => {
+              const deserialized = JSON.parse(JSON.stringify(response));
+
+              let vertices = new Map();
+              let edges = new Map();
+              for (let result of deserialized.result) {
+                for (let vertex of result.vertices) {
+                  // store info
+                  if (!vertices.has(vertex._id)) {
+                    vertices.set(vertex._id, vertex);
+                  }
+                  if (!edges.has(vertex._id)) {
+                    edges.set(vertex._id, new Set());
+                  }
+                }
+
+                // store relationships
+                for (let edge of result.edges) {
+                  edges.get(edge._from).add(edge._to);
+                }
+              }
+
+              let data = []
+              let nodes = []
+              // linearise data
+              for (let edge of edges) {
+                const key = edge[0];
+                const values = edge[1];
+                for (let value of values) {
+                  if (key.includes('company')) {
+                    data.push(
+                      [ vertices.get(key).name, vertices.get(value).name, 'red', '10' ]
+                    );
+                  }
+  
+                  if (key.includes('input')) {
+                    data.push(
+                      [ vertices.get(key).name, vertices.get(value).name, 'green', '9' ]
+                    );
+                  }
+  
+                  if (key.includes('output')) {
+                    data.push(
+                      [ vertices.get(key).name, vertices.get(value).name, 'blue', '8' ]
+                    );
+                  }
+  
+                  if (key.includes('product')) {
+                    data.push(
+                      [ vertices.get(key).name, vertices.get(value).name, 'grey', '7' ]
+                    );
+                  }
+  
+                  if (key.includes('retailer')) {
+                    data.push(
+                      [ vertices.get(key).name, vertices.get(value).name, 'purple', '5' ]
+                    );
+                  }
+  
+                  if (key.includes('producer')) {
+                    data.push(
+                      [ vertices.get(key).name, vertices.get(value).name, 'yellow', '4' ]
+                    );
+                  }
+  
+                  if (key.includes('supplier')) {
+                    data.push(
+                      [ vertices.get(key).name, vertices.get(value).name, 'orange', '3' ]
+                    );
+                  }
+                }
+              }
+
+              for (let vertex of vertices) {
+                const key = vertex[0];
+                const value = vertex[1];
+                
+                if (key.includes('company')) {
+                  nodes.push({
+                    id: value.name,
+                    description: value._key,
+                    dataLabels: {
+                        enabled: true
+                    },
+                    marker: {
+                        radius: 45,
+                        fillColor: 'red'
+                    }
+                  });
+                }
+
+                if (key.includes('input')) {
+                  nodes.push({
+                    id: value.name,
+                    description: value._key,
+                    dataLabels: {
+                        enabled: true
+                    },
+                    marker: {
+                        radius: 25,
+                        fillColor: 'green'
+                    }
+                  });
+                }
+
+                if (key.includes('output')) {
+                  nodes.push({
+                    id: value.name,
+                    description: value._key,
+                    dataLabels: {
+                        enabled: true
+                    },
+                    marker: {
+                        radius: 25,
+                        fillColor: 'blue'
+                    }
+                  });
+                }
+
+                if (key.includes('product')) {
+                  nodes.push({
+                    id: value.name,
+                    description: value._key,
+                    dataLabels: {
+                        enabled: true
+                    },
+                    marker: {
+                        radius: 35,
+                        fillColor: 'grey'
+                    }
+                  });
+                }
+
+                if (key.includes('retailer')) {
+                  nodes.push({
+                    id: value.name,
+                    description: value._key,
+                    dataLabels: {
+                        enabled: true
+                    },
+                    marker: {
+                        radius: 15,
+                        fillColor: 'purple'
+                    }
+                  });
+                }
+
+                if (key.includes('producer')) {
+                  nodes.push({
+                    id: value.name,
+                    description: value._key,
+                    dataLabels: {
+                        enabled: true
+                    },
+                    marker: {
+                        radius: 15,
+                        fillColor: 'yellow'
+                    }
+                  });
+                }
+
+                if (key.includes('supplier')) {
+                  nodes.push({
+                    id: value.name,
+                    description: value._key,
+                    dataLabels: {
+                        enabled: true
+                    },
+                    marker: {
+                        radius: 15,
+                        fillColor: 'orange'
+                    }
+                  });
+                }
+              }
+
+              this.networkChart.addSeries(
+                {
+                  type: "networkgraph",
+                  dataLabels: {
+                    enabled: true,
+                    linkTextPath: {
+                      attributes: {
+                          dy: 12
+                      }
+                    },
+                    // linkFormat: '{point.fromNode.name} \u2192 {point.toNode.name}',
+                    linkFormat: '{point.fromNode.description} \u2192 {point.toNode.description}',
+                    allowOverlap: false,
+                    textPath: {
+                      enabled: true,
+                    },
+                  },
+                  marker: {
+                    radius: 35
+                  },
+                  nodes: nodes,
+                  data: data
+                }
+              );
+              this.networkChart.redraw();
+            },
+            (error) => {
+              console.error('error occurrend fetching the graph: ' +error);
+            }
+          );
         },
         (error) => {
-          console.error('Error fetching the Scope telemetry data...');
+          console.error('Error fetching the Scope telemetry data...' +error);
         });
     }
   }
