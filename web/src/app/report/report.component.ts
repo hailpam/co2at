@@ -27,15 +27,18 @@ export class ReportComponent implements OnInit {
         text: 'Emissions over the Product Value Chain Graph'
     },
     subtitle: {
-        text: 'A Force-Directed Network Graph to diplay the Product Value Chain and related Emissions'
+        text: ''
     },
     plotOptions: {
       networkgraph: {
-          keys: ['from', 'to', 'color', 'description'],
+          keys: [ 'from', 'to', 'color' ],
           layoutAlgorithm: {
               enableSimulation: true,
               integration: 'verlet',
               linkLength: 200
+          },
+          link: {
+            width: 2
           }
       }
     },
@@ -224,43 +227,43 @@ export class ReportComponent implements OnInit {
             for (let value of values) {
               if (key.includes('company')) {
                 data.push(
-                  [ vertices.get(key).name, vertices.get(value).name, 'red', '10' ]
+                  [ vertices.get(key).name, vertices.get(value).name, 'red' ]
                 );
               }
   
               if (key.includes('input')) {
                 data.push(
-                  [ vertices.get(key).name, vertices.get(value).name, 'green', '9' ]
+                  [ vertices.get(key).name, vertices.get(value).name, 'green' ]
                 );
               }
   
               if (key.includes('output')) {
                 data.push(
-                  [ vertices.get(key).name, vertices.get(value).name, 'blue', '8' ]
+                  [ vertices.get(key).name, vertices.get(value).name, 'blue' ]
                 );
               }
   
               if (key.includes('product')) {
                 data.push(
-                  [ vertices.get(key).name, vertices.get(value).name, 'grey', '7' ]
+                  [ vertices.get(key).name, vertices.get(value).name, 'grey' ]
                 );
               }
   
               if (key.includes('retailer')) {
                 data.push(
-                  [ vertices.get(key).name, vertices.get(value).name, 'purple', '5' ]
+                  [ vertices.get(key).name, vertices.get(value).name, 'purple' ]
                 );
               }
   
               if (key.includes('producer')) {
                 data.push(
-                  [ vertices.get(key).name, vertices.get(value).name, 'yellow', '4' ]
+                  [ vertices.get(key).name, vertices.get(value).name, 'yellow' ]
                 );
               }
   
               if (key.includes('supplier')) {
                 data.push(
-                  [ vertices.get(key).name, vertices.get(value).name, 'orange', '3' ]
+                  [ vertices.get(key).name, vertices.get(value).name, 'orange' ]
                 );
               }
             }
