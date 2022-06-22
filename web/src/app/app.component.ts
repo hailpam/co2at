@@ -11,6 +11,8 @@ import { DataService } from './data/data.service';
 
 import { ProfileDialogComponent } from './profile-dialog/profile-dialog.component';
 
+import * as Highcharts from 'highcharts';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

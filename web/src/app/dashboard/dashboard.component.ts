@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { throwToolbarMixedModesError } from '@angular/material/toolbar';
 import { Router } from '@angular/router';
-import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 
 import { DataService } from '../data/data.service';
+
+import * as Highcharts from 'highcharts';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,6 +13,72 @@ import { DataService } from '../data/data.service';
 })
 
 export class DashboardComponent {
+  Highcharts: typeof Highcharts = Highcharts; // required
+  chartConstructor: string = 'chart'; // optional string, defaults to 'chart'
+  chartOptions: Highcharts.Options = {
+    chart: {
+      type: 'networkgraph',
+      height: '100%'
+    },
+    title: {
+        text: 'The Indo-European Language Tree'
+    },
+    subtitle: {
+        text: 'A Force-Directed Network Graph in Highcharts'
+    },
+    plotOptions: {
+      networkgraph: {
+          keys: ['from', 'to'],
+          layoutAlgorithm: {
+              enableSimulation: true,
+              friction: -0.9
+          }
+      }
+    },
+    series: [
+      {
+        accessibility: {
+          enabled: false
+        },
+        dataLabels: {
+            enabled: true,
+            // linkFormat: ''
+        },
+        id: 'lang-tree',
+        data: [
+          ['Proto Indo-European', 'Balto-Slavic'],
+          ['Proto Indo-European', 'Germanic'],
+          ['Proto Indo-European', 'Celtic'],
+          ['Proto Indo-European', 'Italic'],
+          ['Proto Indo-European', 'Hellenic'],
+          ['Proto Indo-European', 'Anatolian'],
+          ['Proto Indo-European', 'Indo-Iranian'],
+          ['Proto Indo-European', 'Tocharian'],
+          ['Indo-Iranian', 'Dardic'],
+          ['Indo-Iranian', 'Indic'],
+          ['Indo-Iranian', 'Iranian'],
+          ['Iranian', 'Old Persian'],
+          ['Old Persian', 'Middle Persian'],
+          ['Indic', 'Sanskrit'],
+          ['Italic', 'Osco-Umbrian'],
+          ['Italic', 'Latino-Faliscan'],
+          ['Latino-Faliscan', 'Latin'],
+          ['Celtic', 'Brythonic'],
+          ['Celtic', 'Goidelic'],
+          ['Germanic', 'North Germanic'],
+          ['Germanic', 'West Germanic'],
+          ['Germanic', 'East Germanic'],
+          ['North Germanic', 'Old Norse'],
+          ['North Germanic', 'Old Swedish']
+        ]
+      }
+    ]
+  }; // required
+  chartCallback: Highcharts.ChartCallbackFunction = function (chart) { } // optional function, defaults to null
+  updateFlag: boolean = false; // optional boolean
+  oneToOneFlag: boolean = true; // optional boolean, defaults to false
+  runOutsideAngular: boolean = false; // optional boolean, defaults to false
+
   constructor(private router: Router, private dataService: DataService) { }
 
   user = {
