@@ -26,6 +26,7 @@ import { NgxEchartsModule } from 'ngx-echarts';
 import * as PlotlyJS from 'plotly.js-dist-min';
 import { PlotlyModule } from 'angular-plotly.js';
 import { QRCodeModule } from 'angularx-qrcode';
+import { HighchartsChartModule } from 'highcharts-angular';
 
 import { ProfileDialogComponent } from './profile-dialog/profile-dialog.component';
 import { ProductsComponent } from './products/products.component';
@@ -84,7 +85,8 @@ PlotlyModule.plotlyjs = PlotlyJS;
     MatDialogModule,
     MatCardModule,
     MatPaginatorModule,
-    QRCodeModule
+    QRCodeModule,
+    HighchartsChartModule
   ],
   providers: [
     DataService,
