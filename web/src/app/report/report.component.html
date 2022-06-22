@@ -54,6 +54,7 @@
             </div>
             <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center" class="content">
                 <plotly-plot [data]="sankey1.data" [layout]="sankey1.layout"></plotly-plot>
+                <highcharts-chart [Highcharts]="Highcharts" [options]="chartOptions" [oneToOne]="oneToOneFlag" [(update)]="updateFlag" [callbackFunction]="chartCallback"></highcharts-chart>
             </div>
         </mat-card-content>
     </mat-card>
