@@ -217,7 +217,7 @@ export class ReportComponent implements OnInit {
         this.sankey1.data[0].link.target = tgt;
         this.sankey1.data[0].link.value = val;
 
-        // process the graph
+        // processing for the network graph representation
         let data = [];
         let nodes = [];
         for (let edge of edges) {
@@ -401,7 +401,6 @@ export class ReportComponent implements OnInit {
           }
         );
         this.networkChart.redraw();
-
       },
       (error) => {
         console.error('Error fetching the graph data for the product', error);

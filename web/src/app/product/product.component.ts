@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+import * as Highcharts from 'highcharts';
+import HC_networkgraph from 'highcharts/modules/networkgraph';
+import HC_exporting from 'highcharts/modules/exporting';
+HC_networkgraph(Highcharts);
+HC_exporting(Highcharts);
+
 import { DataService } from '../data/data.service';
 
 @Component({
@@ -9,6 +15,42 @@ import { DataService } from '../data/data.service';
   styleUrls: ['./product.component.less']
 })
 export class ProductComponent implements OnInit {
+  Highcharts: typeof Highcharts = Highcharts; // required
+  chartConstructor: string = 'chart';         // optional string, defaults to 'chart'
+  chartOptions: Highcharts.Options = {
+    chart: {
+      type: 'networkgraph',
+      height: '100%'
+    },
+    title: {
+        text: 'Emissions over the Product Value Chain Graph'
+    },
+    subtitle: {
+        text: ''
+    },
+    plotOptions: {
+      networkgraph: {
+          keys: [ 'from', 'to', 'color' ],
+          layoutAlgorithm: {
+              enableSimulation: true,
+              integration: 'verlet',
+              linkLength: 200
+          },
+          link: {
+            width: 2
+          }
+      }
+    },
+    series: []
+  };                                          // required
+  networkChart: any = {}; 
+  chartCallback: Highcharts.ChartCallbackFunction = (chart) => {
+    // to redraw it later on
+    this.networkChart = chart;
+  }                                                                      // optional function, defaults to null
+  updateFlag: boolean = true;                                            // optional boolean
+  oneToOneFlag: boolean = true;                                          // optional boolean, defaults to false
+  runOutsideAngular: boolean = false;                                    // optional boolean, defaults to false
 
   qrCodeInfo = '';
 
@@ -153,6 +195,191 @@ export class ProductComponent implements OnInit {
         this.sankey1.data[0].link.source = src;
         this.sankey1.data[0].link.target = tgt;
         this.sankey1.data[0].link.value = val;
+
+        // processing for the network graph representation
+        let data = [];
+        let nodes = [];
+        for (let edge of edges) {
+          const key = edge[0];
+          const values = edge[1];
+          if (selected.has(key)) {
+            for (let value of values) {
+              if (key.includes('company')) {
+                data.push(
+                  [ vertices.get(key).name, vertices.get(value).name, 'red' ]
+                );
+              }
+  
+              if (key.includes('input')) {
+                data.push(
+                  [ vertices.get(key).name, vertices.get(value).name, 'green' ]
+                );
+              }
+  
+              if (key.includes('output')) {
+                data.push(
+                  [ vertices.get(key).name, vertices.get(value).name, 'blue' ]
+                );
+              }
+  
+              if (key.includes('product')) {
+                data.push(
+                  [ vertices.get(key).name, vertices.get(value).name, 'grey' ]
+                );
+              }
+  
+              if (key.includes('retailer')) {
+                data.push(
+                  [ vertices.get(key).name, vertices.get(value).name, 'purple' ]
+                );
+              }
+  
+              if (key.includes('producer')) {
+                data.push(
+                  [ vertices.get(key).name, vertices.get(value).name, 'yellow' ]
+                );
+              }
+  
+              if (key.includes('supplier')) {
+                data.push(
+                  [ vertices.get(key).name, vertices.get(value).name, 'orange' ]
+                );
+              }
+            }
+          }
+        }
+
+        for (let vertex of vertices) {
+          const key = vertex[0];
+          const value = vertex[1];
+          
+          if (selected.has(key)) {
+            if (key.includes('company')) {
+              nodes.push({
+                id: value.name,
+                description: value._key,
+                dataLabels: {
+                    enabled: true
+                },
+                marker: {
+                    radius: 45,
+                    fillColor: 'red'
+                }
+              });
+            }
+  
+            if (key.includes('input')) {
+              nodes.push({
+                id: value.name,
+                description: value._key,
+                dataLabels: {
+                    enabled: true
+                },
+                marker: {
+                    radius: 25,
+                    fillColor: 'green'
+                }
+              });
+            }
+  
+            if (key.includes('output')) {
+              nodes.push({
+                id: value.name,
+                description: value._key,
+                dataLabels: {
+                    enabled: true
+                },
+                marker: {
+                    radius: 25,
+                    fillColor: 'blue'
+                }
+              });
+            }
+  
+            if (key.includes('product')) {
+              nodes.push({
+                id: value.name,
+                description: value._key,
+                dataLabels: {
+                    enabled: true
+                },
+                marker: {
+                    radius: 35,
+                    fillColor: 'grey'
+                }
+              });
+            }
+  
+            if (key.includes('retailer')) {
+              nodes.push({
+                id: value.name,
+                description: value._key,
+                dataLabels: {
+                    enabled: true
+                },
+                marker: {
+                    radius: 15,
+                    fillColor: 'purple'
+                }
+              });
+            }
+  
+            if (key.includes('producer')) {
+              nodes.push({
+                id: value.name,
+                description: value._key,
+                dataLabels: {
+                    enabled: true
+                },
+                marker: {
+                    radius: 15,
+                    fillColor: 'yellow'
+                }
+              });
+            }
+  
+            if (key.includes('supplier')) {
+              nodes.push({
+                id: value.name,
+                description: value._key,
+                dataLabels: {
+                    enabled: true
+                },
+                marker: {
+                    radius: 15,
+                    fillColor: 'orange'
+                }
+              });
+            }
+          }
+
+        }
+
+        this.networkChart.addSeries(
+          {
+            type: "networkgraph",
+            dataLabels: {
+              enabled: true,
+              linkTextPath: {
+                attributes: {
+                    dy: 12
+                }
+              },
+              // linkFormat: '{point.fromNode.name} \u2192 {point.toNode.name}',
+              linkFormat: '{point.fromNode.description} \u2192 {point.toNode.description}',
+              allowOverlap: false,
+              textPath: {
+                enabled: true,
+              },
+            },
+            marker: {
+              radius: 35
+            },
+            nodes: nodes,
+            data: data
+          }
+        );
+        this.networkChart.redraw();
       },
       (error) => {
         console.error('Error fetching the graph data for the product', error);
@@ -242,8 +469,8 @@ export class ProductComponent implements OnInit {
     ],
     layout: {
       title: 'Product-specific Emissions Flows',
-      width: 1118,
-      height: 772,
+      width: 800,
+      height: 650,
     }
   }
 }
